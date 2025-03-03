@@ -17,6 +17,7 @@ final class FrequencyCard: UIView {
         stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.alignment = .center
+        stackView.distribution = .fill
         return stackView
     }()
 
@@ -34,12 +35,21 @@ final class FrequencyCard: UIView {
         return label
     }()
 
+    private let statisticsContainerView = UIView()
     private let frequencyStatistics: FrequencyStatistics
+    private let maxAmount: Int
+    private let currentAmount: Int
 
-    // MARK: - Init
+    // MARK: - Inits
 
-    init(data: FrequencyData) {
-        self.frequencyStatistics = FrequencyStatistics(firstColor: data.firstColor, secondColor: data.secondColor, perCent: data.percentage)
+    init(data: FrequencyData, maxAmount: Int) {
+        self.maxAmount = maxAmount
+        self.currentAmount = data.amount
+        self.frequencyStatistics = FrequencyStatistics(
+            firstColor: data.firstColor,
+            secondColor: data.secondColor,
+            amount: data.amount
+        )
         super.init(frame: .zero)
 
         emotionIcon.image = data.image
@@ -58,10 +68,33 @@ final class FrequencyCard: UIView {
         addSubview(stackView)
         stackView.addArrangedSubview(emotionIcon)
         stackView.addArrangedSubview(frequencyLabel)
-        stackView.addArrangedSubview(frequencyStatistics)
+        stackView.addArrangedSubview(statisticsContainerView)
+
+        statisticsContainerView.addSubview(frequencyStatistics)
 
         stackView.snp.makeConstraints { make in
-            make.top.leading.bottom.trailing.equalToSuperview()
+            make.edges.equalToSuperview()
+        }
+
+        emotionIcon.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.1)
+        }
+
+        frequencyLabel.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.5)
+        }
+
+        statisticsContainerView.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.40)
+            make.height.equalTo(32)
+        }
+
+        let widthMultiplier = CGFloat(currentAmount) / CGFloat(maxAmount)
+
+        frequencyStatistics.snp.makeConstraints { make in
+            make.width.equalTo(statisticsContainerView.snp.width).multipliedBy(widthMultiplier)
+            make.height.equalToSuperview()
+            make.leading.equalToSuperview()
         }
     }
 }

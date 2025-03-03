@@ -67,16 +67,23 @@ func createMockWeeksData() -> [StatWeek] {
                     FrequencyData(
                         image: .sadness,
                         emotion: "Выгорание",
-                        percentage: 70,
-                        firstColor: .red,
-                        secondColor: .orange
+                        amount: 2,
+                        firstColor: .feelingGradientRed,
+                        secondColor: .redGradient
                     ),
                     FrequencyData(
                         image: .lightning,
                         emotion: "Продуктивность",
-                        percentage: 30,
-                        firstColor: .blue,
-                        secondColor: .cyan
+                        amount: 2,
+                        firstColor: .feelingGradientOrange,
+                        secondColor: .orangeGradient
+                    ),
+                    FrequencyData(
+                        image: .greenMood,
+                        emotion: "Спокойствие",
+                        amount: 1,
+                        firstColor: .feelingGradientGreen,
+                        secondColor: .greenGradient
                     )
                 ],
                 partsOfDayStatistic: PartsOfDayStatistic(

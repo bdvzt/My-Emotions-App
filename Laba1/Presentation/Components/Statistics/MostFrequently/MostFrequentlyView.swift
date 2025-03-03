@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 final class MostFrequentlyView: UIView {
+
     // MARK: - Private properties
 
     private let titleLabel: UILabel = {
@@ -28,7 +29,10 @@ final class MostFrequentlyView: UIView {
 
     init(data: [FrequencyData]) {
         super.init(frame: .zero)
-        let cards = data.map { FrequencyCard(data: $0) }
+
+        let maxAmount = data.map { $0.amount }.max() ?? 1
+
+        let cards = data.map { FrequencyCard(data: $0, maxAmount: maxAmount) }
         setupView(cards: cards)
     }
 
@@ -63,6 +67,10 @@ final class MostFrequentlyView: UIView {
 
         cards.forEach { card in
             stackView.addArrangedSubview(card)
+
+            card.snp.makeConstraints { make in
+                make.height.equalTo(32)
+            }
         }
     }
 }

@@ -14,11 +14,10 @@ final class FrequencyStatistics: UIView {
 
     private let firstColor: UIColor
     private let secondColor: UIColor
-    private let perCent: Int
+    private let amount: Int
 
     private let gradientLayer = CAGradientLayer()
-    private let filledView = UIView()
-    private let amount: UILabel = {
+    private let amountLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "VelaSans-Bold", size: 14)
         label.textColor = .black
@@ -28,11 +27,12 @@ final class FrequencyStatistics: UIView {
 
     // MARK: - Init
 
-    init(firstColor: UIColor, secondColor: UIColor, perCent: Int, frame: CGRect = .zero) {
+    init(firstColor: UIColor, secondColor: UIColor, amount: Int) {
         self.firstColor = firstColor
         self.secondColor = secondColor
-        self.perCent = min(max(perCent, 0), 100)
-        super.init(frame: frame)
+        self.amount = amount
+        super.init(frame: .zero)
+
         setupView()
     }
 
@@ -43,31 +43,29 @@ final class FrequencyStatistics: UIView {
     // MARK: - Setup
 
     private func setupView() {
-        layer.cornerRadius = 10
-//        layer.masksToBounds = true
-        layer.masksToBounds = false
+        layer.cornerRadius = 16
+        clipsToBounds = true
+        layer.masksToBounds = true
+
+        amountLabel.text = "\(amount)"
+        amountLabel.layer.zPosition = 1
 
         gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        layer.addSublayer(gradientLayer)
+        gradientLayer.cornerRadius = 10
+        layer.insertSublayer(gradientLayer, at: 0)
 
-        filledView.backgroundColor = .clear
-        addSubview(filledView)
+        addSubview(amountLabel)
 
-        amount.text = "\(perCent)"
-        addSubview(amount)
+        amountLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(10)
+            make.centerY.equalToSuperview()
+        }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
         gradientLayer.frame = bounds
-        gradientLayer.setNeedsDisplay()
-
-        let width = bounds.width * CGFloat(perCent) / 100
-        filledView.frame = CGRect(x: 0, y: 0, width: width, height: bounds.height)
-
-        amount.frame = bounds
     }
 }

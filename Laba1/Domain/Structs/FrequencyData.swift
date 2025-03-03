@@ -10,7 +10,7 @@ import UIKit
 struct FrequencyData {
     let image: UIImage?
     let emotion: String
-    let percentage: Int
+    let amount: Int
     let firstColor: UIColor
     let secondColor: UIColor
 }

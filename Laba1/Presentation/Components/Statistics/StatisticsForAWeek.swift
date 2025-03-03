@@ -61,14 +61,14 @@ final class StatisticsForAWeek: UIView {
         contentView.addSubview(categoryView)
         categoryView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(800)
         }
 
         contentView.addSubview(dayStatisticView)
         dayStatisticView.snp.makeConstraints { make in
             make.top.equalTo(categoryView.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview()
             make.height.greaterThanOrEqualTo(800)
         }
 
@@ -76,14 +76,14 @@ final class StatisticsForAWeek: UIView {
         contentView.addSubview(mostFrequentlyView)
         mostFrequentlyView.snp.makeConstraints { make in
             make.top.equalTo(dayStatisticView.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview()
             make.height.greaterThanOrEqualTo(800)
         }
 
         contentView.addSubview(duringDayView)
         duringDayView.snp.makeConstraints { make in
             make.top.equalTo(mostFrequentlyView.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-16)
             make.height.equalTo(800)
         }

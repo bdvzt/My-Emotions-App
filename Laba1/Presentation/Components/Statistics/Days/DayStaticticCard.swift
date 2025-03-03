@@ -15,7 +15,8 @@ final class DayStaticsticCard: UIView {
     private let horizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
+        stackView.alignment = .center
         stackView.spacing = 8
         return stackView
     }()
@@ -24,6 +25,7 @@ final class DayStaticsticCard: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
+        stackView.alignment = .leading
         stackView.spacing = 2
         return stackView
     }()
@@ -47,7 +49,8 @@ final class DayStaticsticCard: UIView {
     private let moodStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
+        stackView.alignment = .leading
         stackView.spacing = 2
         return stackView
     }()
@@ -55,8 +58,9 @@ final class DayStaticsticCard: UIView {
     private let moodImageStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 4
+        stackView.distribution = .fill
+        stackView.alignment = .trailing
+        stackView.spacing = 2
         return stackView
     }()
 
@@ -86,6 +90,7 @@ final class DayStaticsticCard: UIView {
         addSubview(horizontalStackView)
         horizontalStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+            make.height.equalTo(64)
         }
         setupDateStack()
         setupMoodStack()
@@ -95,12 +100,26 @@ final class DayStaticsticCard: UIView {
     private func setupDateStack() {
         dateStackView.addArrangedSubview(dayLabel)
         dateStackView.addArrangedSubview(dateLabel)
+
+        horizontalStackView.addArrangedSubview(dateStackView)
+
+        dateStackView.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.25)
+        }
     }
 
     private func setupMoodStack() {
-        horizontalStackView.addArrangedSubview(dateStackView)
         horizontalStackView.addArrangedSubview(moodStackView)
         horizontalStackView.addArrangedSubview(moodImageStackView)
+
+        moodStackView.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.40)
+        }
+
+        moodImageStackView.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.35)
+            make.trailing.equalToSuperview()
+        }
     }
 
     private func setupBottomLine() {
@@ -134,10 +153,24 @@ final class DayStaticsticCard: UIView {
     }
 
     private func addMoodImages(images: [UIImage]) {
-        for image in images {
-            let imageView = UIImageView(image: image)
-            imageView.contentMode = .scaleAspectFit
-            moodImageStackView.addArrangedSubview(imageView)
+        if images.isEmpty {
+            let grayCircle = UIImageView(image: .emptyCircle)
+            moodImageStackView.addArrangedSubview(grayCircle)
+
+            grayCircle.snp.makeConstraints { make in
+                make.width.equalTo(moodImageStackView.snp.width).multipliedBy(0.35)
+                make.height.equalTo(grayCircle.snp.width)
+            }
+        } else {
+            for image in images {
+                let imageView = UIImageView(image: image)
+                imageView.contentMode = .scaleAspectFit
+                moodImageStackView.addArrangedSubview(imageView)
+                imageView.snp.makeConstraints { make in
+                    make.width.equalTo(moodImageStackView.snp.width).multipliedBy(0.35)
+                    make.height.equalTo(imageView.snp.width)
+                }
+            }
         }
     }
 }

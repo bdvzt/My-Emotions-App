@@ -52,8 +52,8 @@ func createMockWeeksData() -> [StatWeek] {
                     DayData(
                         day: "Суббота",
                         date: "22 фев",
-                        moodsTitles: ["Выгорание", "Усталость"],
-                        moodsImages: [.sadness, .shell]
+                        moodsTitles: [],
+                        moodsImages: []
                     ),
                     DayData(
                         day: "Воскресенье",

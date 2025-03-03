@@ -1,0 +1,82 @@
+//
+//  TouchIdSwitchBar.swift
+//  LAB1
+//
+//  Created by Zayata Budaeva on 24.02.2025.
+//
+
+import UIKit
+import SnapKit
+
+final class TouchIdSwitchBar: UIView
+{
+    // MARK: - Private properties
+
+    private let horizontalStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.alignment = .center
+        return stack
+    }()
+
+    private let touchId: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = .touchId
+        imageView.tintColor = .white
+        return imageView
+    }()
+
+    private let textLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Вход по отпечатку пальца"
+        label.textColor = .white
+        label.font = UIFont(name: "VelaSans-Regular", size: 16)
+        label.textAlignment = .left
+        return label
+    }()
+
+    private let switchBar: UISwitch = {
+        let switchBar = UISwitch()
+        switchBar.onTintColor = .systemGreen
+        switchBar.backgroundColor = .white
+        switchBar.layer.cornerRadius = 16
+        switchBar.clipsToBounds = true
+        switchBar.thumbTintColor = .circleProgressBarGray
+        return switchBar
+    }()
+
+    // MARK: - Init
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Setup
+
+    private func setup() {
+        addSubview(horizontalStackView)
+
+        horizontalStackView.addArrangedSubview(touchId)
+        horizontalStackView.addArrangedSubview(textLabel)
+        horizontalStackView.addArrangedSubview(switchBar)
+
+        setupConstraints()
+    }
+
+    private func setupConstraints() {
+        horizontalStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(10)
+        }
+
+        touchId.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+        }
+    }
+}

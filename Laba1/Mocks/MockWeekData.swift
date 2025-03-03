@@ -92,16 +92,16 @@ func createMockWeeksData() -> [StatWeek] {
                         PartOdDayColor(color: .blue, percentage: 40)
                     ],
                     morning: [
-                        PartOdDayColor(color: .green, percentage: 80)
+                        PartOdDayColor(color: .green, percentage: 100)
                     ],
                     day: [
-                        PartOdDayColor(color: .yellow, percentage: 30)
+                        PartOdDayColor(color: .yellow, percentage: 100)
                     ],
                     evening: [
-                        PartOdDayColor(color: .red, percentage: 50)
+                        PartOdDayColor(color: .red, percentage: 100)
                     ],
                     lateEvening: [
-                        PartOdDayColor(color: .blue, percentage: 10)
+                        PartOdDayColor(color: .blue, percentage: 100)
                     ]
                 )
             )

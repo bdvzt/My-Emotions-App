@@ -27,6 +27,7 @@ final class DuringDayView: UIView {
         stackView.axis = .horizontal
         stackView.spacing = 16
         stackView.alignment = .bottom
+        stackView.distribution = .fillEqually
         return stackView
     }()
 
@@ -55,36 +56,38 @@ final class DuringDayView: UIView {
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
+//            make.height.equalTo(600)
         }
 
-        let earlyMorningColumn = makeColumn(from: data.earlyMorning, title: "Раннее утро")
-        let morningColumn = makeColumn(from: data.morning, title: "Утро")
-        let dayColumn = makeColumn(from: data.day, title: "День")
-        let eveningColumn = makeColumn(from: data.evening, title: "Вечер")
-        let lateEveningColumn = makeColumn(from: data.lateEvening, title: "Поздний вечер")
+        let partsOfDay: [(data: [PartOdDayColor], title: String)] = [
+            (data.earlyMorning, "Раннее утро"),
+            (data.morning, "Утро"),
+            (data.day, "День"),
+            (data.evening, "Вечер"),
+            (data.lateEvening, "Поздний вечер")
+        ]
 
-        columnsStackView.addArrangedSubview(earlyMorningColumn)
-        columnsStackView.addArrangedSubview(morningColumn)
-        columnsStackView.addArrangedSubview(dayColumn)
-        columnsStackView.addArrangedSubview(eveningColumn)
-        columnsStackView.addArrangedSubview(lateEveningColumn)
+        partsOfDay.forEach { part in
+            let columnView = makeColumn(from: part.data, title: part.title)
+            columnsStackView.addArrangedSubview(columnView)
+        }
     }
 
-    private func makeColumn(from data: [PartOdDayColor], title: String) -> ColorColumn {
-        guard let first = data.first else {
-            return ColorColumn(
-                moodCase: .none,
-                percentage: 0,
-                title: title,
-                amount: 0
-            )
+    private func makeColumn(from data: [PartOdDayColor], title: String) -> UIView {
+        guard !data.isEmpty else {
+            return UIView()
         }
 
-        return ColorColumn(
-            moodCase: first.color,
-            percentage: CGFloat(first.percentage),
-            title: title,
-            amount: data.count
-        )
+        let totalAmount = data.reduce(0) { $0 + $1.percentage }
+        let statisticView = PartOfDayStatistic(data: data, title: title, amount: totalAmount)
+
+        let containerView = UIView()
+        containerView.addSubview(statisticView)
+
+        statisticView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        return containerView
     }
 }

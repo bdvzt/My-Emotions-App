@@ -20,7 +20,6 @@ class StatisticsViewController: UIViewController {
     private let indicatorLine = UIView()
     private let weeksLine = UIView()
 
-    private let mainScrollView = UIScrollView()
     private let mainContentView = UIView()
     private var statisticsForAWeekView: StatisticsForAWeek?
 
@@ -129,17 +128,11 @@ class StatisticsViewController: UIViewController {
     }
 
     private func setupMainScrollView() {
-        view.addSubview(mainScrollView)
-        mainScrollView.addSubview(mainContentView)
-
-        mainScrollView.snp.makeConstraints { make in
-            make.top.equalTo(chooseWeekScrollView.snp.bottom).offset(16)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
+        view.addSubview(mainContentView)
 
         mainContentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.width.equalTo(mainScrollView)
+            make.top.equalTo(chooseWeekScrollView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 
@@ -162,8 +155,8 @@ class StatisticsViewController: UIViewController {
         statisticsView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(1200)
+            make.bottom.equalToSuperview().offset(-16)
+            make.height.greaterThanOrEqualTo(1400)
         }
     }
 }

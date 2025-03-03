@@ -12,13 +12,45 @@ final class PartOfDayStatistic: UIView {
 
     // MARK: - Private properties
 
-    private let stackView = UIStackView()
+    private let columnStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 4
+        stack.alignment = .fill
+        stack.distribution = .fillProportionally
+        return stack
+    }()
+
+    private let labelStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.alignment = .center
+        stack.spacing = 2
+        return stack
+    }()
+
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "VelaSans-Regular", size: 12)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        return label
+    }()
+
+    private let amountLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "VelaSans-Regular", size: 12)
+        label.textColor = .tabBarUnselected
+        label.textAlignment = .center
+        return label
+    }()
 
     // MARK: - Inits
 
-    init(colors: [PartOdDayColor]) {
+    init(data: [PartOdDayColor], title: String, amount: Int) {
         super.init(frame: .zero)
-        setup(colors)
+        setup(data: data, title: title, amount: amount)
     }
 
     required init?(coder: NSCoder) {
@@ -27,20 +59,43 @@ final class PartOfDayStatistic: UIView {
 
     // MARK: - Setup
 
-    private func setup(_ data: [PartOdDayColor]) {
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        addSubview(stackView)
+    private func setup(data: [PartOdDayColor], title: String, amount: Int) {
+        let mainStack = UIStackView()
+        mainStack.axis = .vertical
+        mainStack.alignment = .center
+        mainStack.spacing = 8
 
-        stackView.snp.makeConstraints { make in
+        addSubview(mainStack)
+        mainStack.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 
-        data.forEach { emotion in
-            let column = ColorColumn()
-            column.moodCase = emotion.color
-            column.percentage = CGFloat(emotion.percentage)
-            stackView.addArrangedSubview(column)
+        mainStack.addArrangedSubview(columnStackView)
+        columnStackView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+        }
+
+        let totalPercentage = data.reduce(0) { $0 + $1.percentage }
+
+        for part in data {
+            let column = ColorColumn(moodCase: part.color, percentage: CGFloat(part.percentage))
+            columnStackView.addArrangedSubview(column)
+
+            column.snp.makeConstraints { make in
+                make.width.equalToSuperview()
+                make.height.equalToSuperview().multipliedBy(CGFloat(part.percentage) / CGFloat(totalPercentage))
+            }
+        }
+
+        titleLabel.text = title
+        amountLabel.text = "\(amount)"
+
+        labelStackView.addArrangedSubview(titleLabel)
+        labelStackView.addArrangedSubview(amountLabel)
+
+        mainStack.addArrangedSubview(labelStackView)
+        labelStackView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
         }
     }
 }

@@ -11,13 +11,12 @@ import SnapKit
 class ChooseMoodViewController: UIViewController {
 
     // MARK: - Private properties
-    var onSelected: ((UIColor, String) -> Void)?
 
     private let scrollView = UIScrollView()
     private let backArrow = BackArrow()
     private let moodGrid = MoodGridView()
     private let moodCardContainer = UIView()
-    private var currentMoodCard: UIView?
+    private var currentMoodCard: ChosenMoodCard?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +40,10 @@ class ChooseMoodViewController: UIViewController {
     private func setupBackArrow() {
         view.addSubview(backArrow)
         backArrow.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.top.equalToSuperview().inset(16)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
+        backArrow.addTarget(self, action: #selector(backArrowTapped), for: .touchUpInside)
     }
 
     private func setupCard() {
@@ -87,24 +87,36 @@ class ChooseMoodViewController: UIViewController {
         newCard.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        currentMoodCard = newCard
+
+        if let chosenCard = newCard as? ChosenMoodCard {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(nextMoodTapped))
+            chosenCard.arrowView.addGestureRecognizer(tapGesture)
+            currentMoodCard = chosenCard
+        }
     }
 
     // MARK: - Actions
 
+    @objc private func backArrowTapped() {
+        let journalViewController = TabController()
+        let navController = UINavigationController(rootViewController: journalViewController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: false)
+    }
+
     private func updateMoodCard(color: UIColor, mood: String) {
-        let chosenCard = ChosenMoodCard(color: color, mood: mood, description: "Вы выбрали это настроение.")
+        let chosenCard = ChosenMoodCard(color: color, mood: mood, description: "ощущение, что необходимо отдохнуть")
         addMoodCard(chosenCard)
+    }
+
+    @objc private func nextMoodTapped() {
+        guard let chosenCard = currentMoodCard else { return }
 
         let addNoteVC = AddNoteViewController()
-        addNoteVC.setupMoodCard(color: color, mood: mood)
-
-        addNoteVC.saveMoodCard = { [weak self] selectedColor, selectedMood in
-            self?.onSelected?(selectedColor, selectedMood)
-        }
+        addNoteVC.setupMoodCard(color: chosenCard.moodColor, mood: chosenCard.moodName)
 
         addNoteVC.modalPresentationStyle = .fullScreen
-        present(addNoteVC, animated: true)
+        present(addNoteVC, animated: false)
     }
 }
 

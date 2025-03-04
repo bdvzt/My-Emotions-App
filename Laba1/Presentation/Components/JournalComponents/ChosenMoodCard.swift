@@ -10,10 +10,14 @@ import SnapKit
 
 final class ChosenMoodCard: UIView {
 
-    // MARK: - Private properties
+    let moodColor: UIColor
+    let moodName: String
+    let arrowView: RightArrow = {
+        let view = RightArrow(chosen: true)
+        return view
+    }()
 
-    private let moodColor: UIColor
-    private let moodName: String
+    // MARK: - Private properties
 
     private let chosenMoodLabel: UILabel = {
         let label = UILabel()
@@ -44,11 +48,6 @@ final class ChosenMoodCard: UIView {
         stackView.spacing = 16
         stackView.alignment = .center
         return stackView
-    }()
-
-    private let arrowView: RightArrow = {
-        let view = RightArrow(chosen: true)
-        return view
     }()
 
     // MARK: - Init
@@ -101,43 +100,5 @@ final class ChosenMoodCard: UIView {
         arrowView.snp.makeConstraints { make in
             make.width.height.equalTo(64)
         }
-
-        arrowView.addTarget(self, action: #selector(arrowTapped), for: .touchUpInside)
-    }
-
-    // MARK: - Actions
-
-    //    @objc private func arrowTapped() {
-    //        guard let parentVC = findViewController() else { return }
-    //
-    //        let addNoteVC = AddNoteViewController()
-    //        addNoteVC.setupMoodCard(color: self.moodColor, mood: self.moodName)
-    //        addNoteVC.isModalInPresentation = true
-    //        addNoteVC.modalPresentationStyle = .fullScreen
-    //
-    //        parentVC.dismiss(animated: false) {
-    //            parentVC.present(addNoteVC, animated: true)
-    //        }
-    //    }
-    //
-    private func findViewController() -> UIViewController? {
-        var responder: UIResponder? = self
-        while let next = responder?.next {
-            if let vc = next as? UIViewController {
-                return vc
-            }
-            responder = next
-        }
-        return nil
-    }
-    
-    @objc private func arrowTapped() {
-        guard let parentVC = findViewController() else { return }
-
-        let addNoteVC = AddNoteViewController()
-        addNoteVC.setupMoodCard(color: self.moodColor, mood: self.moodName)
-        addNoteVC.isModalInPresentation = true
-
-        parentVC.navigationController?.pushViewController(addNoteVC, animated: true)
     }
 }

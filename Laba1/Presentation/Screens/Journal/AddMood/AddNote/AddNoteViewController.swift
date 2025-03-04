@@ -10,11 +10,8 @@ import SnapKit
 
 final class AddNoteViewController: UIViewController {
 
-    // MARK: - Public properties
-
-    var saveMoodCard: ((UIColor, String) -> Void)?
-
     // MARK: - Private properties
+    
     private var chosenColor: UIColor?
     private var chosenMood: String?
     private var moodCardView: MoodCardView?
@@ -130,10 +127,11 @@ final class AddNoteViewController: UIViewController {
     private func setupHeaderStackView() {
         view.addSubview(headerStackView)
         headerStackView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalToSuperview().inset(16)
             make.leading.equalTo(view).offset(16)
             make.trailing.equalTo(view).offset(-16)
         }
+        backArrow.addTarget(self, action: #selector(backArrowTapped), for: .touchUpInside)
     }
 
     private func setupQuestionViews() {
@@ -173,13 +171,18 @@ final class AddNoteViewController: UIViewController {
 
     // MARK: - Actions
 
+    @objc private func backArrowTapped() {
+        let chooseMoodViewController = ChooseMoodViewController()
+        let navController = UINavigationController(rootViewController: chooseMoodViewController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: false)
+    }
+
     @objc private func saveButtonTapped() {
-        guard let color = chosenColor, let mood = chosenMood else {
-            dismiss(animated: true)
-            return
-        }
-        saveMoodCard?(color, mood) 
-        dismiss(animated: true)
+        let journalViewController = TabController()
+        let navController = UINavigationController(rootViewController: journalViewController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: false)
     }
 }
 

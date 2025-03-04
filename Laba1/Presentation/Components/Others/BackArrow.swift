@@ -37,27 +37,5 @@ final class BackArrow: UIButton {
         tintColor = .white
 
         imageView?.contentMode = .scaleAspectFit
-        addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
-
-    @objc private func backButtonTapped() {
-        if let viewController = self.findViewController() {
-            if let navigationController = viewController.navigationController {
-                navigationController.popViewController(animated: false)
-            } else {
-                viewController.dismiss(animated: false, completion: nil)
-            }
-        }
-    }
-    
-    private func findViewController() -> UIViewController? {
-        var responder: UIResponder? = self
-        while let nextResponder = responder?.next {
-            if let viewController = nextResponder as? UIViewController {
-                return viewController
-            }
-            responder = nextResponder
-        }
-        return nil
     }
 }

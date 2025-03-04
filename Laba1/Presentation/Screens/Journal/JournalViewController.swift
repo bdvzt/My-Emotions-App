@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class JournalViewController: UIViewController {
+
     // MARK: - Private properties
 
     private var moodCards: [MoodCardView] = [
@@ -92,7 +93,7 @@ class JournalViewController: UIViewController {
         view.addSubview(notesAmountStack)
 
         notesAmountStack.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.top.equalToSuperview().offset(16)
             make.centerX.equalToSuperview()
         }
     }
@@ -111,7 +112,9 @@ class JournalViewController: UIViewController {
         view.addSubview(moodCardScrollView)
         moodCardScrollView.snp.makeConstraints { make in
             make.top.equalTo(questionLabel.snp.bottom).offset(30)
-            make.left.right.bottom.equalToSuperview()
+            make.leading.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview()
         }
 
         let containerView = UIView()
@@ -137,7 +140,6 @@ class JournalViewController: UIViewController {
             make.center.equalTo(circleProgressBar)
         }
 
-//        let cardsContainerView = UIView()
         containerView.addSubview(cardsContainerView)
         cardsContainerView.snp.makeConstraints { make in
             make.top.equalTo(circleProgressBar.snp.bottom).offset(50)
@@ -154,8 +156,8 @@ class JournalViewController: UIViewController {
                 } else {
                     make.top.equalToSuperview().offset(10)
                 }
-                make.left.equalToSuperview().offset(10)
-                make.right.equalToSuperview().inset(10)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
                 make.height.equalTo(158)
             }
             previousCard = card
@@ -176,41 +178,9 @@ class JournalViewController: UIViewController {
 
     @objc private func addMoodButtonTapped() {
         let chooseMoodViewController = ChooseMoodViewController()
-
-        chooseMoodViewController.onSelected = { [weak self] color, mood in
-            let addNoteVC = AddNoteViewController()
-            addNoteVC.setupMoodCard(color: color, mood: mood)
-
-            addNoteVC.saveMoodCard = { selectedColor, selectedMood in
-                self?.addNewMoodCard(color: selectedColor, mood: selectedMood)
-            }
-
-            addNoteVC.modalPresentationStyle = .fullScreen
-            self?.navigationController?.pushViewController(addNoteVC, animated: true)
-        }
-
         let navController = UINavigationController(rootViewController: chooseMoodViewController)
         navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true)
-    }
-
-    func addNewMoodCard(color: UIColor, mood: String) {
-        let dateText = "Сегодня" 
-
-        let newCard = MoodCardView(color: color, image: .shell, dateText: dateText, moodText: mood)
-        moodCards.append(newCard)
-        cardsContainerView.addSubview(newCard)
-
-        let previousCard = moodCards.dropLast().last
-        newCard.snp.makeConstraints { make in
-            if let prev = previousCard {
-                make.top.equalTo(prev.snp.bottom).offset(10)
-            } else {
-                make.top.equalToSuperview().offset(10)
-            }
-            make.left.right.equalToSuperview().inset(10)
-            make.height.equalTo(158)
-        }
+        present(navController, animated: false)
     }
 }
 

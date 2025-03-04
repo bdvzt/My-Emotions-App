@@ -1,14 +1,7 @@
-//
-//  NoteQuestionView.swift
-//  LAB1
-//
-//  Created by Zayata Budaeva on 27.02.2025.
-//
-
 import UIKit
 import SnapKit
 
-final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout {
+final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     // MARK: - UI Elements
     private let questionLabel: UILabel = {
@@ -57,6 +50,7 @@ final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout {
             make.top.equalTo(questionLabel.snp.bottom).offset(8)
             make.leading.trailing.bottom.equalToSuperview()
         }
+
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(NoteAnswerCell.self, forCellWithReuseIdentifier: NoteAnswerCell.reuseIdentifier)
@@ -84,46 +78,8 @@ final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout {
         self.invalidateIntrinsicContentSize()
     }
 
-    // MARK: - UICollectionViewDelegateFlowLayout
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.item < answers.count {
-            let text = answers[indexPath.item]
-            let dummyButton = NoteAnswer(description: text)
-            return dummyButton.intrinsicContentSize
-        } else {
-            let dummyAddButton = NoteAnswerAddButton()
-            return dummyAddButton.intrinsicContentSize
-        }
-    }
+    // MARK: - UICollectionViewDataSource
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == answers.count {
-            presentAddAnswerAlert()
-        }
-    }
-
-    private func presentAddAnswerAlert() {
-        guard let viewController = self.parentViewController else { return }
-        let alert = UIAlertController(title: "Новый ответ", message: "Введите текст ответа", preferredStyle: .alert)
-        alert.addTextField { textField in
-            textField.placeholder = "Ваш ответ"
-        }
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Добавить", style: .default, handler: { [weak self] _ in
-            if let text = alert.textFields?.first?.text, !text.isEmpty {
-                self?.answers.append(text)
-                self?.collectionView.reloadData()
-            }
-        }))
-        viewController.present(alert, animated: true, completion: nil)
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-extension NoteQuestionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return answers.count + 1
     }
@@ -140,8 +96,54 @@ extension NoteQuestionView: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteAnswerAddCell.reuseIdentifier, for: indexPath) as? NoteAnswerAddCell else {
                 return UICollectionViewCell()
             }
+            cell.onAddTapped = { [weak self] in
+                self?.presentAddAnswerAlert()
+            }
             return cell
         }
+    }
+
+    // MARK: - UICollectionViewDelegateFlowLayout
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.item < answers.count {
+            let text = answers[indexPath.item]
+            let dummyButton = NoteAnswer(description: text)
+            return dummyButton.intrinsicContentSize
+        } else {
+            let dummyAddButton = NoteAnswerAddButton()
+            return dummyAddButton.intrinsicContentSize
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("✅ Ячейка нажата: \(indexPath.item)")
+        if indexPath.item == answers.count {
+            print("alert")
+            presentAddAnswerAlert()
+        }
+    }
+
+    private func presentAddAnswerAlert() {
+        guard let viewController = self.parentViewController else {
+            print("⚠️ parentViewController is nil!")
+            return
+        }
+        print("✅ Открытие UIAlertController")
+        let alert = UIAlertController(title: "Новый ответ", message: "Введите текст ответа", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "Ваш ответ"
+        }
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Добавить", style: .default, handler: { [weak self] _ in
+            if let text = alert.textFields?.first?.text, !text.isEmpty {
+                self?.answers.append(text)
+                self?.collectionView.reloadData()
+            }
+        }))
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -157,4 +159,3 @@ extension UIView {
         return nil
     }
 }
-

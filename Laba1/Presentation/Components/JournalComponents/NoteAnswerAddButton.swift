@@ -33,11 +33,11 @@ final class NoteAnswerAddButton: UIButton {
         addSubview(plusImageView)
         plusImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(16)
+            make.width.height.equalTo(20)
         }
     }
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 60, height: 40)
+        return CGSize(width: 36, height: 36)
     }
 }

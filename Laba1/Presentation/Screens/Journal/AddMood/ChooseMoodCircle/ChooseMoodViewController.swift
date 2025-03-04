@@ -98,10 +98,7 @@ class ChooseMoodViewController: UIViewController {
     // MARK: - Actions
 
     @objc private func backArrowTapped() {
-        let journalViewController = TabController()
-        let navController = UINavigationController(rootViewController: journalViewController)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: false)
+        dismiss(animated: false, completion: nil)
     }
 
     private func updateMoodCard(color: UIColor, mood: String) {

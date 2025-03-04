@@ -152,34 +152,12 @@ final class AddNoteViewController: UIViewController {
     // MARK: - Actions
 
     @objc private func backArrowTapped() {
-        let chooseMoodViewController = ChooseMoodViewController()
-        let navController = UINavigationController(rootViewController: chooseMoodViewController)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: false)
+        dismiss(animated: false, completion: nil)
     }
 
     @objc private func saveButtonTapped() {
-        let journalViewController = TabController()
-        let navController = UINavigationController(rootViewController: journalViewController)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: false)
+        let tabController = TabController()
+        tabController.modalPresentationStyle = .fullScreen
+        present(tabController, animated: false, completion: nil)
     }
 }
-
-#if DEBUG
-import SwiftUI
-struct AddNoteViewControllerPreview: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> AddNoteViewController {
-        let vc = AddNoteViewController(color: .loginBlue, mood: "Выгорание")
-        return vc
-    }
-    func updateUIViewController(_ uiViewController: AddNoteViewController, context: Context) {}
-}
-
-struct AddNoteViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        AddNoteViewControllerPreview()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
-#endif

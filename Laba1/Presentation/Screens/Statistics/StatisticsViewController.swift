@@ -39,8 +39,8 @@ class StatisticsViewController: UIViewController {
     }
 
     private func setupWeeks() {
-        weeks = createMockWeeksData()
-
+        weeks = MockWeekData.createMockWeeksData()
+        
         for index in 0..<weeks.count {
             let week = weeks[index]
             let button = setupWeekButton(for: week, index: index)

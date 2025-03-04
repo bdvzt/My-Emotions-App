@@ -29,7 +29,7 @@ final class NoteAnswerAddCell: UICollectionViewCell {
     }
 
     private func setup() {
-        contentView.addSubview(addButton) 
+        contentView.addSubview(addButton)
         addButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.height.equalTo(40)
@@ -38,7 +38,6 @@ final class NoteAnswerAddCell: UICollectionViewCell {
     }
 
     @objc private func addTapped() {
-        print("✅ Кнопка `+` нажата")
         onAddTapped?()
     }
 }

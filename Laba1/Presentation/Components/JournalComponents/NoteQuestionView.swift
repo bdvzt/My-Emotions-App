@@ -29,6 +29,7 @@ final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout, UIColl
     }
 
     // MARK: - Setup
+
     private func setup() {
         setupQuestionLabel()
         setupCollectionView()
@@ -65,7 +66,6 @@ final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout, UIColl
         return layout
     }
 
-    // MARK: - Dynamic height
     override var intrinsicContentSize: CGSize {
         let labelHeight = questionLabel.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         let collectionHeight = collectionView.collectionViewLayout.collectionViewContentSize.height
@@ -119,7 +119,6 @@ final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("✅ Ячейка нажата: \(indexPath.item)")
         if indexPath.item == answers.count {
             print("alert")
             presentAddAnswerAlert()
@@ -128,10 +127,8 @@ final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout, UIColl
 
     private func presentAddAnswerAlert() {
         guard let viewController = self.parentViewController else {
-            print("⚠️ parentViewController is nil!")
             return
         }
-        print("✅ Открытие UIAlertController")
         let alert = UIAlertController(title: "Новый ответ", message: "Введите текст ответа", preferredStyle: .alert)
         alert.addTextField { textField in
             textField.placeholder = "Ваш ответ"

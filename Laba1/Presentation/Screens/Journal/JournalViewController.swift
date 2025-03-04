@@ -12,31 +12,9 @@ class JournalViewController: UIViewController {
 
     // MARK: - Private properties
 
-    //    private var moodCards: [MoodCardView] = []
-
-    private var moodCards: [MoodCardView] = [
-        MoodCardView(
-            color: .loginBlue,
-            image: .sadness,
-            dateText: "вчера, 23:40",
-            moodText: "выгорание"
-        ),
-        MoodCardView(
-            color: .loginGreen,
-            image: .greenMood,
-            dateText: "вчера, 14:08",
-            moodText: "спокойствие"),
-        MoodCardView(
-            color: .loginOrange,
-            image: .lightning,
-            dateText: "воскресенье, 16:12",
-            moodText: "продуктивность"),
-        MoodCardView(
-            color: .loginRed,
-            image: .redMood,
-            dateText: "воскресенье, 03:59",
-            moodText: "беспокойство")
-    ]
+//    private var moodCards: [MoodCardView] = JournalMockData.empty
+//    private var moodCards: [MoodCardView] = JournalMockData.twoCards
+    private var moodCards: [MoodCardView] = JournalMockData.full
 
     private let notesAmountStack = UIStackView()
     private let questionLabel = QuestionLabel()

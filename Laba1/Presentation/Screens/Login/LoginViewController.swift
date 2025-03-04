@@ -16,6 +16,14 @@ class LoginViewController: UIViewController {
     private let welcomeLabel = UILabel()
     private var gradientLayer: CAGradientLayer?
 
+    private let gradientColors: [[CGColor]] = [
+        [UIColor.loginRed.cgColor, UIColor.loginBlue.cgColor, UIColor.loginGreen.cgColor, UIColor.loginOrange.cgColor],
+        [UIColor.loginGreen.cgColor, UIColor.loginOrange.cgColor, UIColor.loginRed.cgColor, UIColor.loginBlue.cgColor],
+        [UIColor.loginOrange.cgColor, UIColor.loginRed.cgColor, UIColor.loginBlue.cgColor, UIColor.loginGreen.cgColor],
+        [UIColor.loginBlue.cgColor, UIColor.loginGreen.cgColor, UIColor.loginOrange.cgColor, UIColor.loginRed.cgColor],
+        [UIColor.loginRed.cgColor, UIColor.loginBlue.cgColor, UIColor.loginGreen.cgColor, UIColor.loginOrange.cgColor]
+    ]
+
     // MARK: - Inits
 
     init() {
@@ -36,6 +44,7 @@ class LoginViewController: UIViewController {
         view.accessibilityIdentifier = "loginScreen"
 
         setup()
+        startGradientAnimation()
     }
 
     override func viewDidLayoutSubviews() {
@@ -60,7 +69,7 @@ class LoginViewController: UIViewController {
         welcomeLabel.textAlignment = .left
 
         welcomeLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(80)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
             make.leading.equalToSuperview().inset(25)
             make.width.lessThanOrEqualToSuperview().inset(40)
         }
@@ -73,8 +82,8 @@ class LoginViewController: UIViewController {
 
         loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(45)
-            make.width.equalTo(364)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(40)
+            make.trailing.leading.equalToSuperview().inset(25)
             make.height.equalTo(80)
         }
     }
@@ -83,20 +92,31 @@ class LoginViewController: UIViewController {
         gradientLayer?.removeFromSuperlayer()
 
         let newGradientLayer = CAGradientLayer()
-        newGradientLayer.masksToBounds = true
+        newGradientLayer.frame = view.bounds
+        newGradientLayer.colors = gradientColors.first
         newGradientLayer.startPoint = CGPoint(x: 0, y: 0)
         newGradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        newGradientLayer.locations = [0.25, 0.5, 0.75, 1.0]
-
-        newGradientLayer.colors = [
-            UIColor.loginGreen.cgColor,
-            UIColor.loginRed.cgColor,
-            UIColor.loginOrange.cgColor,
-            UIColor.loginBlue.cgColor
-        ]
+        newGradientLayer.locations = [0.0, 0.5, 1.0]
 
         view.layer.insertSublayer(newGradientLayer, at: 0)
         gradientLayer = newGradientLayer
+    }
+
+    // MARK: - Gradient Animation
+
+    private func startGradientAnimation() {
+        guard let gradientLayer = gradientLayer else { return }
+
+        let animationDuration: CFTimeInterval = 25.0
+
+        let colorAnimation = CAKeyframeAnimation(keyPath: "colors")
+        colorAnimation.values = gradientColors
+        colorAnimation.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+        colorAnimation.duration = animationDuration
+        colorAnimation.repeatCount = .infinity
+        colorAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
+
+        gradientLayer.add(colorAnimation, forKey: "colorCycle")
     }
 
     // MARK: - Actions
@@ -106,7 +126,6 @@ class LoginViewController: UIViewController {
            let window = windowScene.windows.first {
             let tabController = TabController()
             window.rootViewController = tabController
-            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil)
         }
     }
 }
@@ -114,3 +133,4 @@ class LoginViewController: UIViewController {
 #Preview {
     LoginViewController()
 }
+

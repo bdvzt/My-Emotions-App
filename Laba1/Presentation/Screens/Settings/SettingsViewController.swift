@@ -88,7 +88,7 @@ final class SettingsViewController: UIViewController {
         setupPicker()
         setupActions()
         updateEmptyState()
-        handleErrorState()
+//        handleErrorState()
 
         view.addSubview(emptyStateLabel)
         view.addSubview(errorLabel)
@@ -227,7 +227,7 @@ final class SettingsViewController: UIViewController {
     }
 
     private func updateEmptyState() {
-        emptyStateLabel.isHidden = !timeStackView.arrangedSubviews.isEmpty
+        emptyStateLabel.isHidden = timeStackView.arrangedSubviews.isEmpty
     }
 
     // MARK: - Actions

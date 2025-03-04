@@ -33,7 +33,6 @@ final class SettingsViewController: UIViewController {
         label.textAlignment = .center
         label.font =  UIFont(name: "VelaSans-Regular", size: 18)
         label.isHidden = true
-        label.accessibilityIdentifier = "emptyStateLabel"
         return label
     }()
 
@@ -44,7 +43,6 @@ final class SettingsViewController: UIViewController {
         label.textAlignment = .center
         label.font =  UIFont(name: "VelaSans-Regular", size: 18)
         label.isHidden = true
-        label.accessibilityIdentifier = "errorLabel"
         return label
     }()
 
@@ -63,6 +61,16 @@ final class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "settingsScreen"
+        emptyStateLabel.accessibilityIdentifier = "emptyStateLabel"
+        errorLabel.accessibilityIdentifier = "errorLabel"
+        addReminderButton.accessibilityIdentifier = "addReminderButton"
+        timeScrollView.accessibilityIdentifier = "timeScrollView"
+        settingsLabel.accessibilityIdentifier = "settingsLabel"
+        avatarView.accessibilityIdentifier = "avatarView"
+        touchIdSwitchBar.accessibilityIdentifier = "touchIdSwitchBar"
+        sendAlert.accessibilityIdentifier = "sendAlert"
+        timePicker.accessibilityIdentifier = "timePicker"
+        saveButton.accessibilityIdentifier = "saveButton"
         setup()
     }
 
@@ -79,6 +87,8 @@ final class SettingsViewController: UIViewController {
         setupTouchIdSwitchBar()
         setupPicker()
         setupActions()
+        updateEmptyState()
+        handleErrorState()
 
         view.addSubview(emptyStateLabel)
         view.addSubview(errorLabel)
@@ -216,6 +226,10 @@ final class SettingsViewController: UIViewController {
         timeScrollViewHeightConstraint?.update(offset: newHeight)
     }
 
+    private func updateEmptyState() {
+        emptyStateLabel.isHidden = !timeStackView.arrangedSubviews.isEmpty
+    }
+
     // MARK: - Actions
 
     @objc private func showTimePicker() {
@@ -239,6 +253,20 @@ final class SettingsViewController: UIViewController {
         timeStackView.removeArrangedSubview(reminder)
         reminder.removeFromSuperview()
         updateTimeScrollViewHeight()
+    }
+
+    private func handleErrorState() {
+        emptyStateLabel.isHidden = true
+        errorLabel.isHidden = false
+
+        settingsLabel.isHidden = true
+        avatarView.isHidden = true
+        sendAlert.isHidden = true
+        timeScrollView.isHidden = true
+        addReminderButton.isHidden = true
+        touchIdSwitchBar.isHidden = true
+        pickerContainerView.isHidden = true
+        saveButton.isHidden = true
     }
 }
 

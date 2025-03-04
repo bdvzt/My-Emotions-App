@@ -11,10 +11,8 @@ import SnapKit
 final class AddNoteViewController: UIViewController {
 
     // MARK: - Private properties
-    
-    private var chosenColor: UIColor?
-    private var chosenMood: String?
-    private var moodCardView: MoodCardView?
+
+    private var moodCardView: MoodCardView
     private let backArrow = BackArrow()
 
     private let noteLabel: UILabel = {
@@ -34,81 +32,58 @@ final class AddNoteViewController: UIViewController {
         return stackView
     }()
 
-    private let whatQuestionView: NoteQuestionView = {
-        let answers = [
-            "Приём пищи",
-            "Встреча с друзьями",
-            "Тренировка",
-            "Хобби",
-            "Отдых",
-            "Поездка"
-        ]
-        return NoteQuestionView(question: "Чем вы занимались?", answers: answers)
+    private let whatQuestionView = NoteQuestionView(
+        question: "Чем вы занимались?",
+        answers: ["Приём пищи", "Встреча с друзьями", "Тренировка", "Хобби", "Отдых", "Поездка"]
+    )
+
+    private let withWhomQuestionView = NoteQuestionView(
+        question: "С кем вы были?",
+        answers: ["Один", "Друзья", "Семья", "Коллеги", "Партнёр", "Питомцы"]
+    )
+
+    private let whereQuestionView = NoteQuestionView(
+        question: "Где вы были?",
+        answers: ["Дом", "Работа", "Школа", "Транспорт", "Улица"]
+    )
+
+    private let questionsStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 16
+        stack.alignment = .fill
+        return stack
     }()
 
-    private let withWhomQuestionView: NoteQuestionView = {
-        let answers = [
-            "Один",
-            "Друзья",
-            "Семья",
-            "Коллеги",
-            "Партнёр",
-            "Питомцы"
-        ]
-        return NoteQuestionView(question: "С кем вы были?", answers: answers)
+    private let questionScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
     }()
 
-    private let whereQuestionView: NoteQuestionView = {
-        let answers = [
-            "Дом",
-            "Работа",
-            "Школа",
-            "Транспорт",
-            "Улица"
-        ]
-        return NoteQuestionView(question: "Где вы были?", answers: answers)
-    }()
+    private let saveButton = WhiteButton(title: "Сохранить")
 
-    private let saveButton: WhiteButton = {
-        let button = WhiteButton(title: "Сохранить")
-        return button
-    }()
+    // MARK: - Inits
+
+    init(color: UIColor, mood: String) {
+        self.moodCardView = MoodCardView(
+            color: color,
+            image: .shell,
+            dateText: "сегодня, 14:36",
+            moodText: mood
+        )
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupMoodIfNeeded()
-    }
-
-    // MARK: - Public methods
-
-    func setupMoodCard(color: UIColor, mood: String) {
-        self.chosenColor = color
-        self.chosenMood = mood
-    }
-
-    // MARK: - Private logic
-
-    private func setupMoodIfNeeded() {
-        guard let color = chosenColor, let mood = chosenMood else { return }
-
-        let newMoodCardView = MoodCardView(
-            color: color,
-            image: .shell,
-            dateText: "сегодня, 14:36",
-            moodText: mood
-        )
-        self.moodCardView = newMoodCardView
-
-        view.addSubview(newMoodCardView)
-        newMoodCardView.snp.makeConstraints { make in
-            make.top.equalTo(headerStackView.snp.bottom).offset(30)
-            make.leading.equalTo(view).offset(16)
-            make.trailing.equalTo(view).offset(-16)
-            make.height.equalTo(158)
-        }
     }
 
     // MARK: - Setup
@@ -116,8 +91,9 @@ final class AddNoteViewController: UIViewController {
     private func setup() {
         setupBackground()
         setupHeaderStackView()
-        setupQuestionViews()
+        setupMoodCard()
         setupSaveButton()
+        setupQuestionScrollView()
     }
 
     private func setupBackground() {
@@ -127,42 +103,46 @@ final class AddNoteViewController: UIViewController {
     private func setupHeaderStackView() {
         view.addSubview(headerStackView)
         headerStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(16)
-            make.leading.equalTo(view).offset(16)
-            make.trailing.equalTo(view).offset(-16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         backArrow.addTarget(self, action: #selector(backArrowTapped), for: .touchUpInside)
     }
 
-    private func setupQuestionViews() {
-        view.addSubview(whatQuestionView)
-        view.addSubview(withWhomQuestionView)
-        view.addSubview(whereQuestionView)
-
-        whatQuestionView.snp.makeConstraints { make in
+    private func setupMoodCard() {
+        view.addSubview(moodCardView)
+        moodCardView.snp.makeConstraints { make in
             make.top.equalTo(headerStackView.snp.bottom).offset(30)
-            make.leading.equalTo(view).offset(16)
-            make.trailing.equalTo(view).offset(-16)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(158)
+        }
+    }
+
+    private func setupQuestionScrollView() {
+        view.addSubview(questionScrollView)
+        questionScrollView.addSubview(questionsStack)
+
+        questionScrollView.snp.makeConstraints { make in
+            make.top.equalTo(moodCardView.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(saveButton.snp.top).offset(-20)
         }
 
-        withWhomQuestionView.snp.makeConstraints { make in
-            make.top.equalTo(whatQuestionView.snp.bottom).offset(20)
-            make.leading.equalTo(view).offset(16)
-            make.trailing.equalTo(view).offset(-16)
+        questionsStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
         }
 
-        whereQuestionView.snp.makeConstraints { make in
-            make.top.equalTo(withWhomQuestionView.snp.bottom).offset(20)
-            make.leading.equalTo(view).offset(16)
-            make.trailing.equalTo(view).offset(-16)
-        }
+        questionsStack.addArrangedSubview(whatQuestionView)
+        questionsStack.addArrangedSubview(withWhomQuestionView)
+        questionsStack.addArrangedSubview(whereQuestionView)
     }
 
     private func setupSaveButton() {
         view.addSubview(saveButton)
         saveButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-16)
-            make.centerX.equalTo(view)
+            make.centerX.equalToSuperview()
             make.width.equalTo(364)
             make.height.equalTo(56)
         }
@@ -190,8 +170,7 @@ final class AddNoteViewController: UIViewController {
 import SwiftUI
 struct AddNoteViewControllerPreview: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> AddNoteViewController {
-        let vc = AddNoteViewController()
-        vc.setupMoodCard(color: .loginBlue, mood: "Выгорание")
+        let vc = AddNoteViewController(color: .loginBlue, mood: "Выгорание")
         return vc
     }
     func updateUIViewController(_ uiViewController: AddNoteViewController, context: Context) {}

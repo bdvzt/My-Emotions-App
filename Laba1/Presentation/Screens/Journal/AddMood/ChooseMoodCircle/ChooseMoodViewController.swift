@@ -40,7 +40,7 @@ class ChooseMoodViewController: UIViewController {
     private func setupBackArrow() {
         view.addSubview(backArrow)
         backArrow.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
         backArrow.addTarget(self, action: #selector(backArrowTapped), for: .touchUpInside)
@@ -112,8 +112,7 @@ class ChooseMoodViewController: UIViewController {
     @objc private func nextMoodTapped() {
         guard let chosenCard = currentMoodCard else { return }
 
-        let addNoteVC = AddNoteViewController()
-        addNoteVC.setupMoodCard(color: chosenCard.moodColor, mood: chosenCard.moodName)
+        let addNoteVC = AddNoteViewController(color: chosenCard.moodColor, mood: chosenCard.moodName)
 
         addNoteVC.modalPresentationStyle = .fullScreen
         present(addNoteVC, animated: false)

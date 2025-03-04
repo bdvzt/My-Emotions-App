@@ -44,7 +44,7 @@ final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout {
     private func setupQuestionLabel() {
         addSubview(questionLabel)
         questionLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(16)
+            make.top.leading.trailing.equalToSuperview()
             make.height.greaterThanOrEqualTo(20)
         }
     }
@@ -55,13 +55,12 @@ final class NoteQuestionView: UIView, UICollectionViewDelegateFlowLayout {
         collectionView.backgroundColor = .clear
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(questionLabel.snp.bottom).offset(8)
-            make.leading.trailing.bottom.equalToSuperview().inset(16)
+            make.leading.trailing.bottom.equalToSuperview()
         }
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(NoteAnswerCell.self, forCellWithReuseIdentifier: NoteAnswerCell.reuseIdentifier)
         collectionView.register(NoteAnswerAddCell.self, forCellWithReuseIdentifier: NoteAnswerAddCell.reuseIdentifier)
-        // Убедитесь, что выбор ячеек разрешён
         collectionView.allowsSelection = true
     }
 

@@ -22,10 +22,31 @@ final class SettingsViewController: UIViewController {
     private let timeContentView = UIView()
     private let timeStackView = UIStackView()
     private var timeScrollViewHeightConstraint: Constraint?
-
     private let pickerContainerView = UIView()
     private let timePicker = UIDatePicker()
     private let saveButton = WhiteButton(title: "Сохранить")
+
+    private let emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Нет напоминаний"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font =  UIFont(name: "VelaSans-Regular", size: 18)
+        label.isHidden = true
+        label.accessibilityIdentifier = "emptyStateLabel"
+        return label
+    }()
+
+    private let errorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Ошибка загрузки данных"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font =  UIFont(name: "VelaSans-Regular", size: 18)
+        label.isHidden = true
+        label.accessibilityIdentifier = "errorLabel"
+        return label
+    }()
 
     // MARK: - Inits
 
@@ -41,6 +62,7 @@ final class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "settingsScreen"
         setup()
     }
 
@@ -57,7 +79,17 @@ final class SettingsViewController: UIViewController {
         setupTouchIdSwitchBar()
         setupPicker()
         setupActions()
-        updateTimeScrollViewHeight()
+
+        view.addSubview(emptyStateLabel)
+        view.addSubview(errorLabel)
+        emptyStateLabel.snp.makeConstraints { make in
+            make.top.equalTo(timeScrollView.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(timeScrollView.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
     }
 
     private func setupSettingsLabel() {
@@ -68,7 +100,7 @@ final class SettingsViewController: UIViewController {
 
         view.addSubview(settingsLabel)
         settingsLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.equalToSuperview().inset(16)
         }
     }
@@ -95,7 +127,6 @@ final class SettingsViewController: UIViewController {
 
     private func setupTimeScrollView() {
         timeScrollView.showsVerticalScrollIndicator = false
-
         view.addSubview(timeScrollView)
         timeScrollView.addSubview(timeContentView)
         timeContentView.addSubview(timeStackView)

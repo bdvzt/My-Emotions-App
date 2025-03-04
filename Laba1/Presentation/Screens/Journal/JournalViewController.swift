@@ -12,29 +12,31 @@ class JournalViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private var moodCards: [MoodCardView] = [
-        MoodCardView(
-            color: .loginBlue,
-            image: .sadness,
-            dateText: "вчера, 23:40",
-            moodText: "выгорание"
-        ),
-        MoodCardView(
-            color: .loginGreen,
-            image: .greenMood,
-            dateText: "вчера, 14:08",
-            moodText: "спокойствие"),
-        MoodCardView(
-            color: .loginOrange,
-            image: .lightning,
-            dateText: "воскресенье, 16:12",
-            moodText: "продуктивность"),
-        MoodCardView(
-            color: .loginRed,
-            image: .redMood,
-            dateText: "воскресенье, 03:59",
-            moodText: "беспокойство")
-    ]
+    private var moodCards: [MoodCardView] = []
+
+    //    private var moodCards: [MoodCardView] = [
+    //        MoodCardView(
+    //            color: .loginBlue,
+    //            image: .sadness,
+    //            dateText: "вчера, 23:40",
+    //            moodText: "выгорание"
+    //        ),
+    //        MoodCardView(
+    //            color: .loginGreen,
+    //            image: .greenMood,
+    //            dateText: "вчера, 14:08",
+    //            moodText: "спокойствие"),
+    //        MoodCardView(
+    //            color: .loginOrange,
+    //            image: .lightning,
+    //            dateText: "воскресенье, 16:12",
+    //            moodText: "продуктивность"),
+    //        MoodCardView(
+    //            color: .loginRed,
+    //            image: .redMood,
+    //            dateText: "воскресенье, 03:59",
+    //            moodText: "беспокойство")
+    //    ]
 
     private let notesAmountStack = UIStackView()
     private let questionLabel = QuestionLabel()
@@ -42,6 +44,26 @@ class JournalViewController: UIViewController {
     private let cardsContainerView = UIView()
     private let moodCardScrollView = UIScrollView()
     private let circleProgressBar = CircleProgressBar()
+
+    private let emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Нет записей о настроении"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font =  UIFont(name: "VelaSans-Regular", size: 20)
+        label.isHidden = true
+        return label
+    }()
+
+    private let errorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Ошибка загрузки данных"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font =  UIFont(name: "VelaSans-Regular", size: 20)
+        label.isHidden = true
+        return label
+    }()
 
     // MARK: - Inits
 
@@ -57,6 +79,11 @@ class JournalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "journalScreen"
+        moodCardScrollView.accessibilityIdentifier = "moodCardScrollView"
+        cardsContainerView.accessibilityIdentifier = "cardsContainerView"
+        emptyStateLabel.accessibilityIdentifier = "emptyStateLabel"
+        errorLabel.accessibilityIdentifier = "errorLabel"
         view.backgroundColor = .black
         setup()
     }
@@ -64,10 +91,25 @@ class JournalViewController: UIViewController {
     // MARK: - Setup
 
     private func setup() {
+        view.addSubview(emptyStateLabel)
+        view.addSubview(errorLabel)
         setupNotesAmountStackView()
         setupQuestionLabel()
         setupScrollViewContent()
         setupAddMoodButtonAction()
+        updateEmptyState()
+//        handleErrorState()
+
+        emptyStateLabel.snp.makeConstraints { make in
+            make.top.equalTo(circleProgressBar.snp.bottom).offset(50)
+            make.centerX.equalToSuperview()
+        }
+
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(circleProgressBar.snp.bottom).offset(50)
+            make.centerX.equalToSuperview()
+        }
+
         self.perform(#selector(animateProgress), with: nil, afterDelay: 2.0)
     }
 
@@ -93,7 +135,7 @@ class JournalViewController: UIViewController {
         view.addSubview(notesAmountStack)
 
         notesAmountStack.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
             make.centerX.equalToSuperview()
         }
     }
@@ -148,7 +190,8 @@ class JournalViewController: UIViewController {
         }
 
         var previousCard: UIView?
-        for card in moodCards {
+        for (index, card) in moodCards.enumerated() {
+            card.accessibilityIdentifier = "moodCard_\(index)"
             cardsContainerView.addSubview(card)
             card.snp.makeConstraints { make in
                 if let previous = previousCard {
@@ -172,6 +215,16 @@ class JournalViewController: UIViewController {
 
     private func setupAddMoodButtonAction() {
         addMoodButton.addTarget(self, action: #selector(addMoodButtonTapped), for: .touchUpInside)
+    }
+
+    private func updateEmptyState() {
+        emptyStateLabel.isHidden = !moodCards.isEmpty
+    }
+
+    private func handleErrorState() {
+        moodCardScrollView.isHidden = true
+        emptyStateLabel.isHidden = true
+        errorLabel.isHidden = false
     }
 
     // MARK: - Actions

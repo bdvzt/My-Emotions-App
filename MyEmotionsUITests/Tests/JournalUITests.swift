@@ -19,19 +19,23 @@ private extension JournalUITests {
 }
 
 final class JournalUITests: BasePage {
+
     override func setUpWithError() throws {
         continueAfterFailure = false
-        let app = XCUIApplication()
         app.launch()
         app.activate()
+        navigateToJournalScreen()
     }
-
-    // MARK: - Tests
 
     func testSuccessJournalScreen() {
         let journalPage = JournalPage()
+
         journalPage.assertJournalScreenIsOpened()
+        journalPage.assertTitleExists()
+        journalPage.assertProgressCircleExists()
         journalPage.assertMoodCardsExist()
+        journalPage.assertAddMoodButtonExists()
+
         MockData.mockMoods.forEach { moodText in
             journalPage.assertMoodCardExists(moodText: moodText)
         }
@@ -39,19 +43,38 @@ final class JournalUITests: BasePage {
 
     func testEmptyStateJournalScreen() {
         let journalPage = JournalPage()
+
         journalPage.assertJournalScreenIsOpened()
-        let emptyLabel = journalPage.app.staticTexts["emptyStateLabel"]
-        XCTAssertTrue(emptyLabel.exists, "Должен быть лейбл пустого состояния")
+        journalPage.assertEmptyStateLabelExists()
+        journalPage.assertAddMoodButtonExists()
     }
 
     func testErrorStateJournalScreen() {
         let journalPage = JournalPage()
+
         journalPage.assertJournalScreenIsOpened()
-        let errorLabel = journalPage.app.staticTexts["errorLabel"]
-        XCTAssertTrue(errorLabel.waitForExistence(timeout: 5), "❌ Должен отображаться лейбл ошибки")
-        let moodCardScrollView = journalPage.app.scrollViews["moodCardScrollView"]
-        XCTAssertFalse(moodCardScrollView.exists, "❌ Карточки настроения не должны отображаться при ошибке")
-        let emptyStateLabel = journalPage.app.staticTexts["emptyStateLabel"]
-        XCTAssertFalse(emptyStateLabel.exists, "❌ Лейбл пустого состояния не должен отображаться при ошибке")
+        journalPage.assertErrorLabelExists()
+        journalPage.assertScrollViewNotExists()
+        journalPage.assertEmptyStateLabelNotExists()
+    }
+
+    private func navigateToJournalScreen() {
+        let loginButton = app.otherElements["loginButton"]
+
+        XCTAssertTrue(loginButton.waitForExistence(timeout: 5), "Нет кнопки входа")
+        loginButton.tap()
+
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 5), "TabBarController не открылся")
+
+        let journalTab = tabBar.buttons["Журнал"]
+        XCTAssertTrue(journalTab.waitForExistence(timeout: 5), "Журнал не появился")
+
+        if !journalTab.isSelected {
+            journalTab.tap()
+        }
+
+        let journalScreen = app.otherElements["journalScreen"]
+        XCTAssertTrue(journalScreen.waitForExistence(timeout: 5), "Экран журнала не открылся")
     }
 }

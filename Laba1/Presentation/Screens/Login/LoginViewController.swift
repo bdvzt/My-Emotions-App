@@ -30,6 +30,11 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        loginButton.accessibilityIdentifier = "loginButton"
+        welcomeLabel.accessibilityIdentifier = "welcomeLabel"
+        view.accessibilityIdentifier = "loginScreen"
+
         setup()
     }
 
@@ -97,9 +102,12 @@ class LoginViewController: UIViewController {
     // MARK: - Actions
 
     @objc private func loginButtonTapped() {
-        let tabController = TabController()
-        tabController.modalPresentationStyle = .fullScreen
-        present(tabController, animated: true, completion: nil)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            let tabController = TabController()
+            window.rootViewController = tabController
+            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil)
+        }
     }
 }
 

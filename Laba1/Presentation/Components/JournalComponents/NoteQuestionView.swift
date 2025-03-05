@@ -1,3 +1,10 @@
+//
+//  NoteQuestionView.swift
+//  LAB1
+//
+//  Created by Zayata Budaeva on 28.02.2025.
+//
+
 import UIKit
 import SnapKit
 

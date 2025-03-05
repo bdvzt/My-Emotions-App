@@ -30,21 +30,18 @@ final class ChooseMoodPage: BasePage {
 
     // MARK: - Actions
 
-    /// Проверяет, что экран выбора настроения открыт
     @discardableResult
     func assertChooseMoodScreenIsOpened() -> ChooseMoodPage {
         XCTAssertTrue(chooseMoodScreenTitle.waitForExistence(timeout: 5), "Экран выбора настроения не открылся")
         return self
     }
 
-    /// Проверяет, что сетка настроений загружена
     @discardableResult
     func assertMoodGridExists() -> ChooseMoodPage {
         XCTAssertTrue(moodGrid.waitForExistence(timeout: 5), "Сетка настроений не загружена")
         return self
     }
 
-    /// Выбирает настроение по его названию
     @discardableResult
     func selectMood(mood: String) -> ChooseMoodPage {
         let moodButton = app.staticTexts[mood]
@@ -53,21 +50,18 @@ final class ChooseMoodPage: BasePage {
         return self
     }
 
-    /// Проверяет, что карточка настроения была выбрана
     @discardableResult
     func assertMoodCardExists() -> ChooseMoodPage {
         XCTAssertGreaterThan(moodCards.count, 0, "Ожидалась хотя бы одна карточка настроения")
         return self
     }
 
-    /// Нажимает на кнопку "Добавить заметку"
     @discardableResult
     func tapAddNoteButton() -> AddNotePage {
         addNoteButton.tap()
         return AddNotePage()
     }
 
-    /// Нажимает на кнопку "Назад"
     @discardableResult
     func tapBackArrow() -> JournalPage {
         backArrowButton.tap()

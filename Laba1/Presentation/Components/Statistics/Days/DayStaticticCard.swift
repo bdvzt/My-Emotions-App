@@ -58,7 +58,7 @@ final class DayStaticsticCard: UIView {
     private let moodImageStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .equalSpacing
         stackView.alignment = .trailing
         stackView.spacing = 2
         return stackView
@@ -113,11 +113,11 @@ final class DayStaticsticCard: UIView {
         horizontalStackView.addArrangedSubview(moodImageStackView)
 
         moodStackView.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.40)
+            make.width.equalToSuperview().multipliedBy(0.3)
         }
 
         moodImageStackView.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.35)
+            make.width.equalToSuperview().multipliedBy(0.45)
             make.trailing.equalToSuperview()
         }
     }
@@ -158,7 +158,7 @@ final class DayStaticsticCard: UIView {
             moodImageStackView.addArrangedSubview(grayCircle)
 
             grayCircle.snp.makeConstraints { make in
-                make.width.equalTo(moodImageStackView.snp.width).multipliedBy(0.35)
+                make.width.equalTo(moodImageStackView.snp.width).multipliedBy(0.25)
                 make.height.equalTo(grayCircle.snp.width)
             }
         } else {
@@ -167,7 +167,7 @@ final class DayStaticsticCard: UIView {
                 imageView.contentMode = .scaleAspectFit
                 moodImageStackView.addArrangedSubview(imageView)
                 imageView.snp.makeConstraints { make in
-                    make.width.equalTo(moodImageStackView.snp.width).multipliedBy(0.35)
+                    make.width.equalTo(moodImageStackView.snp.width).multipliedBy(0.25)
                     make.height.equalTo(imageView.snp.width)
                 }
             }

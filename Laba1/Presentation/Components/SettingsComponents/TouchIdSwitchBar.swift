@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-final class TouchIdSwitchBar: UIView
-{
+final class TouchIdSwitchBar: UIView {
     // MARK: - Private properties
 
     private let horizontalStackView: UIStackView = {
@@ -43,7 +42,7 @@ final class TouchIdSwitchBar: UIView
         switchBar.backgroundColor = .white
         switchBar.layer.cornerRadius = 16
         switchBar.clipsToBounds = true
-        switchBar.thumbTintColor = .circleProgressBarGray
+        switchBar.thumbTintColor = .circleProgressBarGray 
         return switchBar
     }()
 
@@ -52,6 +51,7 @@ final class TouchIdSwitchBar: UIView
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
+        switchBar.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
     }
 
     required init?(coder: NSCoder) {
@@ -78,5 +78,11 @@ final class TouchIdSwitchBar: UIView
         touchId.snp.makeConstraints { make in
             make.width.height.equalTo(20)
         }
+    }
+
+    // MARK: - Actions
+
+    @objc private func switchValueChanged() {
+        switchBar.thumbTintColor = switchBar.isOn ? .white : .circleProgressBarGray
     }
 }

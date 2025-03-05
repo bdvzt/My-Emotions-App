@@ -30,21 +30,18 @@ final class AddNotePage: BasePage {
 
     // MARK: - Actions
 
-    /// Проверяет, что экран добавления заметки открыт
     @discardableResult
     func assertAddNoteScreenIsOpened() -> AddNotePage {
         XCTAssertTrue(addNoteScreenTitle.waitForExistence(timeout: 5), "Экран добавления заметки не открылся")
         return self
     }
 
-    /// Проверяет, что карточка настроения отображается
     @discardableResult
     func assertMoodCardExists() -> AddNotePage {
         XCTAssertTrue(moodCard.waitForExistence(timeout: 5), "Карточка настроения не отображается")
         return self
     }
 
-    /// Проверяет, что все вопросы отображены
     @discardableResult
     func assertQuestionsExist() -> AddNotePage {
         XCTAssertTrue(whatQuestionView.waitForExistence(timeout: 5), "Вопрос 'Чем вы занимались?' не найден")
@@ -53,7 +50,6 @@ final class AddNotePage: BasePage {
         return self
     }
 
-    /// Выбирает ответ на вопрос
     @discardableResult
     func selectAnswer(answer: String) -> AddNotePage {
         let answerButton = app.staticTexts[answer]
@@ -62,14 +58,12 @@ final class AddNotePage: BasePage {
         return self
     }
 
-    /// Нажимает кнопку "Сохранить" и переходит в журнал
     @discardableResult
     func tapSaveButton() -> JournalPage {
         saveButton.tap()
         return JournalPage()
     }
 
-    /// Нажимает кнопку "Назад" и возвращается на экран выбора настроения
     @discardableResult
     func tapBackArrow() -> ChooseMoodPage {
         backArrowButton.tap()

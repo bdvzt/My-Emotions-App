@@ -19,6 +19,7 @@ private extension String {
 }
 
 final class JournalPage: BasePage {
+    
     private lazy var journalScreenTitle = app.otherElements[.Identifier.journalScreen]
     private lazy var addMoodButton = app.otherElements[.Identifier.addMoodButton]
     private lazy var moodCards = app.scrollViews[.Identifier.cardsContainerView].otherElements

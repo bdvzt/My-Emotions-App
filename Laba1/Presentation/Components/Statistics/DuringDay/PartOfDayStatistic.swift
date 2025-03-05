@@ -75,7 +75,7 @@ final class PartOfDayStatistic: UIView {
             make.width.equalToSuperview()
         }
 
-        let totalPercentage = data.reduce(0) { $0 + $1.percentage }
+        let totalPercentage = max(data.reduce(0) { $0 + $1.percentage }, 1)
 
         for part in data {
             let column = ColorColumn(moodCase: part.color, percentage: CGFloat(part.percentage))

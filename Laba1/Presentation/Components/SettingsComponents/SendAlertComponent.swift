@@ -52,6 +52,7 @@ final class SendAlertComponent: UIView
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
+        switchBar.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
     }
 
     required init?(coder: NSCoder) {
@@ -78,5 +79,9 @@ final class SendAlertComponent: UIView
         alertImage.snp.makeConstraints { make in
             make.width.height.equalTo(23)
         }
+    }
+
+    @objc private func switchValueChanged() {
+        switchBar.thumbTintColor = switchBar.isOn ? .white : .circleProgressBarGray
     }
 }

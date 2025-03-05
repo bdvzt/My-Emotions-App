@@ -44,11 +44,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		886E94CE2D75C6690092BC6F /* MyEmotionsTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MyEmotionsTests;
-			sourceTree = "<group>";
-		};
 		886E94D82D75C6690092BC6F /* MyEmotionsUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MyEmotionsUITests;
@@ -94,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				886E95D32D75C7B20092BC6F /* Laba1 */,
-				886E94CE2D75C6690092BC6F /* MyEmotionsTests */,
 				886E94D82D75C6690092BC6F /* MyEmotionsUITests */,
 				886E94B62D75C6680092BC6F /* Products */,
 			);
@@ -148,9 +142,6 @@
 			);
 			dependencies = (
 				886E94CD2D75C6690092BC6F /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				886E94CE2D75C6690092BC6F /* MyEmotionsTests */,
 			);
 			name = MyEmotionsTests;
 			packageProductDependencies = (

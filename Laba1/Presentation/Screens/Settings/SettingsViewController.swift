@@ -12,6 +12,9 @@ final class SettingsViewController: UIViewController {
 
     // MARK: - Private properties
 
+    private let settingsScrollView = UIScrollView()
+    private let settingsContentView = UIView()
+
     private let settingsLabel = UILabel()
     private let avatarView = AvatarWithName(avatarImage: .avatar, name: "Иван Иванов")
     private let sendAlert = SendAlertComponent()
@@ -31,7 +34,7 @@ final class SettingsViewController: UIViewController {
         label.text = "Нет напоминаний"
         label.textColor = .white
         label.textAlignment = .center
-        label.font =  UIFont(name: "VelaSans-Regular", size: 18)
+        label.font = UIFont(name: "VelaSans-Regular", size: 18)
         label.isHidden = true
         return label
     }()
@@ -41,7 +44,7 @@ final class SettingsViewController: UIViewController {
         label.text = "Ошибка загрузки данных"
         label.textColor = .white
         label.textAlignment = .center
-        label.font =  UIFont(name: "VelaSans-Regular", size: 18)
+        label.font = UIFont(name: "VelaSans-Regular", size: 18)
         label.isHidden = true
         return label
     }()
@@ -60,17 +63,6 @@ final class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.accessibilityIdentifier = "settingsScreen"
-        emptyStateLabel.accessibilityIdentifier = "emptyStateLabel"
-        errorLabel.accessibilityIdentifier = "errorLabel"
-        addReminderButton.accessibilityIdentifier = "addReminderButton"
-        timeScrollView.accessibilityIdentifier = "timeScrollView"
-        settingsLabel.accessibilityIdentifier = "settingsLabel"
-        avatarView.accessibilityIdentifier = "avatarView"
-        touchIdSwitchBar.accessibilityIdentifier = "touchIdSwitchBar"
-        sendAlert.accessibilityIdentifier = "sendAlert"
-        timePicker.accessibilityIdentifier = "timePicker"
-        saveButton.accessibilityIdentifier = "saveButton"
         setup()
     }
 
@@ -78,6 +70,20 @@ final class SettingsViewController: UIViewController {
 
     private func setup() {
         view.backgroundColor = .black
+
+        view.addSubview(settingsScrollView)
+        settingsScrollView.addSubview(settingsContentView)
+
+        settingsScrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        settingsContentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+
+        settingsScrollView.contentInsetAdjustmentBehavior = .never
 
         setupSettingsLabel()
         setupAvatarView()
@@ -88,18 +94,6 @@ final class SettingsViewController: UIViewController {
         setupPicker()
         setupActions()
         updateEmptyState()
-//        handleErrorState()
-
-        view.addSubview(emptyStateLabel)
-        view.addSubview(errorLabel)
-        emptyStateLabel.snp.makeConstraints { make in
-            make.top.equalTo(timeScrollView.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
-        }
-        errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(timeScrollView.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
-        }
     }
 
     private func setupSettingsLabel() {
@@ -108,17 +102,17 @@ final class SettingsViewController: UIViewController {
         settingsLabel.textColor = .white
         settingsLabel.textAlignment = .left
 
-        view.addSubview(settingsLabel)
+        settingsContentView.addSubview(settingsLabel)
         settingsLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().inset(16)
         }
     }
 
     private func setupAvatarView() {
-        view.addSubview(avatarView)
+        settingsContentView.addSubview(avatarView)
         avatarView.snp.makeConstraints { make in
-            make.top.equalTo(settingsLabel.snp.bottom).offset(30)
+            make.top.equalTo(settingsLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(364)
             make.height.equalTo(136)
@@ -126,7 +120,7 @@ final class SettingsViewController: UIViewController {
     }
 
     private func setupSendAlert() {
-        view.addSubview(sendAlert)
+        settingsContentView.addSubview(sendAlert)
         sendAlert.snp.makeConstraints { make in
             make.top.equalTo(avatarView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
@@ -137,14 +131,14 @@ final class SettingsViewController: UIViewController {
 
     private func setupTimeScrollView() {
         timeScrollView.showsVerticalScrollIndicator = false
-        view.addSubview(timeScrollView)
+        settingsContentView.addSubview(timeScrollView)
         timeScrollView.addSubview(timeContentView)
         timeContentView.addSubview(timeStackView)
 
         timeScrollView.snp.makeConstraints { make in
             make.top.equalTo(sendAlert.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
-            timeScrollViewHeightConstraint = make.height.equalTo(0).constraint
+            timeScrollViewHeightConstraint = make.height.equalTo(100).constraint
         }
 
         timeContentView.snp.makeConstraints { make in
@@ -163,7 +157,7 @@ final class SettingsViewController: UIViewController {
     }
 
     private func setupAddReminderButton() {
-        view.addSubview(addReminderButton)
+        settingsContentView.addSubview(addReminderButton)
         addReminderButton.snp.makeConstraints { make in
             make.top.equalTo(timeScrollView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
@@ -173,12 +167,13 @@ final class SettingsViewController: UIViewController {
     }
 
     private func setupTouchIdSwitchBar() {
-        view.addSubview(touchIdSwitchBar)
+        settingsContentView.addSubview(touchIdSwitchBar)
         touchIdSwitchBar.snp.makeConstraints { make in
-            make.top.equalTo(addReminderButton.snp.bottom).offset(30)
+            make.top.equalTo(addReminderButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(364)
             make.height.equalTo(50)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
 
@@ -222,7 +217,7 @@ final class SettingsViewController: UIViewController {
     }
 
     private func updateTimeScrollViewHeight() {
-        let newHeight = min(200, timeStackView.subviews.count * 90)
+        let newHeight = min(150, timeStackView.arrangedSubviews.count * 50)
         timeScrollViewHeightConstraint?.update(offset: newHeight)
     }
 

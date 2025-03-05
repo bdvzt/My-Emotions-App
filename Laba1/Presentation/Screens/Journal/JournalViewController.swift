@@ -115,7 +115,7 @@ class JournalViewController: UIViewController {
         view.addSubview(notesAmountStack)
 
         notesAmountStack.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
             make.centerX.equalToSuperview()
         }
     }

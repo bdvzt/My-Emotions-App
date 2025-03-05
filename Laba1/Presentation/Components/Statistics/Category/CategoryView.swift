@@ -110,22 +110,22 @@ final class CategoryView: UIView {
 
         if redPercent > 0 {
             let size = maxCircleSize * CGFloat(redPercent) / 100.0
-            let circle = MoodPerCentCircle(size: size, color: .loginRed, percent: redPercent)
+            let circle = MoodPerCentCircle(size: size, colors: (.redGradient, .feelingGradientRed), percent: redPercent)
             circles.append(circle)
         }
         if bluePercent > 0 {
             let size = maxCircleSize * CGFloat(bluePercent) / 100.0
-            let circle = MoodPerCentCircle(size: size, color: .loginBlue, percent: bluePercent)
+            let circle = MoodPerCentCircle(size: size, colors: (.blueGradient, .feelingGradientBlue), percent: bluePercent)
             circles.append(circle)
         }
         if greenPercent > 0 {
             let size = maxCircleSize * CGFloat(greenPercent) / 100.0
-            let circle = MoodPerCentCircle(size: size, color: .loginGreen, percent: greenPercent)
+            let circle = MoodPerCentCircle(size: size, colors: (.greenGradient, .feelingGradientGreen), percent: greenPercent)
             circles.append(circle)
         }
         if orangePercent > 0 {
             let size = maxCircleSize * CGFloat(orangePercent) / 100.0
-            let circle = MoodPerCentCircle(size: size, color: .loginOrange, percent: orangePercent)
+            let circle = MoodPerCentCircle(size: size, colors: (.orangeGradient, .feelingGradientOrange), percent: orangePercent)
             circles.append(circle)
         }
 

@@ -44,9 +44,9 @@ struct MockWeekData {
         return StatWeek(
             week: "3-9 фев",
             data: WeekStatistic(
-                redPercent: 20,
-                bluePercent: 30,
-                greenPercent: 50,
+                redPercent: 40,
+                bluePercent: 40,
+                greenPercent: 20,
                 orangePercent: 0,
                 amountOfNotes: 3,
 
@@ -81,9 +81,9 @@ struct MockWeekData {
         return StatWeek(
             week: "17-23 фев",
             data: WeekStatistic(
-                redPercent: 50,
-                bluePercent: 30,
-                greenPercent: 20,
+                redPercent: 60,
+                bluePercent: 40,
+                greenPercent: 0,
                 orangePercent: 0,
                 amountOfNotes: 10,
 
@@ -118,9 +118,9 @@ struct MockWeekData {
         return StatWeek(
             week: "27 янв - 2 фев",
             data: WeekStatistic(
-                redPercent: 50,
+                redPercent: 40,
                 bluePercent: 30,
-                greenPercent: 20,
+                greenPercent: 30,
                 orangePercent: 0,
                 amountOfNotes: 10,
 

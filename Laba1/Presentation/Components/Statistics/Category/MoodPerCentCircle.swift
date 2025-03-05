@@ -21,13 +21,15 @@ final class MoodPerCentCircle: UIView {
     }()
 
     private var circleSize: CGFloat = 0
+    private let gradientLayer = CAGradientLayer()
 
     // MARK: - Inits
 
-    init(size: CGFloat, color: UIColor, percent: Int) {
+    init(size: CGFloat, colors: (UIColor, UIColor), percent: Int) {
         super.init(frame: .zero)
         self.circleSize = size
-        backgroundColor = color
+        setupGradient(colors: colors)
+
         layer.cornerRadius = size / 2
         clipsToBounds = true
 
@@ -44,5 +46,20 @@ final class MoodPerCentCircle: UIView {
 
     override var intrinsicContentSize: CGSize {
         return CGSize(width: circleSize, height: circleSize)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = bounds
+        gradientLayer.cornerRadius = bounds.width / 2
+    }
+
+    // MARK: - Gradient Setup
+
+    private func setupGradient(colors: (UIColor, UIColor)) {
+        gradientLayer.colors = [colors.0.cgColor, colors.1.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        layer.insertSublayer(gradientLayer, at: 0)
     }
 }

@@ -104,7 +104,7 @@ final class SettingsViewController: UIViewController {
 
         settingsContentView.addSubview(settingsLabel)
         settingsLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
             make.leading.equalToSuperview().inset(16)
         }
     }

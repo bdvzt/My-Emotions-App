@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+/*
 struct JournalMockData {
     static let empty: [MoodCardView] = []
 
@@ -36,3 +36,4 @@ struct JournalMockData {
         MoodCardView(color: .loginRed, image: .redMood, dateText: "среда, 12:15", moodText: "раздражение")
     ]
 }
+*/

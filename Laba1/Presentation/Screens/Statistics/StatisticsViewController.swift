@@ -33,20 +33,20 @@ class StatisticsViewController: UIViewController {
     // MARK: - Setup
 
     private func setup() {
-        setupWeeks()
+//        setupWeeks()
         setupView()
         showStatistics(for: currentIndex)
     }
 
-    private func setupWeeks() {
-        weeks = MockWeekData.createMockWeeksData()
-        
-        for index in 0..<weeks.count {
-            let week = weeks[index]
-            let button = setupWeekButton(for: week, index: index)
-            chooseWeekButtons.addArrangedSubview(button)
-        }
-    }
+//    private func setupWeeks() {
+//        weeks = MockWeekData.createMockWeeksData()
+//        
+//        for index in 0..<weeks.count {
+//            let week = weeks[index]
+//            let button = setupWeekButton(for: week, index: index)
+//            chooseWeekButtons.addArrangedSubview(button)
+//        }
+//    }
 
     private func setupWeekButton(for week: StatWeek, index: Int) -> UIButton {
         let button = UIButton(type: .system)

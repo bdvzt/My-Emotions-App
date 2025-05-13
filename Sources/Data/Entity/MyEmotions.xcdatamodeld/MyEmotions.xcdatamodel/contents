@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="MoodCardEntity" representedClassName="MoodCardEntity" syncable="YES">
+        <attribute name="activities" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName"/>
+        <attribute name="dateAndTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="people" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName"/>
+        <attribute name="places" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName"/>
+        <relationship name="mood" maxCount="1" deletionRule="Nullify" destinationEntity="MoodEntity" inverseName="card" inverseEntity="MoodEntity"/>
+    </entity>
+    <entity name="MoodEntity" representedClassName="MoodEntity" syncable="YES">
+        <attribute name="color" attributeType="String"/>
+        <attribute name="icon" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="moodInfo" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="card" toMany="YES" deletionRule="Nullify" destinationEntity="MoodCardEntity" inverseName="mood" inverseEntity="MoodCardEntity"/>
+    </entity>
+</model>

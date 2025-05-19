@@ -24,9 +24,7 @@ final class ChooseMoodCoordinator: Coordinator {
     }
 
     func start() {
-        let viewController = ChooseMoodViewController(
-            chooseMoodViewModel: self.chooseMoodViewModel
-        )
+        let viewController = ChooseMoodViewController(chooseMoodViewModel: self.chooseMoodViewModel)
         viewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(viewController, animated: true)
     }

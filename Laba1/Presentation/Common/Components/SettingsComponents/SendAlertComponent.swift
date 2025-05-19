@@ -11,6 +11,7 @@ import SnapKit
 final class SendAlertComponent: UIView
 {
     // MARK: - Private properties
+    var setOnToggle: ((Bool) -> Void)?
 
     private let horizontalStackView: UIStackView = {
         let stack = UIStackView()
@@ -81,7 +82,14 @@ final class SendAlertComponent: UIView
         }
     }
 
+    func setSwitchState(_ isOn: Bool) {
+        switchBar.setOn(isOn, animated: true)
+        switchBar.thumbTintColor = isOn ? .white : .circleProgressBarGray
+    }
+
     @objc private func switchValueChanged() {
-        switchBar.thumbTintColor = switchBar.isOn ? .white : .circleProgressBarGray
+        let isOn = switchBar.isOn
+        switchBar.thumbTintColor = isOn ? .white : .circleProgressBarGray
+        setOnToggle?(isOn)
     }
 }

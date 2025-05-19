@@ -12,6 +12,9 @@ final class AddNoteViewController: UIViewController {
 
     // MARK: - Dependencies
     private let viewModel: AddNoteViewModel
+    private let activitiesViewModel: NoteAnswersViewModel
+    private let peopleViewModel: NoteAnswersViewModel
+    private let placesViewModel: NoteAnswersViewModel
 
     // MARK: - Private properties
     private let backArrow = BackArrow()
@@ -34,19 +37,17 @@ final class AddNoteViewController: UIViewController {
         return stackView
     }()
 
-    private let whatQuestionView = NoteQuestionView(
+    private lazy var activitiesView = NoteQuestionView(
         question: "Чем вы занимались?",
-        answers: ["Приём пищи", "Встреча с друзьями", "Тренировка", "Хобби", "Отдых", "Поездка"]
+        viewModel: activitiesViewModel
     )
-
-    private let withWhomQuestionView = NoteQuestionView(
+    private lazy var peopleView = NoteQuestionView(
         question: "С кем вы были?",
-        answers: ["Один", "Друзья", "Семья", "Коллеги", "Партнёр", "Питомцы"]
+        viewModel: peopleViewModel
     )
-
-    private let whereQuestionView = NoteQuestionView(
+    private lazy var placesView = NoteQuestionView(
         question: "Где вы были?",
-        answers: ["Дом", "Работа", "Школа", "Транспорт", "Улица"]
+        viewModel: placesViewModel
     )
 
     private let questionsStack: UIStackView = {
@@ -67,8 +68,15 @@ final class AddNoteViewController: UIViewController {
 
     // MARK: - Inits
 
-    init(viewModel: AddNoteViewModel) {
+    init(viewModel: AddNoteViewModel,
+         activitiesViewModel: NoteAnswersViewModel,
+         peopleViewModel: NoteAnswersViewModel,
+         placesViewModel: NoteAnswersViewModel
+    ) {
         self.viewModel = viewModel
+        self.activitiesViewModel = activitiesViewModel
+        self.peopleViewModel = peopleViewModel
+        self.placesViewModel = placesViewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -101,6 +109,7 @@ final class AddNoteViewController: UIViewController {
         setupMoodCard()
         setupSaveButton()
         setupQuestionScrollView()
+        setupBindings()
     }
 
     private func setupBackground() {
@@ -142,9 +151,9 @@ final class AddNoteViewController: UIViewController {
             make.width.equalToSuperview()
         }
 
-        questionsStack.addArrangedSubview(whatQuestionView)
-        questionsStack.addArrangedSubview(withWhomQuestionView)
-        questionsStack.addArrangedSubview(whereQuestionView)
+        questionsStack.addArrangedSubview(activitiesView)
+        questionsStack.addArrangedSubview(peopleView)
+        questionsStack.addArrangedSubview(placesView)
     }
 
     private func setupSaveButton() {
@@ -173,9 +182,18 @@ final class AddNoteViewController: UIViewController {
     }
 
     // MARK: - Actions
+    private func setupBindings() {
+        activitiesView.onSelectionChanged = { [weak self] selected in
+            self?.viewModel.updateActivities(selected)
+        }
 
-    private func setupActions() {
+        peopleView.onSelectionChanged = { [weak self] selected in
+            self?.viewModel.updatePeople(selected)
+        }
 
+        placesView.onSelectionChanged = { [weak self] selected in
+            self?.viewModel.updatePlaces(selected)
+        }
     }
 
     @objc private func backArrowTapped() {
@@ -183,6 +201,10 @@ final class AddNoteViewController: UIViewController {
     }
 
     @objc private func saveButtonTapped() {
+        viewModel.updateActivities(activitiesViewModel.selectedTitles)
+        viewModel.updatePeople(peopleViewModel.selectedTitles)
+        viewModel.updatePlaces(placesViewModel.selectedTitles)
+
         Task {
             await viewModel.saveNote()
         }

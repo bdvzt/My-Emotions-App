@@ -119,6 +119,7 @@ class JournalListViewController: UIViewController {
             await journalListViewModel.fetchMoodCards()
         }
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)

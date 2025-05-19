@@ -12,6 +12,8 @@ final class TabBarCoordinator: Coordinator {
     var navigationController: UINavigationController
     private let dependencies: AppDependencyContainer
     private var journalCoordinator: JournalListCoordinator?
+    private var settingsCoordinator: SettingsCoordinator?
+    private var statisticsCoordinator: StatisticsCoordinator?
 
     init(
         navigationController: UINavigationController,
@@ -32,10 +34,18 @@ final class TabBarCoordinator: Coordinator {
         self.journalCoordinator = journalCoordinator
         journalCoordinator.start()
 
+        let settingsCoordinator = dependencies.makeSettingsCoordinator(navigationController: settingsNav)
+        self.settingsCoordinator = settingsCoordinator
+        settingsCoordinator.start()
+
+        let stasticsCoordinator = dependencies.makeStatisticsCoordinator(navigationController: statisticsNav)
+        self.statisticsCoordinator = stasticsCoordinator
+        stasticsCoordinator.start()
+
         tabBarController.setViewControllers([
             createTabItem(navigationController: journalNav, title: "Журнал", icon: .journal),
-            createTabItem(navigationController: UINavigationController(rootViewController: StatisticsViewController()), title: "Статистика", icon: .statistics),
-            createTabItem(navigationController: UINavigationController(rootViewController: SettingsViewController()), title: "Настройка", icon: .tools)
+            createTabItem(navigationController: statisticsNav, title: "Статистика", icon: .statistics),
+            createTabItem(navigationController: settingsNav, title: "Настройка", icon: .tools)
         ], animated: false)
 
         navigationController.setViewControllers([tabBarController], animated: false)

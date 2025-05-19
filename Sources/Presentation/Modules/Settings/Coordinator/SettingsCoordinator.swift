@@ -31,5 +31,5 @@ final class SettingsCoordinator: Coordinator {
 }
 
 extension SettingsCoordinator: SettingsViewModelDelegate {
-
+    
 }

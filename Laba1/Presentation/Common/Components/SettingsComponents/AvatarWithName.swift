@@ -71,5 +71,9 @@ final class AvatarWithName: UIView
         avatarImageView.snp.makeConstraints { make in
             make.width.height.equalTo(96)
         }
+
+        nameLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
     }
 }

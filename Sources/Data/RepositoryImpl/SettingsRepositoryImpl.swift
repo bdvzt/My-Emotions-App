@@ -67,6 +67,11 @@ final class SettingsRepositoryImpl: SettingsRepository {
             userDefaults.set(times, forKey: Keys.reminderTimes)
         }
     }
+
+    func saveUserNameIfNeeded(givenName: String, familyName: String) {
+        userDefaults.set(givenName, forKey: Keys.firstName)
+        userDefaults.set(familyName, forKey: Keys.lastName)
+    }
 }
 
 private extension SettingsRepositoryImpl {

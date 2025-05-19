@@ -18,4 +18,6 @@ protocol SettingsRepository {
     var reminderTimes: [String] { get }
     func addReminderTime(_ time: String)
     func deleteReminderTime(_ time: String)
+
+    func saveUserNameIfNeeded(givenName: String, familyName: String)
 }

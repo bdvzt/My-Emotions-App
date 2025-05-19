@@ -15,10 +15,15 @@ final class LoginViewModel: NSObject {
 
     // MARK: - Delegate
     weak var delegate: LoginViewModelDelegate?
+    private var repository: SettingsRepository
+
+    init(repository: SettingsRepository) {
+        self.repository = repository
+    }
 
     // MARK: - Actions
     func didTapLoginButton() {
-        saveUserNameIfNeeded(givenName: "Степан", familyName: "Потапов")
+        repository.saveUserNameIfNeeded(givenName: "Степан", familyName: "Потапов")
         delegate?.didLogin()
     }
 

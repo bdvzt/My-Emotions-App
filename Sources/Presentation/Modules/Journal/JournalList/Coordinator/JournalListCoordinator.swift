@@ -24,9 +24,7 @@ final class JournalListCoordinator: Coordinator {
     }
 
     func start() {
-        let viewController = JournalListViewController(
-            journalListViewModel: journalListViewModel
-        )
+        let viewController = JournalListViewController(journalListViewModel: journalListViewModel)
         navigationController.pushViewController(viewController, animated: true)
     }
 

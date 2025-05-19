@@ -21,18 +21,19 @@ final class SettingsViewController: UIViewController {
     private let settingsContentView = UIView()
 
     private let settingsLabel = UILabel()
-    private let avatarView = AvatarWithName(avatarImage: .avatar, name: "Иван Иванов")
     private let sendAlert = SendAlertComponent()
     private let addReminderButton = WhiteButton(title: "Добавить напоминание")
     private let touchIdSwitchBar = TouchIdSwitchBar()
 
-    private let timeScrollView = UIScrollView()
-    private let timeContentView = UIView()
     private let timeStackView = UIStackView()
-    private var timeScrollViewHeightConstraint: Constraint?
     private let pickerContainerView = UIView()
     private let timePicker = UIDatePicker()
     private let saveButton = WhiteButton(title: "Сохранить")
+
+    private lazy var avatarView = AvatarWithName(
+        avatarImage: settingsViewModel.avatar,
+        name: "\(settingsViewModel.firstName) \(settingsViewModel.lastName)"
+    )
 
     private let emptyStateLabel: UILabel = {
         let label = UILabel()
@@ -73,16 +74,27 @@ final class SettingsViewController: UIViewController {
         bindViewModel()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
     // MARK: - Setup
 
     private func setup() {
         view.backgroundColor = .black
-
         view.addSubview(settingsScrollView)
         settingsScrollView.addSubview(settingsContentView)
 
         settingsScrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
 
         settingsContentView.snp.makeConstraints { make in
@@ -95,7 +107,7 @@ final class SettingsViewController: UIViewController {
         setupSettingsLabel()
         setupAvatarView()
         setupSendAlert()
-        setupTimeScrollView()
+        setupTimeStackView()
         setupAddReminderButton()
         setupTouchIdSwitchBar()
         setupPicker()
@@ -111,8 +123,8 @@ final class SettingsViewController: UIViewController {
 
         settingsContentView.addSubview(settingsLabel)
         settingsLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().inset(16)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
         }
     }
 
@@ -130,45 +142,32 @@ final class SettingsViewController: UIViewController {
         settingsContentView.addSubview(sendAlert)
         sendAlert.snp.makeConstraints { make in
             make.top.equalTo(avatarView.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(364)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
+        }
+        sendAlert.setOnToggle = { [weak self] isOn in
+            self?.settingsViewModel.setRemindersEnabled(isOn)
         }
     }
 
-    private func setupTimeScrollView() {
-        timeScrollView.showsVerticalScrollIndicator = false
-        settingsContentView.addSubview(timeScrollView)
-        timeScrollView.addSubview(timeContentView)
-        timeContentView.addSubview(timeStackView)
-
-        timeScrollView.snp.makeConstraints { make in
-            make.top.equalTo(sendAlert.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
-            timeScrollViewHeightConstraint = make.height.equalTo(100).constraint
-        }
-
-        timeContentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.width.equalToSuperview()
-        }
-
+    private func setupTimeStackView() {
+        settingsContentView.addSubview(timeStackView)
         timeStackView.axis = .vertical
         timeStackView.spacing = 12
         timeStackView.alignment = .fill
+        timeStackView.distribution = .equalSpacing
 
         timeStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
-            make.width.equalTo(364)
+            make.top.equalTo(sendAlert.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview()
         }
     }
 
     private func setupAddReminderButton() {
         settingsContentView.addSubview(addReminderButton)
         addReminderButton.snp.makeConstraints { make in
-            make.top.equalTo(timeScrollView.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(364)
+            make.top.equalTo(timeStackView.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(56)
         }
     }
@@ -177,10 +176,13 @@ final class SettingsViewController: UIViewController {
         settingsContentView.addSubview(touchIdSwitchBar)
         touchIdSwitchBar.snp.makeConstraints { make in
             make.top.equalTo(addReminderButton.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(364)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview()
+        }
+
+        touchIdSwitchBar.setOnToggle = { [weak self] isOn in
+            self?.settingsViewModel.setFaceIDEnabled(isOn)
         }
     }
 
@@ -223,11 +225,6 @@ final class SettingsViewController: UIViewController {
         saveButton.addTarget(self, action: #selector(addReminderTime), for: .touchUpInside)
     }
 
-    private func updateTimeScrollViewHeight() {
-        let newHeight = min(150, timeStackView.arrangedSubviews.count * 50)
-        timeScrollViewHeightConstraint?.update(offset: newHeight)
-    }
-
     private func updateEmptyState() {
         emptyStateLabel.isHidden = timeStackView.arrangedSubviews.isEmpty
     }
@@ -243,18 +240,28 @@ final class SettingsViewController: UIViewController {
         formatter.dateFormat = "HH:mm"
         let timeString = formatter.string(from: timePicker.date)
 
-        let reminder = ReminderTime(time: timeString)
-        reminder.onDelete = { self.removeReminderTime(reminder) }
-
-        timeStackView.addArrangedSubview(reminder)
-        updateTimeScrollViewHeight()
+        settingsViewModel.addReminderTime(timeString)
         pickerContainerView.isHidden = true
     }
 
-    private func removeReminderTime(_ reminder: ReminderTime) {
-        timeStackView.removeArrangedSubview(reminder)
-        reminder.removeFromSuperview()
-        updateTimeScrollViewHeight()
+    private func removeReminderTime(_ time: String) {
+        settingsViewModel.deleteReminderTime(time)
+    }
+
+    private func updateReminders(_ times: [String]) {
+        timeStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+
+        for time in times {
+            let reminder = ReminderTime(time: time)
+            reminder.onDelete = { [weak self] in
+                self?.removeReminderTime(time)
+            }
+            timeStackView.addArrangedSubview(reminder)
+        }
+
+        emptyStateLabel.isHidden = !times.isEmpty
     }
 
     private func handleErrorState() {
@@ -264,15 +271,41 @@ final class SettingsViewController: UIViewController {
         settingsLabel.isHidden = true
         avatarView.isHidden = true
         sendAlert.isHidden = true
-        timeScrollView.isHidden = true
         addReminderButton.isHidden = true
         touchIdSwitchBar.isHidden = true
         pickerContainerView.isHidden = true
         saveButton.isHidden = true
     }
 
+    private func updateReminderToggle(_ isOn: Bool) {
+        sendAlert.setSwitchState(isOn)
+    }
+
+    private func updateFaceIDToggle(_ isOn: Bool) {
+        touchIdSwitchBar.setSwitchState(isOn)
+    }
+
     // MARK: - Binding
     private func bindViewModel() {
-        
+        settingsViewModel.$reminderTimes
+            .receive(on: RunLoop.main)
+            .sink { [weak self] times in
+                self?.updateReminders(times)
+            }
+            .store(in: &cancellables)
+
+        settingsViewModel.$isRemindersEnabled
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isOn in
+                self?.updateReminderToggle(isOn)
+            }
+            .store(in: &cancellables)
+
+        settingsViewModel.$isFaceIDEnabled
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isOn in
+                self?.updateFaceIDToggle(isOn)
+            }
+            .store(in: &cancellables)
     }
 }

@@ -17,6 +17,7 @@ final class AddNoteViewModel {
 
     // MARK: - Dependencies
     private let repository: JournalListRepository
+    private let noteAnswersRepository: NoteAnswersRepository
     private let selectedMood: Mood
     var mood: Mood { selectedMood }
 
@@ -27,10 +28,12 @@ final class AddNoteViewModel {
 
     init(
         selectedMood: Mood,
-        repository: JournalListRepository
+        repository: JournalListRepository,
+        noteAnswersRepository: NoteAnswersRepository
     ) {
         self.selectedMood = selectedMood
         self.repository = repository
+        self.noteAnswersRepository = noteAnswersRepository
     }
 
     // MARK: - Inputs
@@ -59,6 +62,9 @@ final class AddNoteViewModel {
 
         do {
             try await repository.saveMoodCard(card: card)
+            print("Выбраны активности: \(activities)")
+            print("Выбраны люди: \(people)")
+            print("Выбраны места: \(places)")
         } catch {
             print("NE POLUCHILOS SOCHRANIT")
         }

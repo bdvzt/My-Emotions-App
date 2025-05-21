@@ -23,10 +23,12 @@ final class ChooseMoodViewModel {
     // MARK: - Init
     init(
         journalListRepository: JournalListRepository,
-        moodRepository: MoodRepository
+        moodRepository: MoodRepository,
+        preselectedMood: Mood? = nil
     ) {
         self.journalListRepository = journalListRepository
         self.moodRepository = moodRepository
+        self.selectedMood = preselectedMood
         moodRepository.setMoodsIfNeeded()
         loadMoods()
     }

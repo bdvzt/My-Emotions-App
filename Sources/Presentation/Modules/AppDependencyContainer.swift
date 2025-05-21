@@ -11,6 +11,7 @@ import CoreData
 final class AppDependencyContainer {
     let persistantContainer: NSPersistentContainer
     let journalListRepository: JournalListRepository
+    let noteStatRepository: NoteStatRepository
     let moodRepository: MoodRepository
     let settingsRepository: SettingsRepository
     let statisticsRepository: StatisticsRepository
@@ -24,6 +25,7 @@ final class AppDependencyContainer {
 
         self.moodRepository = MoodRepositoryImpl(context: persistantContainer.viewContext)
         self.journalListRepository = JournalListRepositoryImpl(context: persistantContainer.viewContext)
+        self.noteStatRepository = NoteStatRepositoryImpl(context: persistantContainer.viewContext)
         self.settingsRepository = SettingsRepositoryImpl()
         self.noteAnswersRepository  = NoteAnswersRepositoryImpl()
         self.statisticsRepository = StatisticsRepositoryImpl(context: persistantContainer.viewContext)
@@ -44,7 +46,10 @@ final class AppDependencyContainer {
 
     // MARK: - JournalList
     func makeJournalListViewModel() -> JournalListViewModel {
-        JournalListViewModel(repository: self.journalListRepository)
+        JournalListViewModel(
+            repository: self.journalListRepository,
+            statRepository: self.noteStatRepository
+        )
     }
 
     func makeJournalListCoordinator(navigationController: UINavigationController) -> JournalListCoordinator {
@@ -59,23 +64,24 @@ final class AppDependencyContainer {
     }
 
     // MARK: - ChooseMood
-    func makeChooseMoodViewModel() -> ChooseMoodViewModel {
+    func makeChooseMoodViewModel(preselectedMood: Mood? = nil) -> ChooseMoodViewModel {
         ChooseMoodViewModel(
-            journalListRepository: self.journalListRepository,
-            moodRepository: moodRepository
+            journalListRepository: journalListRepository,
+            moodRepository: moodRepository,
+            preselectedMood: preselectedMood
         )
     }
-
-    func makeChooseMoodCoordinator(navigationController: UINavigationController) -> ChooseMoodCoordinator {
-        let viewModel = makeChooseMoodViewModel()
-        let coordinator = ChooseMoodCoordinator(
-            navigationController: navigationController,
-            chooseMoodViewModel: viewModel,
-            dependencies: self
-        )
-        viewModel.delegate = coordinator
-        return coordinator
-    }
+    func makeChooseMoodCoordinator(
+        navigationController: UINavigationController,
+        preselectedCard: MoodCard? = nil) -> ChooseMoodCoordinator {
+            let coordinator = ChooseMoodCoordinator(
+                navigationController: navigationController,
+                dependencies: self,
+                preselectedCard: preselectedCard
+            )
+            coordinator.chooseMoodViewModel.delegate = coordinator
+            return coordinator
+        }
 
     // MARK: - Add Note
     func makeAddNoteViewModel(selectedMood: Mood) -> AddNoteViewModel {

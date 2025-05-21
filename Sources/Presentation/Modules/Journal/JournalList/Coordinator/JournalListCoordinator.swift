@@ -28,8 +28,11 @@ final class JournalListCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
 
-    func showChooseMoodScreen() {
-        let chooseMoodCoordinator = dependecies.makeChooseMoodCoordinator(navigationController: navigationController)
+    func showChooseMoodScreen(with card: MoodCard? = nil) {
+        let chooseMoodCoordinator = dependecies.makeChooseMoodCoordinator(
+            navigationController: navigationController,
+            preselectedCard: card
+        )
         self.chooseMoodCoordinator = chooseMoodCoordinator
         chooseMoodCoordinator.start()
     }
@@ -38,5 +41,9 @@ final class JournalListCoordinator: Coordinator {
 extension JournalListCoordinator: JournalListViewModelDelegate {
     func didRequestAddMood() {
         showChooseMoodScreen()
+    }
+
+    func didSelectMoodCard(_ card: MoodCard) {
+        showChooseMoodScreen(with: card)
     }
 }

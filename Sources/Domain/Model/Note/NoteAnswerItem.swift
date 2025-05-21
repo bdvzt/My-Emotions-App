@@ -7,15 +7,11 @@
 
 import Foundation
 
-struct NoteAnswerItem: Codable, Identifiable {
-    let id: UUID
+struct NoteAnswerItem: Codable, Equatable {
     let title: String
     let isDefault: Bool
-}
 
-// MARK: - Equatable по title
-extension NoteAnswerItem: Equatable {
     static func == (lhs: NoteAnswerItem, rhs: NoteAnswerItem) -> Bool {
-        return lhs.title.caseInsensitiveCompare(rhs.title) == .orderedSame
+        return lhs.title == rhs.title
     }
 }

@@ -52,7 +52,7 @@ final class NoteAnswersRepositoryImpl: NoteAnswersRepository {
         return defaultsForCategory
     }
 
-    func saveAnswers(: [NoteAnswerItem], for category: String) {
+    func saveAnswers(_ items: [NoteAnswerItem], for category: String) {
         guard let data = try? JSONEncoder().encode(items) else { return }
         defaults.set(data, forKey: key(for: category))
     }
@@ -60,7 +60,7 @@ final class NoteAnswersRepositoryImpl: NoteAnswersRepository {
     func addCustomAnswer(_ title: String, to category: String) {
         var items = loadAnswers(for: category)
         guard !items.contains(where: { $0.title.caseInsensitiveCompare(title) == .orderedSame }) else { return }
-        items.append(NoteAnswerItem(id: UUID(), title: title, isDefault: false))
+        items.append(NoteAnswerItem(title: title, isDefault: false))
         saveAnswers(items, for: category)
     }
 

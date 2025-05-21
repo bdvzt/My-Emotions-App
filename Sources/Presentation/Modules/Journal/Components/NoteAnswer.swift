@@ -60,9 +60,13 @@ final class NoteAnswer: UIButton
     }
 
     // MARK: - Actions
+    func setSelected(_ selected: Bool) {
+        chosen = selected
+        backgroundColor = chosen ? .circleProgressBarGray : .amountGray
+    }
 
     @objc private func changeColor() {
-        chosen = !chosen
+        chosen.toggle()
         backgroundColor = chosen ? .circleProgressBarGray : .amountGray
     }
 

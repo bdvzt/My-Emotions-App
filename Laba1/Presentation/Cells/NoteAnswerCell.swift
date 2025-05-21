@@ -26,14 +26,17 @@ final class NoteAnswerCell: UICollectionViewCell {
     }
 
     // MARK: - Setup
-
-    func configure(with answerText: String) {
+    func configure(with answerText: String, selected: Bool) {
         noteAnswer?.removeFromSuperview()
+
         let answerButton = NoteAnswer(description: answerText)
         contentView.addSubview(answerButton)
         answerButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        answerButton.setSelected(selected)
+        answerButton.isUserInteractionEnabled = false
         noteAnswer = answerButton
     }
 }

@@ -21,53 +21,54 @@ final class AddNoteViewModel {
     private let selectedMood: Mood
     var mood: Mood { selectedMood }
 
-    // MARK: - State
-    private(set) var activities: [String] = []
-    private(set) var people: [String] = []
-    private(set) var places: [String] = []
+    let activitiesViewModel: NoteAnswersViewModel
+    let peopleViewModel: NoteAnswersViewModel
+    let placesViewModel: NoteAnswersViewModel
 
-    init(
-        selectedMood: Mood,
-        repository: JournalListRepository,
-        noteAnswersRepository: NoteAnswersRepository
+    let existingCard: MoodCard?
+
+    // MARK: - Init
+    init(selectedMood: Mood,
+         repository: JournalListRepository,
+         noteAnswersRepository: NoteAnswersRepository,
+         existingCard: MoodCard? = nil
     ) {
         self.selectedMood = selectedMood
         self.repository = repository
         self.noteAnswersRepository = noteAnswersRepository
-    }
+        self.existingCard = existingCard
 
-    // MARK: - Inputs
-    func updateActivities(_ items: [String]) {
-        activities = items
-    }
+        self.activitiesViewModel = NoteAnswersViewModel(repository: noteAnswersRepository, category: "activities")
+        self.peopleViewModel = NoteAnswersViewModel(repository: noteAnswersRepository, category: "people")
+        self.placesViewModel = NoteAnswersViewModel(repository: noteAnswersRepository, category: "places")
 
-    func updatePeople(_ items: [String]) {
-        people = items
-    }
-
-    func updatePlaces(_ items: [String]) {
-        places = items
+        if let card = existingCard {
+            self.activitiesViewModel.setSelectedAnswers(card.activities)
+            self.peopleViewModel.setSelectedAnswers(card.people)
+            self.placesViewModel.setSelectedAnswers(card.places)
+        }
     }
 
     // MARK: - Saving
     func saveNote() async {
         let card = MoodCard(
-            id: UUID(),
-            date: Date(),
+            id: existingCard?.id ?? UUID(),
+            date: existingCard?.date ?? Date(),
             mood: selectedMood,
-            activities: activities,
-            people: people,
-            places: places
+            activities: activitiesViewModel.selectedAnswers,
+            people: peopleViewModel.selectedAnswers,
+            places: placesViewModel.selectedAnswers
         )
 
         do {
             try await repository.saveMoodCard(card: card)
-            print("Выбраны активности: \(activities)")
-            print("Выбраны люди: \(people)")
-            print("Выбраны места: \(places)")
+            print(activitiesViewModel.selectedAnswers)
+            print(peopleViewModel.selectedAnswers)
+            print(placesViewModel.selectedAnswers)
         } catch {
-            print("NE POLUCHILOS SOCHRANIT")
+            print("Не получилось сохранить")
         }
+
         delegate?.didSaveNote()
     }
 }

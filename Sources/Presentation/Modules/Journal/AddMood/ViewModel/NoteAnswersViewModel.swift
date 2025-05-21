@@ -11,11 +11,8 @@ final class NoteAnswersViewModel {
     private let repository: NoteAnswersRepository
     private let category: String
 
-    @Published
     private(set) var answers: [NoteAnswerItem] = []
-
-    @Published
-    private(set) var selectedAnswers: [NoteAnswerItem] = []
+    private(set) var selectedAnswers: [String] = []
 
     init(repository: NoteAnswersRepository, category: String) {
         self.repository = repository
@@ -27,21 +24,28 @@ final class NoteAnswersViewModel {
         self.answers = self.repository.loadAnswers(for: category)
     }
 
-    private func add(_ title: String) {
+    func add(_ title: String) {
         self.repository.addCustomAnswer(title, to: category)
-        self.load()
+
+        let newItem = NoteAnswerItem(title: title, isDefault: false)
+        self.answers.append(newItem)
     }
 
-    private func delete(_ title: String) {
-        self.repository.deleteCustomAnswer(title, from: category)
-        self.load()
+    func addAndSelect(_ title: String) {
+        add(title)
+        toggleAnswer(title: title)
+
     }
 
-    func toggleAnswer(answer: NoteAnswerItem) {
-        if answers.contains(answer) {
-            selectedAnswers.removeAll { $0 == answer }
+    func toggleAnswer(title: String) {
+        if selectedAnswers.contains(title) {
+            selectedAnswers.removeAll { $0 == title }
         } else {
-            selectedAnswers.append(answer)
+            selectedAnswers.append(title)
         }
+    }
+
+    func setSelectedAnswers(_ answers: [String]) {
+        self.selectedAnswers = answers
     }
 }

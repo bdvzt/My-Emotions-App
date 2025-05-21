@@ -31,30 +31,28 @@ final class JournalListRepositoryImpl: JournalListRepository {
                     return moodCard
                 }
             } catch {
-                print("[JournalListRepositoryImpl] — ошибка при получении карточек настроения: \(error)")
                 return []
             }
         }
     }
 
     func saveMoodCard(card: MoodCard) async throws {
-        try await context.perform {
-            let moodRequest: NSFetchRequest<MoodEntity> = MoodEntity.fetchRequest()
-            moodRequest.predicate = NSPredicate(format: "id==%@", card.mood.id as CVarArg)
+        try await context.perform {            let moodRequest: NSFetchRequest<MoodEntity> = MoodEntity.fetchRequest()
+            moodRequest.predicate = NSPredicate(format: "id == %@", card.mood.id as CVarArg)
             moodRequest.fetchLimit = 1
 
-            let fetched = try self.context.fetch(moodRequest)
-            guard let moodEntity = fetched.first else {
-                let error = NSError(
-                    domain: "JournalListRepository",
-                    code: 0,
-                    userInfo: [NSLocalizedDescriptionKey: "Mood not found for id \(card.mood.id)"]
-                )
-                print("[JournalListRepositoryImpl] ❌ Ошибка: \(error.localizedDescription)")
-                throw error
+            guard let moodEntity = try self.context.fetch(moodRequest).first else {
+                throw NSError(domain: "JournalListRepository", code: 0, userInfo: [
+                    NSLocalizedDescriptionKey: "Mood not found for id \(card.mood.id)"
+                ])
             }
 
-            let cardEntity = MoodCardEntity(context: self.context)
+            let cardRequest: NSFetchRequest<MoodCardEntity> = MoodCardEntity.fetchRequest()
+            cardRequest.predicate = NSPredicate(format: "id == %@", card.id as CVarArg)
+            cardRequest.fetchLimit = 1
+
+            let cardEntity = try self.context.fetch(cardRequest).first ?? MoodCardEntity(context: self.context)
+
             cardEntity.id = card.id
             cardEntity.dateAndTime = card.date
             cardEntity.activities = card.activities
@@ -64,6 +62,22 @@ final class JournalListRepositoryImpl: JournalListRepository {
 
             if self.context.hasChanges {
                 try self.context.save()
+            }
+        }
+    }
+
+    func deleteMoodCard(id: UUID) async throws {
+        try await context.perform {
+            let request: NSFetchRequest<MoodCardEntity> = MoodCardEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+            request.fetchLimit = 1
+
+            if let cardEntity = try self.context.fetch(request).first {
+                self.context.delete(cardEntity)
+
+                if self.context.hasChanges {
+                    try self.context.save()
+                }
             }
         }
     }

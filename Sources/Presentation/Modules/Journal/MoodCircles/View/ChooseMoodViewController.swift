@@ -101,6 +101,10 @@ class ChooseMoodViewController: UIViewController {
 
         moodGrid.configure(with: chooseMoodViewModel.moods)
 
+        if let preselected = chooseMoodViewModel.selectedMood {
+            showSelectedMood(preselected)
+        }
+
         moodGrid.onMoodSelected = { [weak self] mood in
             guard let self = self else { return }
             self.chooseMoodViewModel.didTapMoodCircle(mood)

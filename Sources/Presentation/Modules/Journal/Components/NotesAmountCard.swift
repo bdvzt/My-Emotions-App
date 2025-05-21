@@ -76,4 +76,8 @@ final class NotesAmountCard: UIView
             make.height.greaterThanOrEqualTo(40)
         }
     }
+
+    func updateAmount(_ text: String) {
+        amountLabel.text = text
+    }
 }

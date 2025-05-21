@@ -12,9 +12,7 @@ final class AddNoteViewController: UIViewController {
 
     // MARK: - Dependencies
     private let viewModel: AddNoteViewModel
-    private let activitiesViewModel: NoteAnswersViewModel
-    private let peopleViewModel: NoteAnswersViewModel
-    private let placesViewModel: NoteAnswersViewModel
+    private let card: MoodCard?
 
     // MARK: - Private properties
     private let backArrow = BackArrow()
@@ -39,15 +37,15 @@ final class AddNoteViewController: UIViewController {
 
     private lazy var activitiesView = NoteQuestionView(
         question: "Чем вы занимались?",
-        viewModel: activitiesViewModel
+        viewModel: viewModel.activitiesViewModel
     )
     private lazy var peopleView = NoteQuestionView(
         question: "С кем вы были?",
-        viewModel: peopleViewModel
+        viewModel: viewModel.peopleViewModel
     )
     private lazy var placesView = NoteQuestionView(
         question: "Где вы были?",
-        viewModel: placesViewModel
+        viewModel: viewModel.placesViewModel
     )
 
     private let questionsStack: UIStackView = {
@@ -67,16 +65,9 @@ final class AddNoteViewController: UIViewController {
     private let saveButton = WhiteButton(title: "Сохранить")
 
     // MARK: - Inits
-
-    init(viewModel: AddNoteViewModel,
-         activitiesViewModel: NoteAnswersViewModel,
-         peopleViewModel: NoteAnswersViewModel,
-         placesViewModel: NoteAnswersViewModel
-    ) {
+    init(viewModel: AddNoteViewModel, card: MoodCard? = nil) {
         self.viewModel = viewModel
-        self.activitiesViewModel = activitiesViewModel
-        self.peopleViewModel = peopleViewModel
-        self.placesViewModel = placesViewModel
+        self.card = card
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -109,7 +100,6 @@ final class AddNoteViewController: UIViewController {
         setupMoodCard()
         setupSaveButton()
         setupQuestionScrollView()
-        setupBindings()
     }
 
     private func setupBackground() {
@@ -169,7 +159,7 @@ final class AddNoteViewController: UIViewController {
 
     // MARK: - Configure
     private func configureMoodCard() {
-        let previewCard = MoodCard(
+        let card = viewModel.existingCard ?? MoodCard(
             id: UUID(),
             date: Date(),
             mood: viewModel.mood,
@@ -177,34 +167,17 @@ final class AddNoteViewController: UIViewController {
             people: [],
             places: []
         )
-        let viewModel = MoodCardViewModel(from: previewCard)
+
+        let viewModel = MoodCardViewModel(from: card)
         moodCardView.configure(with: viewModel)
     }
 
     // MARK: - Actions
-    private func setupBindings() {
-        activitiesView.onSelectionChanged = { [weak self] selected in
-            self?.viewModel.updateActivities(selected)
-        }
-
-        peopleView.onSelectionChanged = { [weak self] selected in
-            self?.viewModel.updatePeople(selected)
-        }
-
-        placesView.onSelectionChanged = { [weak self] selected in
-            self?.viewModel.updatePlaces(selected)
-        }
-    }
-
     @objc private func backArrowTapped() {
         navigationController?.popViewController(animated: true)
     }
 
     @objc private func saveButtonTapped() {
-        viewModel.updateActivities(activitiesViewModel.selectedTitles)
-        viewModel.updatePeople(peopleViewModel.selectedTitles)
-        viewModel.updatePlaces(placesViewModel.selectedTitles)
-
         Task {
             await viewModel.saveNote()
         }

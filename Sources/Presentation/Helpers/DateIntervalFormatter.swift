@@ -34,3 +34,33 @@ enum DateIntervalFormatter {
         }
     }
 }
+
+extension Date {
+    func formattedForMoodCard(locale: Locale = Locale(identifier: "ru_RU")) -> String {
+        let calendar = Calendar.current
+        let now = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        timeFormatter.locale = locale
+
+        let time = timeFormatter.string(from: self)
+
+        if calendar.isDateInToday(self) {
+            return "сегодня, \(time)"
+        } else if calendar.isDateInYesterday(self) {
+            return "вчера, \(time)"
+        } else if calendar.isDate(self, equalTo: now, toGranularity: .weekOfYear) {
+            let weekdayFormatter = DateFormatter()
+            weekdayFormatter.locale = locale
+            weekdayFormatter.dateFormat = "EEEE"
+            let weekday = weekdayFormatter.string(from: self)
+            return "\(weekday), \(time)"
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = locale
+            dateFormatter.dateFormat = "d MMMM"
+            let date = dateFormatter.string(from: self)
+            return "\(date), \(time)"
+        }
+    }
+}

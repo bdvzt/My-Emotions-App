@@ -23,24 +23,8 @@ final class AddNoteCoordinator: Coordinator {
     }
 
     func start() {
-        let activitiesViewModel = NoteAnswersViewModel(
-            repository: dependencies.noteAnswersRepository,
-            category: "activities"
-        )
-        let peopleViewModel = NoteAnswersViewModel(
-            repository: dependencies.noteAnswersRepository,
-            category: "people"
-        )
-        let placesViewModel = NoteAnswersViewModel(
-            repository: dependencies.noteAnswersRepository,
-            category: "places"
-        )
-
         let viewController = AddNoteViewController(
-            viewModel: self.addNoteViewModel,
-            activitiesViewModel: activitiesViewModel,
-            peopleViewModel: peopleViewModel,
-            placesViewModel: placesViewModel
+            viewModel: self.addNoteViewModel
         )
 
         viewController.hidesBottomBarWhenPushed = true

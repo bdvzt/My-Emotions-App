@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Разрешите доступ к фото для добавления аватара</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Для входа в приложение с помощью Face ID</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Мы используем галерею для выбора аватара</string>
+	<string>Мы используем галерею, чтобы вы могли выбрать фото для установки аватарки</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Мы используем камеру для выбора аватара</string>
+	<string>Мы используем камеру, чтобы вы могли выбрать фото для установки аватарки</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Gwen-Trial-Bold.otf</string>

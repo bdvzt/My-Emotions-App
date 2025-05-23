@@ -11,6 +11,7 @@ import SnapKit
 final class TouchIdSwitchBar: UIView {
     // MARK: - Private properties
     var setOnToggle: ((Bool) -> Void)?
+    private var shouldNotifyChange = true
 
     private let horizontalStackView: UIStackView = {
         let stack = UIStackView()
@@ -23,14 +24,14 @@ final class TouchIdSwitchBar: UIView {
     private let touchId: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = .touchId
+        imageView.image = UIImage(systemName: "faceid")
         imageView.tintColor = .white
         return imageView
     }()
 
     private let textLabel: UILabel = {
         let label = UILabel()
-        label.text = "Вход по отпечатку пальца"
+        label.text = "Вход по Face ID"
         label.textColor = .white
         label.font = UIFont(name: "VelaSans-Regular", size: 16)
         label.textAlignment = .left
@@ -43,7 +44,7 @@ final class TouchIdSwitchBar: UIView {
         switchBar.backgroundColor = .white
         switchBar.layer.cornerRadius = 16
         switchBar.clipsToBounds = true
-        switchBar.thumbTintColor = .circleProgressBarGray 
+        switchBar.thumbTintColor = .circleProgressBarGray
         return switchBar
     }()
 
@@ -82,15 +83,18 @@ final class TouchIdSwitchBar: UIView {
     }
 
     // MARK: - Actions
-
     func setSwitchState(_ isOn: Bool) {
+        shouldNotifyChange = false
         switchBar.setOn(isOn, animated: true)
         switchBar.thumbTintColor = isOn ? .white : .circleProgressBarGray
+        shouldNotifyChange = true
     }
 
     @objc private func switchValueChanged() {
         let isOn = switchBar.isOn
         switchBar.thumbTintColor = isOn ? .white : .circleProgressBarGray
-        setOnToggle?(isOn)
+        if shouldNotifyChange {
+            setOnToggle?(isOn)
+        }
     }
 }

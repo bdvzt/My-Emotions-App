@@ -7,9 +7,16 @@
 
 import Combine
 import UIKit
+import AVFoundation
+import LocalAuthentication
 
 protocol SettingsViewModelDelegate: AnyObject {
     func didRequestLogout()
+    func presentCameraPicker()
+    func presentPhotoPicker()
+    func presentCameraAccessAlert()
+    func updateFaceIDSwitch(to isOn: Bool)
+    func showFaceIDError(message: String)
 }
 
 final class SettingsViewModel {
@@ -65,5 +72,61 @@ final class SettingsViewModel {
 
     func updateAvatar(_ image: UIImage) {
         repository.saveAvatar(image)
+    }
+
+    func didTapCameraOption() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+
+        switch status {
+        case .authorized:
+            delegate?.presentCameraPicker()
+
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                DispatchQueue.main.async {
+                    granted ? self?.delegate?.presentCameraPicker() : self?.delegate?.presentCameraAccessAlert()
+                }
+            }
+
+        case .denied, .restricted:
+            delegate?.presentCameraAccessAlert()
+
+        default: break
+        }
+    }
+
+    func didTapGalleryOption() {
+        delegate?.presentPhotoPicker()
+    }
+}
+
+extension SettingsViewModel {
+    func toggleFaceID(to isOn: Bool) {
+        if isOn {
+            let context = LAContext()
+            var error: NSError?
+
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Для включения Face ID") { [weak self] success, authError in
+                    DispatchQueue.main.async {
+                        if success {
+                            self?.setFaceIDEnabled(true)
+                            self?.delegate?.updateFaceIDSwitch(to: true)
+                        } else {
+                            self?.setFaceIDEnabled(false)
+                            self?.delegate?.updateFaceIDSwitch(to: false)
+                            self?.delegate?.showFaceIDError(message: authError?.localizedDescription ?? "Ошибка аутентификации")
+                        }
+                    }
+                }
+            } else {
+                setFaceIDEnabled(false)
+                delegate?.updateFaceIDSwitch(to: false)
+                delegate?.showFaceIDError(message: error?.localizedDescription ?? "Face ID недоступен на устройстве")
+            }
+        } else {
+            setFaceIDEnabled(false)
+            delegate?.updateFaceIDSwitch(to: false)
+        }
     }
 }

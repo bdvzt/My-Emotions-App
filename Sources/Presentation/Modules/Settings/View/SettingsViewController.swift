@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Combine
+import PhotosUI
 
 final class SettingsViewController: UIViewController {
 
@@ -200,7 +201,7 @@ final class SettingsViewController: UIViewController {
         }
 
         touchIdSwitchBar.setOnToggle = { [weak self] isOn in
-            self?.settingsViewModel.setFaceIDEnabled(isOn)
+            self?.settingsViewModel.toggleFaceID(to: isOn)
         }
     }
 
@@ -267,14 +268,16 @@ final class SettingsViewController: UIViewController {
     }
 
     @objc private func avatarTapped() {
-        let alert = UIAlertController(title: "Выбери источник", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Выбери источник для выбора аватарки", message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "Камера", style: .default) { [weak self] _ in
-            self?.presentImagePicker(source: .camera)
+            self?.settingsViewModel.didTapCameraOption()
         })
+
         alert.addAction(UIAlertAction(title: "Галерея", style: .default) { [weak self] _ in
-            self?.presentImagePicker(source: .photoLibrary)
+            self?.settingsViewModel.didTapGalleryOption()
         })
+
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
 
         present(alert, animated: true)
@@ -317,7 +320,11 @@ final class SettingsViewController: UIViewController {
         sendAlert.setSwitchState(isOn)
     }
 
-    private func updateFaceIDToggle(_ isOn: Bool) {
+    @objc private func faceIDSwitchChanged(_ sender: UISwitch) {
+        settingsViewModel.toggleFaceID(to: sender.isOn)
+    }
+
+    func setFaceIDSwitchState(_ isOn: Bool) {
         touchIdSwitchBar.setSwitchState(isOn)
     }
 
@@ -340,19 +347,26 @@ final class SettingsViewController: UIViewController {
         settingsViewModel.$isFaceIDEnabled
             .receive(on: RunLoop.main)
             .sink { [weak self] isOn in
-                self?.updateFaceIDToggle(isOn)
+                self?.setFaceIDSwitchState(isOn)
             }
             .store(in: &cancellables)
     }
+}
 
-    private func presentImagePicker(source: UIImagePickerController.SourceType) {
-        guard UIImagePickerController.isSourceTypeAvailable(source) else { return }
+extension SettingsViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
 
-        let picker = UIImagePickerController()
-        picker.sourceType = source
-        picker.delegate = self
-        picker.allowsEditing = true
-        present(picker, animated: true)
+        guard let itemProvider = results.first?.itemProvider,
+              itemProvider.canLoadObject(ofClass: UIImage.self) else { return }
+
+        itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+            guard let image = image as? UIImage else { return }
+            DispatchQueue.main.async {
+                self?.avatarView.setImage(image)
+                self?.settingsViewModel.updateAvatar(image)
+            }
+        }
     }
 }
 

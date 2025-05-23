@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import LocalAuthentication
 
 class MainCoordinator: NSObject, Coordinator {
 
@@ -30,7 +31,11 @@ class MainCoordinator: NSObject, Coordinator {
 
     func start() {
         if isLoggedIn {
-            showMainApp()
+            if dependencies.settingsRepository.isFaceIDEnabled {
+                authenticateWithBiometrics()
+            } else {
+                showMainApp()
+            }
         } else {
             showLogin()
         }
@@ -61,6 +66,27 @@ class MainCoordinator: NSObject, Coordinator {
             safariVC.dismiss(animated: true) {
                 self?.showMainApp()
             }
+        }
+    }
+
+    private func authenticateWithBiometrics() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Выполните вход с помощью Face ID"
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, authError in
+                DispatchQueue.main.async {
+                    if success {
+                        self?.showMainApp()
+                    } else {
+                        self?.showLogin()
+                    }
+                }
+            }
+        } else {
+            showLogin()
         }
     }
 }

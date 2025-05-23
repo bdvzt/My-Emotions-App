@@ -114,157 +114,124 @@ final class CategoryView: UIView {
     private func setupCircles() {
         layoutIfNeeded()
 
-        var circles: [MoodPerCentCircle] = []
-
         let containerWidth = circlesContainerView.bounds.width
         let containerHeight = circlesContainerView.bounds.height
-
         let availableSide = min(containerWidth, containerHeight)
         let maxCircleSize = availableSide * 0.9
         let minCircleSize = availableSide * 0.2
 
+        var circles: [MoodPerCentCircle] = []
+
         func addCircle(percent: Int, colors: (UIColor, UIColor)) {
             guard percent > 0 else { return }
-
             let rawSize = maxCircleSize * CGFloat(percent) / 100.0
             let size = max(minCircleSize, rawSize)
-
             let circle = MoodPerCentCircle(size: size, colors: colors, percent: percent)
             circles.append(circle)
         }
 
         addCircle(percent: viewModel.redPercent, colors: (.redGradient, .feelingGradientRed))
+        addCircle(percent: viewModel.orangePercent, colors: (.orangeGradient, .feelingGradientOrange))
         addCircle(percent: viewModel.bluePercent, colors: (.blueGradient, .feelingGradientBlue))
         addCircle(percent: viewModel.greenPercent, colors: (.greenGradient, .feelingGradientGreen))
-        addCircle(percent: viewModel.orangePercent, colors: (.orangeGradient, .feelingGradientOrange))
 
         circles.sort { $0.intrinsicContentSize.width > $1.intrinsicContentSize.width }
 
         let layoutView = UIView()
         circlesContainerView.addSubview(layoutView)
+
+        let layoutSize: CGFloat = max(circles.first?.intrinsicContentSize.width ?? 0, maxCircleSize)
         layoutView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalToSuperview()
+            make.width.height.equalTo(layoutSize)
         }
 
-        let offsets: [CGPoint] = [
-            CGPoint(x: -maxCircleSize * 0.25, y: -maxCircleSize * 0.25),
-            CGPoint(x: maxCircleSize * 0.25, y: -maxCircleSize * 0.25),
-            CGPoint(x: -maxCircleSize * 0.25, y: maxCircleSize * 0.25),
-            CGPoint(x: maxCircleSize * 0.25, y: maxCircleSize * 0.25)
-        ]
-
-        for (index, circle) in circles.enumerated() {
+        switch circles.count {
+        case 1:
+            let circle = circles[0]
             layoutView.addSubview(circle)
-            layoutView.sendSubviewToBack(circle)
-
-            let offset = index < offsets.count ? offsets[index] : .zero
             circle.snp.makeConstraints { make in
-                make.centerX.equalToSuperview().offset(offset.x)
-                make.centerY.equalToSuperview().offset(offset.y)
+                make.center.equalToSuperview()
+            }
+
+        case 2:
+            let big = circles[0]
+            let small = circles[1]
+
+            layoutView.addSubview(big)
+            layoutView.addSubview(small)
+
+            let bigWidth = big.intrinsicContentSize.width
+            let smallWidth = small.intrinsicContentSize.width
+
+            let totalWidth = bigWidth + smallWidth
+            let bigOffset = (smallWidth / totalWidth) * maxCircleSize * 0.4
+            let smallOffset = (bigWidth / totalWidth) * maxCircleSize * 0.4
+
+            big.snp.makeConstraints { make in
+                make.centerX.equalToSuperview().offset(-bigOffset)
+                make.centerY.equalToSuperview()
+            }
+
+            small.snp.makeConstraints { make in
+                make.centerX.equalToSuperview().offset(smallOffset)
+                make.centerY.equalToSuperview().offset(maxCircleSize * 0.3)
+            }
+
+        case 3:
+            layoutView.addSubview(circles[0])
+            layoutView.addSubview(circles[1])
+            layoutView.addSubview(circles[2])
+
+            circles[0].snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.centerX.equalToSuperview()
+            }
+
+            circles[1].snp.makeConstraints { make in
+                make.bottom.equalToSuperview()
+                make.leading.equalToSuperview()
+            }
+
+            circles[2].snp.makeConstraints { make in
+                make.bottom.equalToSuperview()
+                make.trailing.equalToSuperview()
+            }
+
+        case 4:
+            layoutView.addSubview(circles[0])
+            layoutView.addSubview(circles[1])
+            layoutView.addSubview(circles[2])
+            layoutView.addSubview(circles[3])
+
+            circles[0].snp.makeConstraints { make in
+                make.top.leading.equalToSuperview()
+            }
+
+            circles[1].snp.makeConstraints { make in
+                make.top.trailing.equalToSuperview()
+            }
+
+            circles[2].snp.makeConstraints { make in
+                make.bottom.leading.equalToSuperview()
+            }
+
+            circles[3].snp.makeConstraints { make in
+                make.bottom.trailing.equalToSuperview()
+            }
+
+        default:
+            for circle in circles {
+                layoutView.addSubview(circle)
+                circle.snp.makeConstraints { make in
+                    make.center.equalToSuperview()
+                }
             }
         }
-    }
 
-    //    private func setupCircles() {
-    //        var circles: [MoodPerCentCircle] = []
-    //
-    //        if redPercent > 0 {
-    //            let size = maxCircleSize * CGFloat(redPercent) / 100.0
-    //            let circle = MoodPerCentCircle(size: size, colors: (.redGradient, .feelingGradientRed), percent: redPercent)
-    //            circles.append(circle)
-    //        }
-    //        if bluePercent > 0 {
-    //            let size = maxCircleSize * CGFloat(bluePercent) / 100.0
-    //            let circle = MoodPerCentCircle(size: size, colors: (.blueGradient, .feelingGradientBlue), percent: bluePercent)
-    //            circles.append(circle)
-    //        }
-    //        if greenPercent > 0 {
-    //            let size = maxCircleSize * CGFloat(greenPercent) / 100.0
-    //            let circle = MoodPerCentCircle(size: size, colors: (.greenGradient, .feelingGradientGreen), percent: greenPercent)
-    //            circles.append(circle)
-    //        }
-    //        if orangePercent > 0 {
-    //            let size = maxCircleSize * CGFloat(orangePercent) / 100.0
-    //            let circle = MoodPerCentCircle(size: size, colors: (.orangeGradient, .feelingGradientOrange), percent: orangePercent)
-    //            circles.append(circle)
-    //        }
-    //
-    //            let view1 = UIView()
-    //            circlesContainerView.addSubview(view1)
-    //
-    //            view1.snp.makeConstraints { make in
-    //                make.center.equalToSuperview()
-    //            }
-    //
-    //            var viewSize: CGFloat
-    //
-    //            for circle in circles {
-    //                view1.addSubview(circle)
-    //            }
-    //
-    //            switch circles.count {
-    //            case 1:
-    //                let circle = circles[0]
-    //                circle.snp.makeConstraints { make in
-    //                    make.center.equalToSuperview()
-    //                }
-    //            case 2:
-    //                let circle0 = circles[0]
-    //                let circle1 = circles[1]
-    //
-    //                circle0.snp.makeConstraints { make in
-    //                    make.centerX.equalToSuperview().offset(-40)
-    //                    make.centerY.equalToSuperview().offset(-40)
-    //                }
-    //
-    //                circle1.snp.makeConstraints { make in
-    //                    make.centerX.equalToSuperview().offset(30)
-    //                    make.centerY.equalToSuperview().offset(40)
-    //                }
-    //
-    //                viewSize = circle0.intrinsicContentSize.width + circle1.intrinsicContentSize.width - 80
-    //                view1.snp.makeConstraints { make in
-    //                    make.width.height.equalTo(viewSize)
-    //                }
-    //            case 3:
-    //                let circle0 = circles[0]
-    //                let circle1 = circles[1]
-    //                let circle2 = circles[2]
-    //
-    //                circle0.snp.makeConstraints { make in
-    //                    make.top.equalToSuperview()
-    //                    make.centerX.equalToSuperview()
-    //                }
-    //                circle1.snp.makeConstraints { make in
-    //                    make.bottom.equalToSuperview()
-    //                    make.leading.equalToSuperview()
-    //                }
-    //                circle2.snp.makeConstraints { make in
-    //                    make.bottom.equalToSuperview()
-    //                    make.trailing.equalToSuperview()
-    //                }
-    //            case 4:
-    //                let circle0 = circles[0]
-    //                let circle1 = circles[1]
-    //                let circle2 = circles[2]
-    //                let circle3 = circles[3]
-    //
-    //                circle0.snp.makeConstraints { make in
-    //                    make.top.leading.equalToSuperview()
-    //                }
-    //                circle1.snp.makeConstraints { make in
-    //                    make.top.trailing.equalToSuperview()
-    //                }
-    //                circle2.snp.makeConstraints { make in
-    //                    make.bottom.leading.equalToSuperview()
-    //                }
-    //                circle3.snp.makeConstraints { make in
-    //                    make.bottom.trailing.equalToSuperview()
-    //                }
-    //            default:
-    //                break
-    //            }
-    //        }
+        for circle in circles {
+            layoutView.sendSubviewToBack(circle)
+        }
+    }
 }
 

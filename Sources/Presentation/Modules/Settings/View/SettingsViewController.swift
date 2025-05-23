@@ -55,6 +55,14 @@ final class SettingsViewController: UIViewController {
         return label
     }()
 
+    private let logoutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "arrow.right.circle"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
     // MARK: - Inits
 
     init(settingsViewModel: SettingsViewModel) {
@@ -116,15 +124,21 @@ final class SettingsViewController: UIViewController {
     }
 
     private func setupSettingsLabel() {
+        let headerStack = UIStackView(arrangedSubviews: [settingsLabel, logoutButton])
+        headerStack.axis = .horizontal
+        headerStack.spacing = 8
+        headerStack.alignment = .center
+        headerStack.distribution = .equalSpacing
+
         settingsLabel.text = "Настройки"
         settingsLabel.font = UIFont(name: "Gwen-Trial-Regular", size: 36)
         settingsLabel.textColor = .white
         settingsLabel.textAlignment = .left
 
-        settingsContentView.addSubview(settingsLabel)
-        settingsLabel.snp.makeConstraints { make in
+        settingsContentView.addSubview(headerStack)
+        headerStack.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
         }
     }
 
@@ -136,6 +150,10 @@ final class SettingsViewController: UIViewController {
             make.width.equalTo(364)
             make.height.equalTo(136)
         }
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
+        avatarView.isUserInteractionEnabled = true
+        avatarView.addGestureRecognizer(tapGesture)
     }
 
     private func setupSendAlert() {
@@ -244,6 +262,24 @@ final class SettingsViewController: UIViewController {
         pickerContainerView.isHidden = true
     }
 
+    @objc private func logoutButtonTapped() {
+        settingsViewModel.logoutTapped()
+    }
+
+    @objc private func avatarTapped() {
+        let alert = UIAlertController(title: "Выбери источник", message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "Камера", style: .default) { [weak self] _ in
+            self?.presentImagePicker(source: .camera)
+        })
+        alert.addAction(UIAlertAction(title: "Галерея", style: .default) { [weak self] _ in
+            self?.presentImagePicker(source: .photoLibrary)
+        })
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+
+        present(alert, animated: true)
+    }
+
     private func removeReminderTime(_ time: String) {
         settingsViewModel.deleteReminderTime(time)
     }
@@ -307,5 +343,30 @@ final class SettingsViewController: UIViewController {
                 self?.updateFaceIDToggle(isOn)
             }
             .store(in: &cancellables)
+    }
+
+    private func presentImagePicker(source: UIImagePickerController.SourceType) {
+        guard UIImagePickerController.isSourceTypeAvailable(source) else { return }
+
+        let picker = UIImagePickerController()
+        picker.sourceType = source
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true)
+    }
+}
+
+extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true)
+
+        if let image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
+            avatarView.setImage(image)
+            settingsViewModel.updateAvatar(image)
+        }
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }

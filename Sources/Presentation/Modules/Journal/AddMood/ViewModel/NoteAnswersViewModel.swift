@@ -8,8 +8,8 @@
 import Foundation
 
 final class NoteAnswersViewModel {
-    private let repository: NoteAnswersRepository
-    private let category: String
+    let repository: NoteAnswersRepository
+    let category: String
 
     private(set) var answers: [NoteAnswerItem] = []
     private(set) var selectedAnswers: [String] = []
@@ -20,7 +20,7 @@ final class NoteAnswersViewModel {
         self.load()
     }
 
-    private func load() {
+    func load() {
         self.answers = self.repository.loadAnswers(for: category)
     }
 
@@ -47,5 +47,9 @@ final class NoteAnswersViewModel {
 
     func setSelectedAnswers(_ answers: [String]) {
         self.selectedAnswers = answers
+    }
+
+    func canAddMoreCustomAnswers() -> Bool {
+        answers.filter { !$0.isDefault }.count < 10
     }
 }

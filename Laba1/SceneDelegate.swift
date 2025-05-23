@@ -67,3 +67,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate {
+    func restartApp() {
+        guard let windowScene = window?.windowScene else { return }
+
+        let navController = UINavigationController()
+        let newCoordinator = MainCoordinator(navigationController: navController, dependencies: appDependencies)
+
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
+
+        self.coordinator = newCoordinator
+        newCoordinator.start()
+    }
+}

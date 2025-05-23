@@ -121,6 +121,19 @@ extension NoteQuestionView: UICollectionViewDataSource, UICollectionViewDelegate
 
             let isSelected = viewModel.selectedAnswers.contains(answer.title)
             cell.configure(with: answer.title, selected: isSelected)
+
+            cell.onTap = { [weak self] in
+                self?.viewModel.toggleAnswer(title: answer.title)
+                collectionView.reloadData()
+            }
+
+            cell.onLongPress = { [weak self] in
+                guard let self else { return }
+                if !answer.isDefault {
+                    self.presentDeleteConfirmation(for: answer)
+                }
+            }
+
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(
@@ -133,6 +146,40 @@ extension NoteQuestionView: UICollectionViewDataSource, UICollectionViewDelegate
             return cell
         }
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == viewModel.answers.count {
+            presentAddAnswerAlert()
+            return
+        }
+
+        let answer = viewModel.answers[indexPath.item]
+
+        if !answer.isDefault {
+            presentDeleteConfirmation(for: answer)
+        } else {
+            viewModel.toggleAnswer(title: answer.title)
+            collectionView.reloadData()
+        }
+    }
+
+    private func presentDeleteConfirmation(for answer: NoteAnswerItem) {
+        guard let viewController = self.parentViewController else { return }
+
+        let alert = UIAlertController(
+            title: "Удалить ответ?",
+            message: "Вы точно хотите удалить '\(answer.title)'?",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Удалить", style: .destructive) { [weak self] _ in
+            self?.viewModel.repository.deleteCustomAnswer(answer.title, from: self?.viewModel.category ?? "")
+            self?.viewModel.load()
+            self?.reloadAndUpdateLayout()
+        })
+
+        viewController.present(alert, animated: true)
+    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -144,24 +191,22 @@ extension NoteQuestionView: UICollectionViewDataSource, UICollectionViewDelegate
             return NoteAnswerAddButton().intrinsicContentSize
         }
     }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == viewModel.answers.count {
-            presentAddAnswerAlert()
-            return
-        }
-
-        let selected = viewModel.answers[indexPath.item].title
-        print("😎😎😎")
-        print(viewModel.answers[indexPath.item].title)
-        viewModel.toggleAnswer(title: selected)
-        collectionView.reloadData()
-    }
 }
 
 private extension NoteQuestionView {
     func presentAddAnswerAlert() {
         guard let viewController = self.parentViewController else { return }
+
+        if !viewModel.canAddMoreCustomAnswers() {
+            let warningAlert = UIAlertController(
+                title: "Лимит достигнут",
+                message: "Можно добавить не более 10 своих ответов",
+                preferredStyle: .alert
+            )
+            warningAlert.addAction(UIAlertAction(title: "Ок", style: .default))
+            viewController.present(warningAlert, animated: true)
+            return
+        }
 
         let alert = UIAlertController(title: "Новый ответ", message: "Введите текст ответа", preferredStyle: .alert)
         alert.addTextField { $0.placeholder = "Ваш ответ" }
@@ -169,8 +214,6 @@ private extension NoteQuestionView {
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
         alert.addAction(UIAlertAction(title: "Добавить", style: .default) { [weak self] _ in
             guard let self, let text = alert.textFields?.first?.text, !text.isEmpty else { return }
-
-            let newAnswer = NoteAnswerItem(title: text, isDefault: false)
 
             self.viewModel.addAndSelect(text)
             self.reloadAndUpdateLayout()

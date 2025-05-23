@@ -9,7 +9,7 @@ import Combine
 import UIKit
 
 protocol SettingsViewModelDelegate: AnyObject {
-
+    func didRequestLogout()
 }
 
 final class SettingsViewModel {
@@ -57,5 +57,13 @@ final class SettingsViewModel {
     func setRemindersEnabled(_ isOn: Bool) {
         repository.isRemindersEnabled = isOn
         isRemindersEnabled = isOn
+    }
+
+    func logoutTapped() {
+        delegate?.didRequestLogout()
+    }
+
+    func updateAvatar(_ image: UIImage) {
+        repository.saveAvatar(image)
     }
 }

@@ -47,7 +47,6 @@ final class PartOfDayStatistic: UIView {
     }()
 
     // MARK: - Inits
-
     init(data: [PartOdDayColor], title: String, amount: Int) {
         super.init(frame: .zero)
         setup(data: data, title: title, amount: amount)
@@ -58,11 +57,11 @@ final class PartOfDayStatistic: UIView {
     }
 
     // MARK: - Setup
-
     private func setup(data: [PartOdDayColor], title: String, amount: Int) {
         let mainStack = UIStackView()
         mainStack.axis = .vertical
-        mainStack.alignment = .center
+        mainStack.alignment = .fill
+        mainStack.distribution = .fill
         mainStack.spacing = 8
 
         addSubview(mainStack)
@@ -70,12 +69,14 @@ final class PartOfDayStatistic: UIView {
             make.edges.equalToSuperview()
         }
 
+        let screenHeight = UIScreen.main.bounds.height
+        let columnsStackViewHeight = screenHeight * 0.5
+
         mainStack.addArrangedSubview(columnStackView)
         columnStackView.snp.makeConstraints { make in
+            make.height.equalTo(columnsStackViewHeight)
             make.width.equalToSuperview()
         }
-
-        let totalPercentage = max(data.reduce(0) { $0 + $1.percentage }, 1)
 
         for part in data {
             let column = ColorColumn(moodCase: part.color, percentage: CGFloat(part.percentage))
@@ -83,19 +84,31 @@ final class PartOfDayStatistic: UIView {
 
             column.snp.makeConstraints { make in
                 make.width.equalToSuperview()
-                make.height.equalTo(100 * CGFloat(part.percentage) / 100.0)
+                make.height.equalTo(columnsStackViewHeight * CGFloat(part.percentage) / 100.0)
             }
         }
 
         titleLabel.text = title
         amountLabel.text = "\(amount)"
 
-        labelStackView.addArrangedSubview(titleLabel)
-        labelStackView.addArrangedSubview(amountLabel)
+        let labelStackContainer = UIView()
+        labelStackContainer.addSubview(titleLabel)
+        labelStackContainer.addSubview(amountLabel)
 
-        mainStack.addArrangedSubview(labelStackView)
-        labelStackView.snp.makeConstraints { make in
+        mainStack.addArrangedSubview(labelStackContainer)
+        labelStackContainer.snp.makeConstraints { make in
             make.width.equalToSuperview()
+            make.height.equalTo(50)
+        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+        }
+
+        amountLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(2)
+            make.leading.trailing.equalToSuperview()
         }
     }
 }

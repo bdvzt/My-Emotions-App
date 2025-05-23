@@ -140,13 +140,19 @@ final class CircleProgressBar: UIView {
             ctx.replacePathWithStrokedPath()
             ctx.clip()
 
-            if isSingleColor {
+            if isSingleColor && progress == 1.0 {
                 ctx.drawLinearGradient(
                     gradient,
                     start: center,
                     end: CGPoint(x: center.x + radius * cos(startAngle), y: center.y + radius * sin(startAngle)),
                     options: [.drawsBeforeStartLocation, .drawsAfterEndLocation]
                 )
+            } else if isSingleColor && pair.start == pair.end {
+                ctx.setStrokeColor(pair.start.cgColor)
+                ctx.setLineWidth(lineWidth)
+                ctx.setLineCap(.round)
+                ctx.addPath(path.cgPath)
+                ctx.strokePath()
             } else {
                 ctx.drawLinearGradient(
                     gradient,

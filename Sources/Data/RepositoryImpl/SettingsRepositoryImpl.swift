@@ -25,8 +25,11 @@ final class SettingsRepositoryImpl: SettingsRepository {
     }
 
     var avatar: UIImage {
-        // TODO: настроить аватарку
-        UIImage(resource: .avatar)
+        if let data = UserDefaults.standard.data(forKey: Keys.avatarImage),
+           let image = UIImage(data: data) {
+            return image
+        }
+        return UIImage(resource: .avatar)
     }
 
     var isRemindersEnabled: Bool {
@@ -72,6 +75,13 @@ final class SettingsRepositoryImpl: SettingsRepository {
         userDefaults.set(givenName, forKey: Keys.firstName)
         userDefaults.set(familyName, forKey: Keys.lastName)
     }
+
+    func saveAvatar(_ image: UIImage) {
+        if let data = image.jpegData(compressionQuality: 0.8) {
+            UserDefaults.standard.set(data, forKey: Keys.avatarImage)
+        }
+    }
+
 }
 
 private extension SettingsRepositoryImpl {

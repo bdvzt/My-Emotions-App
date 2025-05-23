@@ -53,35 +53,33 @@ final class DuringDayView: UIView {
         addSubview(columnsStackView)
         let screenHeight = UIScreen.main.bounds.height
         let columnsStackViewHeight = screenHeight * 0.5
+
         columnsStackView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(columnsStackViewHeight)
         }
 
-        for (colors, title) in viewModel.partsOfDay {
-            let columnView = makeColumn(from: colors, title: title)
+        for (colors, title, amount) in viewModel.partsOfDay {
+            let columnView = makeColumn(from: colors, title: title, amount: amount)
             columnsStackView.addArrangedSubview(columnView)
         }
     }
 
-    private func makeColumn(from data: [PartOdDayColor], title: String) -> UIView {
-        guard !data.isEmpty else {
-            return UIView()
+    private func makeColumn(from data: [PartOdDayColor], title: String, amount: Int) -> UIView {
+        let actualData: [PartOdDayColor]
+        if data.isEmpty {
+            actualData = [PartOdDayColor(color: .none, percentage: 100)]
+        } else {
+            actualData = data
         }
-        let totalAmount = data.reduce(0) { $0 + $1.percentage }
-        let statisticView = PartOfDayStatistic(data: data, title: title, amount: totalAmount)
 
+        let statisticView = PartOfDayStatistic(data: actualData, title: title, amount: amount)
         let containerView = UIView()
         containerView.addSubview(statisticView)
 
-        containerView.snp.makeConstraints { make in
-            make.height.greaterThanOrEqualTo(100) 
-        }
-
         statisticView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.equalToSuperview()
         }
 
         return containerView

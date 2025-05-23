@@ -52,6 +52,11 @@ final class ColorColumn: UIView {
         percentageLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        if moodCase == .none {
+            percentageLabel.isHidden = true
+        } else {
+            percentageLabel.text = "\(Int(percentage))%"
+        }
     }
 
     override func layoutSubviews() {

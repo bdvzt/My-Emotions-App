@@ -19,5 +19,7 @@ protocol SettingsRepository {
     func addReminderTime(_ time: String)
     func deleteReminderTime(_ time: String)
 
+    func saveAvatar(_ image: UIImage)
+
     func saveUserNameIfNeeded(givenName: String, familyName: String)
 }

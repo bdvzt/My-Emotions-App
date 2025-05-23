@@ -20,6 +20,9 @@ final class JournalListRepositoryImpl: JournalListRepository {
         await context.perform {
             let request: NSFetchRequest<MoodCardEntity> = MoodCardEntity.fetchRequest()
 
+            let sortDescriptor = NSSortDescriptor(key: "dateAndTime", ascending: false)
+            request.sortDescriptors = [sortDescriptor]
+            
             do {
                 let moodCards = try self.context.fetch(request)
                 return moodCards.compactMap { moodCardEntity in

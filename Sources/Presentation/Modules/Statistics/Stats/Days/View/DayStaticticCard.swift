@@ -10,167 +10,135 @@ import SnapKit
 
 final class DayStaticsticCard: UIView {
 
-    // MARK: - Private properties
+    // MARK: - Private UI
 
-    private let horizontalStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.alignment = .center
-        stackView.spacing = 8
-        return stackView
-    }()
+    private let horizontalStackView = UIStackView()
+    private let dateStackView = UIStackView()
+    private let labelsStackView = UIStackView()
 
-    private let dateStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .leading
-        stackView.spacing = 2
-        return stackView
-    }()
+    private let dayLabel = UILabel()
+    private let dateLabel = UILabel()
+    private let bottomLine = UIView()
 
-    private let dayLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "VelaSans-Regular", size: 12)
-        label.textColor = .white
-        label.textAlignment = .left
-        return label
-    }()
+    private var images: [UIImage] = []
+    private let moodsTitles: [String]
 
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "VelaSans-Regular", size: 12)
-        label.textColor = .white
-        label.textAlignment = .left
-        return label
-    }()
+    private let moodCollectionView: UICollectionView
 
-    private let moodStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .leading
-        stackView.spacing = 2
-        return stackView
-    }()
-
-    private let moodImageStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .trailing
-        stackView.spacing = 2
-        return stackView
-    }()
-
-    private let bottomLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = .amountGray
-        return view
-    }()
-
-    // MARK: - Inits
+    // MARK: - Init
 
     init(day: String, date: String, moodsTitles: [String], moodsImages: [UIImage]) {
+        self.moodsTitles = moodsTitles
+        self.images = moodsImages.isEmpty ? [.emptyCircle] : moodsImages
+
+        let layout = LeftAlignedCollectionViewFlowLayout()
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+
+        layout.minimumLineSpacing = 4
+        layout.minimumInteritemSpacing = 4
+
+        self.moodCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+
         super.init(frame: .zero)
-        setup()
-        configure(day: day, date: date, moodsTitles: moodsTitles, moodsImages: moodsImages)
+        setup(day: day, date: date)
     }
 
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
         fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - Setup
 
-    private func setup() {
+    private func setup(day: String, date: String) {
         backgroundColor = .black
-        addSubview(horizontalStackView)
-        horizontalStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.height.equalTo(64)
-        }
-        setupDateStack()
-        setupMoodStack()
-        setupBottomLine()
-    }
 
-    private func setupDateStack() {
+        addSubview(horizontalStackView)
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.spacing = 8
+        horizontalStackView.alignment = .top
+        horizontalStackView.distribution = .fill
+        horizontalStackView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
+
+        // MARK: - Date stack
+        dateLabel.font = UIFont(name: "VelaSans-Regular", size: 12)
+        dayLabel.font = UIFont(name: "VelaSans-Regular", size: 12)
+        dateLabel.textColor = .white
+        dayLabel.textColor = .white
+        dayLabel.text = day
+        dateLabel.text = date
+
+        dateStackView.axis = .vertical
+        dateStackView.spacing = 2
+        dateStackView.alignment = .leading
         dateStackView.addArrangedSubview(dayLabel)
         dateStackView.addArrangedSubview(dateLabel)
 
         horizontalStackView.addArrangedSubview(dateStackView)
-
         dateStackView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.25)
         }
-    }
 
-    private func setupMoodStack() {
-        horizontalStackView.addArrangedSubview(moodStackView)
-        horizontalStackView.addArrangedSubview(moodImageStackView)
+        // MARK: - Labels stack
+        labelsStackView.axis = .vertical
+        labelsStackView.spacing = 4
+        labelsStackView.alignment = .leading
 
-        moodStackView.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.3)
-        }
-
-        moodImageStackView.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.45)
-            make.trailing.equalToSuperview()
-        }
-    }
-
-    private func setupBottomLine() {
-        addSubview(bottomLine)
-        bottomLine.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview()
-            make.height.equalTo(1)
-        }
-    }
-
-    // MARK: - Configuration
-
-    private func configure(day: String, date: String, moodsTitles: [String], moodsImages: [UIImage]) {
-        dayLabel.text = day
-        dateLabel.text = date
-
-        addMoodTitles(titles: moodsTitles)
-        addMoodImages(images: moodsImages)
-    }
-
-    private func addMoodTitles(titles: [String]) {
-        for title in titles {
+        for title in moodsTitles {
             let titleLabel = UILabel()
             titleLabel.text = title
             titleLabel.font = UIFont(name: "VelaSans-Regular", size: 12)
             titleLabel.textColor = .tabBarUnselected
-            titleLabel.textAlignment = .left
-            moodStackView.addArrangedSubview(titleLabel)
+            titleLabel.numberOfLines = 0
+            labelsStackView.addArrangedSubview(titleLabel)
         }
-    }
 
-    private func addMoodImages(images: [UIImage]) {
-        if images.isEmpty {
-            let grayCircle = UIImageView(image: .emptyCircle)
-            moodImageStackView.addArrangedSubview(grayCircle)
+        horizontalStackView.addArrangedSubview(labelsStackView)
+        labelsStackView.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.4)
+        }
 
-            grayCircle.snp.makeConstraints { make in
-                make.width.equalTo(moodImageStackView.snp.width).multipliedBy(0.25)
-                make.height.equalTo(grayCircle.snp.width)
-            }
-        } else {
-            for image in images {
-                let imageView = UIImageView(image: image)
-                imageView.contentMode = .scaleAspectFit
-                moodImageStackView.addArrangedSubview(imageView)
-                imageView.snp.makeConstraints { make in
-                    make.width.equalTo(moodImageStackView.snp.width).multipliedBy(0.25)
-                    make.height.equalTo(imageView.snp.width)
-                }
-            }
+        // MARK: - Icon collection
+        moodCollectionView.backgroundColor = .clear
+        moodCollectionView.isScrollEnabled = false
+        moodCollectionView.dataSource = self
+        moodCollectionView.register(MoodIconCell.self, forCellWithReuseIdentifier: "MoodIconCell")
+
+        moodCollectionView.reloadData()
+
+        horizontalStackView.addArrangedSubview(moodCollectionView)
+        moodCollectionView.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.3)
+            make.height.greaterThanOrEqualTo(24)
+        }
+
+        // MARK: - Bottom line
+        addSubview(bottomLine)
+        bottomLine.backgroundColor = .amountGray
+        bottomLine.snp.makeConstraints { make in
+            make.top.equalTo(horizontalStackView.snp.bottom).offset(8)
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
 }
+
+// MARK: - UICollectionViewDataSource
+
+extension DayStaticsticCard: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return max(images.count, 1)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoodIconCell", for: indexPath) as? MoodIconCell else {
+            return UICollectionViewCell()
+        }
+
+        let image = images.indices.contains(indexPath.item) ? images[indexPath.item] : .emptyCircle
+        cell.setImage(image)
+        return cell
+    }
+}
+

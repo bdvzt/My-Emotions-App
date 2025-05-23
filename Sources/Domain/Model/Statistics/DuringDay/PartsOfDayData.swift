@@ -7,10 +7,15 @@
 
 import UIKit
 
+struct PartOfDayStat {
+    let colors: [PartOdDayColor]
+    let amount: Int
+}
+
 struct PartsOfDayData {
-    let earlyMorning: [PartOdDayColor]
-    let morning: [PartOdDayColor]
-    let day: [PartOdDayColor]
-    let evening: [PartOdDayColor]
-    let lateEvening: [PartOdDayColor]
+    let earlyMorning: PartOfDayStat
+    let morning: PartOfDayStat
+    let day: PartOfDayStat
+    let evening: PartOfDayStat
+    let lateEvening: PartOfDayStat
 }

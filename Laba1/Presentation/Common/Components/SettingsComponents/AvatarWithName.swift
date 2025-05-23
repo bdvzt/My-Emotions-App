@@ -76,4 +76,8 @@ final class AvatarWithName: UIView
             make.leading.trailing.equalToSuperview().inset(16)
         }
     }
+
+    func setImage(_ image: UIImage) {
+        avatarImageView.image = image
+    }
 }

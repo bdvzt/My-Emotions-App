@@ -268,18 +268,19 @@ final class StatisticsRepositoryImpl: StatisticsRepository {
             }
         }
 
-        func makeColorStats(from colors: [String]) -> [PartOdDayColor] {
+        func makeStat(from colors: [String]) -> PartOfDayStat {
             let total = colors.count
-            guard total > 0 else { return [] }
+            if total == 0 {
+                return PartOfDayStat(colors: [], amount: 0)
+            }
 
             let grouped = Dictionary(grouping: colors) { $0 }
-            return grouped.map { (colorName, group) in
+            let colorStats = grouped.map { (colorName, group) in
                 let percent = Int((Double(group.count) / Double(total)) * 100)
-                return PartOdDayColor(
-                    color: mapColor(colorName),
-                    percentage: percent
-                )
+                return PartOdDayColor(color: mapColor(colorName), percentage: percent)
             }.sorted { $0.percentage > $1.percentage }
+
+            return PartOfDayStat(colors: colorStats, amount: total)
         }
 
         func mapColor(_ name: String) -> EmotionColor {
@@ -293,11 +294,11 @@ final class StatisticsRepositoryImpl: StatisticsRepository {
         }
 
         return PartsOfDayData(
-            earlyMorning: makeColorStats(from: parts["earlyMorning"] ?? []),
-            morning: makeColorStats(from: parts["morning"] ?? []),
-            day: makeColorStats(from: parts["day"] ?? []),
-            evening: makeColorStats(from: parts["evening"] ?? []),
-            lateEvening: makeColorStats(from: parts["lateEvening"] ?? [])
+            earlyMorning: makeStat(from: parts["earlyMorning"] ?? []),
+            morning: makeStat(from: parts["morning"] ?? []),
+            day: makeStat(from: parts["day"] ?? []),
+            evening: makeStat(from: parts["evening"] ?? []),
+            lateEvening: makeStat(from: parts["lateEvening"] ?? [])
         )
     }
 }

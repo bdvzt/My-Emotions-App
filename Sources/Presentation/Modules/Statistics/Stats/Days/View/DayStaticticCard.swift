@@ -29,16 +29,15 @@ final class DayStaticsticCard: UIView {
 
     init(day: String, date: String, moodsTitles: [String], moodsImages: [UIImage]) {
         self.moodsTitles = moodsTitles
-        self.images = moodsImages.isEmpty ? [.emptyCircle] : moodsImages
-
+        self.images = moodsImages
         let layout = LeftAlignedCollectionViewFlowLayout()
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-
-        layout.minimumLineSpacing = 4
+        layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = 4
+        layout.minimumLineSpacing = 4
+        layout.sectionInset = .zero
+        layout.estimatedItemSize = CGSize(width: 24, height: 24)
 
         self.moodCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-
         super.init(frame: .zero)
         setup(day: day, date: date)
     }
@@ -58,7 +57,8 @@ final class DayStaticsticCard: UIView {
         horizontalStackView.alignment = .top
         horizontalStackView.distribution = .fill
         horizontalStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(8)
+            make.leading.trailing.equalToSuperview()
         }
 
         // MARK: - Date stack
@@ -99,18 +99,23 @@ final class DayStaticsticCard: UIView {
             make.width.equalToSuperview().multipliedBy(0.4)
         }
 
+        let spacer = UIView()
+        spacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        spacer.setContentHuggingPriority(.defaultLow,  for: .horizontal)
+        horizontalStackView.addArrangedSubview(spacer)
+
         // MARK: - Icon collection
         moodCollectionView.backgroundColor = .clear
         moodCollectionView.isScrollEnabled = false
         moodCollectionView.dataSource = self
+        moodCollectionView.delegate = self
         moodCollectionView.register(MoodIconCell.self, forCellWithReuseIdentifier: "MoodIconCell")
-
         moodCollectionView.reloadData()
 
         horizontalStackView.addArrangedSubview(moodCollectionView)
         moodCollectionView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.3)
-            make.height.greaterThanOrEqualTo(24)
+            make.height.greaterThanOrEqualTo(50)
         }
 
         // MARK: - Bottom line
@@ -127,18 +132,25 @@ final class DayStaticsticCard: UIView {
 // MARK: - UICollectionViewDataSource
 
 extension DayStaticsticCard: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ cv: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return max(images.count, 1)
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoodIconCell", for: indexPath) as? MoodIconCell else {
-            return UICollectionViewCell()
-        }
-
-        let image = images.indices.contains(indexPath.item) ? images[indexPath.item] : .emptyCircle
+    func collectionView(_ cv: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = cv.dequeueReusableCell(withReuseIdentifier: "MoodIconCell", for: indexPath) as! MoodIconCell
+        let image = images.isEmpty ? .emptyCircle : images[indexPath.item]
         cell.setImage(image)
         return cell
     }
 }
 
+extension DayStaticsticCard: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ cv: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if images.isEmpty {
+            return CGSize(width: 40, height: 40)
+        }
+        return CGSize(width: 24, height: 24)
+    }
+}

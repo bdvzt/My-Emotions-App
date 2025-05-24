@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Для входа в приложение с помощью Face ID</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Мы используем галерею, чтобы вы могли выбрать фото для установки аватарки</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Мы используем камеру, чтобы вы могли выбрать фото для установки аватарки</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Gwen-Trial-Bold.otf</string>
+		<string>VelaSans-Regular.ttf</string>
+		<string>VelaSans-Bold.ttf</string>
+		<string>Gwen-Trial-Regular.otf</string>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>

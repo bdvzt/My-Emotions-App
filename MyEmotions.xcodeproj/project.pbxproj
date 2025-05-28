@@ -7,7 +7,124 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8805F27F2DE0F93B00BBD950 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8805F2772DE0F93B00BBD950 /* LaunchScreen.storyboard */; };
+		8805F2812DE0F93B00BBD950 /* LoginButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2602DE0F93B00BBD950 /* LoginButtonView.swift */; };
+		8805F2822DE0F93B00BBD950 /* BackArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2622DE0F93B00BBD950 /* BackArrow.swift */; };
+		8805F2832DE0F93B00BBD950 /* RightArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2632DE0F93B00BBD950 /* RightArrow.swift */; };
+		8805F2842DE0F93B00BBD950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2752DE0F93B00BBD950 /* AppDelegate.swift */; };
+		8805F2852DE0F93B00BBD950 /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2642DE0F93B00BBD950 /* WhiteButton.swift */; };
+		8805F2862DE0F93B00BBD950 /* AvatarWithName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2662DE0F93B00BBD950 /* AvatarWithName.swift */; };
+		8805F2872DE0F93B00BBD950 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2782DE0F93B00BBD950 /* SceneDelegate.swift */; };
+		8805F2882DE0F93B00BBD950 /* ReminderTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2672DE0F93B00BBD950 /* ReminderTime.swift */; };
+		8805F2892DE0F93B00BBD950 /* SendAlertComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2682DE0F93B00BBD950 /* SendAlertComponent.swift */; };
+		8805F28A2DE0F93B00BBD950 /* NoteAnswerAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F25D2DE0F93B00BBD950 /* NoteAnswerAddCell.swift */; };
+		8805F28B2DE0F93B00BBD950 /* TouchIdSwitchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2692DE0F93B00BBD950 /* TouchIdSwitchBar.swift */; };
+		8805F28C2DE0F93B00BBD950 /* NoteAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F25E2DE0F93B00BBD950 /* NoteAnswerCell.swift */; };
+		8805F2A52DE0FD0700BBD950 /* NoteStatisticsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2A42DE0FD0200BBD950 /* NoteStatisticsCalculator.swift */; };
+		8805F2A72DE10BA300BBD950 /* NoteStatisticsCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2A62DE10BA100BBD950 /* NoteStatisticsCalculatorTests.swift */; };
+		8805F2AB2DE115FE00BBD950 /* JournalListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2AA2DE115F900BBD950 /* JournalListViewModelTests.swift */; };
+		8805F2AD2DE1188E00BBD950 /* MockNoteAnswersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2AC2DE1188300BBD950 /* MockNoteAnswersRepository.swift */; };
+		8805F2AF2DE118C100BBD950 /* AddNoteViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2AE2DE118B900BBD950 /* AddNoteViewModelTests.swift */; };
+		8805F2B12DE11BAD00BBD950 /* MockSettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2B02DE11BA300BBD950 /* MockSettingsDelegate.swift */; };
+		8805F2B32DE11BCB00BBD950 /* MockSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2B22DE11BC400BBD950 /* MockSettingsRepository.swift */; };
+		8805F2B62DE11C3400BBD950 /* SettingsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2B52DE11C2A00BBD950 /* SettingsRepositoryTests.swift */; };
+		8805F2B82DE11C5B00BBD950 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8805F2B72DE11C5400BBD950 /* SettingsViewModelTests.swift */; };
+		886511732DC7568500DB3496 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886511482DC7568500DB3496 /* TabBarController.swift */; };
+		8865117E2DC7568500DB3496 /* MoodCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886511192DC7568500DB3496 /* MoodCardView.swift */; };
+		8865117F2DC7568500DB3496 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886511402DC7568500DB3496 /* TabBarCoordinator.swift */; };
+		886511F32DC7DA3C00DB3496 /* MyEmotions.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 886511F12DC7DA3C00DB3496 /* MyEmotions.xcdatamodeld */; };
+		886512082DC8841000DB3496 /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886512072DC8840E00DB3496 /* Mood.swift */; };
+		8865120A2DC8859500DB3496 /* JournalListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886512092DC8858B00DB3496 /* JournalListRepository.swift */; };
+		8865120C2DC8860000DB3496 /* JournalListRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8865120B2DC885F100DB3496 /* JournalListRepositoryImpl.swift */; };
+		8865120E2DC886DE00DB3496 /* MoodMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8865120D2DC886CC00DB3496 /* MoodMapper.swift */; };
+		886512102DC886E700DB3496 /* MoodCardMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8865120F2DC886E100DB3496 /* MoodCardMapper.swift */; };
+		886512222DC8BC5300DB3496 /* MoodCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886512212DC8BC3C00DB3496 /* MoodCardViewModel.swift */; };
 		886E94EB2D75C6860092BC6F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 886E94EA2D75C6860092BC6F /* SnapKit */; };
+		887C62DF2DCD05A600087352 /* ChooseMoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C62C22DCD05A600087352 /* ChooseMoodViewController.swift */; };
+		887C62E72DCD05A600087352 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C62C82DCD05A600087352 /* SettingsViewController.swift */; };
+		887C62FD2DCD05A600087352 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C62C02DCD05A600087352 /* AddNoteViewController.swift */; };
+		887C632D2DCD193C00087352 /* ChooseMoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C632C2DCD193000087352 /* ChooseMoodViewModel.swift */; };
+		887C632F2DCD1B4300087352 /* ChooseMoodCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C632E2DCD1B2E00087352 /* ChooseMoodCoordinator.swift */; };
+		887C63312DCD3E5F00087352 /* AppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63302DCD3E5400087352 /* AppDependencyContainer.swift */; };
+		887C63332DCE0E4100087352 /* MoodRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63322DCE0E3C00087352 /* MoodRepository.swift */; };
+		887C63352DCE0E9700087352 /* MoodRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63342DCE0E8F00087352 /* MoodRepositoryImpl.swift */; };
+		887C633E2DCFA3DE00087352 /* MoodEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C633D2DCFA3DE00087352 /* MoodEntity+CoreDataProperties.swift */; };
+		887C633F2DCFA3DE00087352 /* MoodEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C633C2DCFA3DE00087352 /* MoodEntity+CoreDataClass.swift */; };
+		887C63432DCFB1C200087352 /* AddNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63422DCFB1B400087352 /* AddNoteViewModel.swift */; };
+		887C63452DCFB1CD00087352 /* AddNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63442DCFB1C500087352 /* AddNoteCoordinator.swift */; };
+		887C63482DD0A55F00087352 /* MoodCardEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63462DD0A55F00087352 /* MoodCardEntity+CoreDataClass.swift */; };
+		887C63492DD0A55F00087352 /* MoodCardEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63472DD0A55F00087352 /* MoodCardEntity+CoreDataProperties.swift */; };
+		887C634B2DD0B04400087352 /* JournalListViewModel+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C634A2DD0B03700087352 /* JournalListViewModel+State.swift */; };
+		887C63622DD32D6700087352 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63612DD32D5F00087352 /* SettingsViewModel.swift */; };
+		887C63642DD32D7500087352 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63632DD32D6D00087352 /* SettingsCoordinator.swift */; };
+		887C63662DD33B7200087352 /* SettingsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63652DD33B6A00087352 /* SettingsRepositoryImpl.swift */; };
+		887C63682DD33B8400087352 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63672DD33B7C00087352 /* SettingsRepository.swift */; };
+		887C63BB2DD3AE1100087352 /* PartsOfDayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C636F2DD3AE1100087352 /* PartsOfDayData.swift */; };
+		887C63BC2DD3AE1100087352 /* PartOfDayStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63992DD3AE1100087352 /* PartOfDayStatistic.swift */; };
+		887C63BD2DD3AE1100087352 /* FrequencyStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C639C2DD3AE1100087352 /* FrequencyStatistics.swift */; };
+		887C63C02DD3AE1100087352 /* DayStaticticCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63942DD3AE1100087352 /* DayStaticticCard.swift */; };
+		887C63C12DD3AE1100087352 /* NoteAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63802DD3AE1100087352 /* NoteAnswer.swift */; };
+		887C63C52DD3AE1100087352 /* MoodGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C637E2DD3AE1100087352 /* MoodGridView.swift */; };
+		887C63C62DD3AE1100087352 /* FrequencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C636C2DD3AE1100087352 /* FrequencyData.swift */; };
+		887C63C72DD3AE1100087352 /* FrequencyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C639B2DD3AE1100087352 /* FrequencyCard.swift */; };
+		887C63C92DD3AE1100087352 /* EmotionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63692DD3AE1100087352 /* EmotionColor.swift */; };
+		887C63CA2DD3AE1100087352 /* WeekStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63712DD3AE1100087352 /* WeekStatistic.swift */; };
+		887C63CB2DD3AE1100087352 /* AddMoodButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C637A2DD3AE1100087352 /* AddMoodButton.swift */; };
+		887C63CD2DD3AE1100087352 /* NoteAnswerAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63812DD3AE1100087352 /* NoteAnswerAddButton.swift */; };
+		887C63CF2DD3AE1100087352 /* PartOfDayColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C636E2DD3AE1100087352 /* PartOfDayColor.swift */; };
+		887C63D02DD3AE1100087352 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63AB2DD3AE1100087352 /* StatisticsViewController.swift */; };
+		887C63D12DD3AE1100087352 /* ChosenMoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C637B2DD3AE1100087352 /* ChosenMoodCard.swift */; };
+		887C63D32DD3AE1100087352 /* DayStatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63952DD3AE1100087352 /* DayStatisticView.swift */; };
+		887C63D72DD3AE1100087352 /* QuestionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63842DD3AE1100087352 /* QuestionLabel.swift */; };
+		887C63D82DD3AE1100087352 /* DuringDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63982DD3AE1100087352 /* DuringDayView.swift */; };
+		887C63D92DD3AE1100087352 /* NoteQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63822DD3AE1100087352 /* NoteQuestionView.swift */; };
+		887C63DB2DD3AE1100087352 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63912DD3AE1100087352 /* CategoryView.swift */; };
+		887C63DE2DD3AE1100087352 /* StatWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63702DD3AE1100087352 /* StatWeek.swift */; };
+		887C63DF2DD3AE1100087352 /* NotesAmountCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63832DD3AE1100087352 /* NotesAmountCard.swift */; };
+		887C63E02DD3AE1100087352 /* MoodPerCentCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63922DD3AE1100087352 /* MoodPerCentCircle.swift */; };
+		887C63E12DD3AE1100087352 /* ColorColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63972DD3AE1100087352 /* ColorColumn.swift */; };
+		887C63E22DD3AE1100087352 /* NotChosenMoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C637F2DD3AE1100087352 /* NotChosenMoodCard.swift */; };
+		887C63E32DD3AE1100087352 /* MostFrequentlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C639D2DD3AE1100087352 /* MostFrequentlyView.swift */; };
+		887C63E42DD3AE1100087352 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C637C2DD3AE1100087352 /* CircleProgressBar.swift */; };
+		887C63E52DD3AE1100087352 /* MoodCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C637D2DD3AE1100087352 /* MoodCircle.swift */; };
+		887C63E62DD3AE1100087352 /* DayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C636B2DD3AE1100087352 /* DayData.swift */; };
+		887C63F12DD4765700087352 /* StatisticsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63F02DD4765000087352 /* StatisticsRepository.swift */; };
+		887C63F32DD478AA00087352 /* StatisticsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63F22DD478A000087352 /* StatisticsRepositoryImpl.swift */; };
+		887C63F92DD501C500087352 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63F82DD501BB00087352 /* StatisticsViewModel.swift */; };
+		887C63FB2DD501CE00087352 /* StatisticsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63FA2DD501C700087352 /* StatisticsCoordinator.swift */; };
+		887C63FE2DD507C600087352 /* DateIntervalFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C63FD2DD507C500087352 /* DateIntervalFormatter.swift */; };
+		887C64022DD50FE500087352 /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64012DD50FD600087352 /* CategoryData.swift */; };
+		887C640D2DD5182700087352 /* CategoryStatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C640C2DD5181D00087352 /* CategoryStatisticsViewModel.swift */; };
+		887C64162DD5259500087352 /* DayStatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64152DD5258E00087352 /* DayStatisticsViewModel.swift */; };
+		887C64182DD52D9100087352 /* StatisticsSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64172DD52D8500087352 /* StatisticsSectionCell.swift */; };
+		887C641D2DD5379C00087352 /* MostFrequentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C641C2DD5379300087352 /* MostFrequentViewModel.swift */; };
+		887C64232DD53B4B00087352 /* DuringDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64222DD53B3C00087352 /* DuringDayViewModel.swift */; };
+		887C642C2DDB25FF00087352 /* NoteAnswerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C642B2DDB25F800087352 /* NoteAnswerItem.swift */; };
+		887C642E2DDB26D500087352 /* NoteAnswersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C642D2DDB26CC00087352 /* NoteAnswersRepository.swift */; };
+		887C64302DDB270000087352 /* NoteAnswersRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C642F2DDB26F600087352 /* NoteAnswersRepositoryImpl.swift */; };
+		887C64322DDB277000087352 /* NoteAnswersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64312DDB276A00087352 /* NoteAnswersViewModel.swift */; };
+		887C64342DDB8AD800087352 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64332DDB8AD500087352 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		887C64372DDC924100087352 /* NoteStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64362DDC923C00087352 /* NoteStatistics.swift */; };
+		887C64392DDC926D00087352 /* NoteStatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64382DDC926200087352 /* NoteStatRepository.swift */; };
+		887C643B2DDC928F00087352 /* NoteStatRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C643A2DDC928800087352 /* NoteStatRepositoryImpl.swift */; };
+		887C643D2DDCABCD00087352 /* Pluralization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C643C2DDCABCA00087352 /* Pluralization.swift */; };
+		887C643F2DDCAD4700087352 /* GoalPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C643E2DDCAD3E00087352 /* GoalPicker.swift */; };
+		887C64492DDCB53200087352 /* MoodCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64482DDCB53000087352 /* MoodCardCell.swift */; };
+		887C644C2DDDF55400087352 /* CircleStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C644B2DDDF54F00087352 /* CircleStatistics.swift */; };
+		887C644E2DDE222300087352 /* GradientPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C644D2DDE221C00087352 /* GradientPair.swift */; };
+		887C64502DDE726600087352 /* MoodIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C644F2DDE725F00087352 /* MoodIconCell.swift */; };
+		887C64522DE0960B00087352 /* FakeLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64512DE0960000087352 /* FakeLoginController.swift */; };
+		887C645F2DE0F26E00087352 /* MockNoteStatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C645D2DE0F1DE00087352 /* MockNoteStatRepository.swift */; };
+		887C64602DE0F27300087352 /* MockJournalListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C645C2DE0F1B800087352 /* MockJournalListRepository.swift */; };
+		887C64622DE0F53E00087352 /* MockMoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C64612DE0F53700087352 /* MockMoods.swift */; };
+		8882D0202DC228C0004F7061 /* JournalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882D0012DC228C0004F7061 /* JournalListViewController.swift */; };
+		8882D0442DC228C0004F7061 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882D0032DC228C0004F7061 /* LoginViewController.swift */; };
+		8882D06E2DC22B0A004F7061 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882D06D2DC22B04004F7061 /* LoginViewModel.swift */; };
+		8882D0722DC37B5C004F7061 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882D0712DC37B56004F7061 /* Coordinator.swift */; };
+		8882D0742DC37C7C004F7061 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882D0732DC37C78004F7061 /* MainCoordinator.swift */; };
+		8882D07E2DC3AB86004F7061 /* JournalListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882D07D2DC3AB7F004F7061 /* JournalListCoordinator.swift */; };
+		8882D0952DC3B593004F7061 /* JournalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882D0942DC3B585004F7061 /* JournalListViewModel.swift */; };
+		8882D09B2DC4BAEA004F7061 /* MoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882D09A2DC4BAE7004F7061 /* MoodCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,33 +145,139 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8805F25D2DE0F93B00BBD950 /* NoteAnswerAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnswerAddCell.swift; sourceTree = "<group>"; };
+		8805F25E2DE0F93B00BBD950 /* NoteAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnswerCell.swift; sourceTree = "<group>"; };
+		8805F2602DE0F93B00BBD950 /* LoginButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonView.swift; sourceTree = "<group>"; };
+		8805F2622DE0F93B00BBD950 /* BackArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackArrow.swift; sourceTree = "<group>"; };
+		8805F2632DE0F93B00BBD950 /* RightArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightArrow.swift; sourceTree = "<group>"; };
+		8805F2642DE0F93B00BBD950 /* WhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteButton.swift; sourceTree = "<group>"; };
+		8805F2662DE0F93B00BBD950 /* AvatarWithName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarWithName.swift; sourceTree = "<group>"; };
+		8805F2672DE0F93B00BBD950 /* ReminderTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTime.swift; sourceTree = "<group>"; };
+		8805F2682DE0F93B00BBD950 /* SendAlertComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAlertComponent.swift; sourceTree = "<group>"; };
+		8805F2692DE0F93B00BBD950 /* TouchIdSwitchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIdSwitchBar.swift; sourceTree = "<group>"; };
+		8805F2752DE0F93B00BBD950 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8805F2762DE0F93B00BBD950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8805F2782DE0F93B00BBD950 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8805F2792DE0F93B00BBD950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8805F2A42DE0FD0200BBD950 /* NoteStatisticsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStatisticsCalculator.swift; sourceTree = "<group>"; };
+		8805F2A62DE10BA100BBD950 /* NoteStatisticsCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStatisticsCalculatorTests.swift; sourceTree = "<group>"; };
+		8805F2AA2DE115F900BBD950 /* JournalListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListViewModelTests.swift; sourceTree = "<group>"; };
+		8805F2AC2DE1188300BBD950 /* MockNoteAnswersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNoteAnswersRepository.swift; sourceTree = "<group>"; };
+		8805F2AE2DE118B900BBD950 /* AddNoteViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModelTests.swift; sourceTree = "<group>"; };
+		8805F2B02DE11BA300BBD950 /* MockSettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSettingsDelegate.swift; sourceTree = "<group>"; };
+		8805F2B22DE11BC400BBD950 /* MockSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSettingsRepository.swift; sourceTree = "<group>"; };
+		8805F2B52DE11C2A00BBD950 /* SettingsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepositoryTests.swift; sourceTree = "<group>"; };
+		8805F2B72DE11C5400BBD950 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		886511192DC7568500DB3496 /* MoodCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCardView.swift; sourceTree = "<group>"; };
+		886511402DC7568500DB3496 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		886511482DC7568500DB3496 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		886511F22DC7DA3C00DB3496 /* MyEmotions.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyEmotions.xcdatamodel; sourceTree = "<group>"; };
+		886512072DC8840E00DB3496 /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
+		886512092DC8858B00DB3496 /* JournalListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListRepository.swift; sourceTree = "<group>"; };
+		8865120B2DC885F100DB3496 /* JournalListRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListRepositoryImpl.swift; sourceTree = "<group>"; };
+		8865120D2DC886CC00DB3496 /* MoodMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodMapper.swift; sourceTree = "<group>"; };
+		8865120F2DC886E100DB3496 /* MoodCardMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCardMapper.swift; sourceTree = "<group>"; };
+		886512212DC8BC3C00DB3496 /* MoodCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCardViewModel.swift; sourceTree = "<group>"; };
+		886513952DCB01A300DB3496 /* MyEmotions.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyEmotions.entitlements; sourceTree = "<group>"; };
 		886E94B52D75C6680092BC6F /* MyEmotions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyEmotions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		886E94CB2D75C6690092BC6F /* MyEmotionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyEmotionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		886E94D52D75C6690092BC6F /* MyEmotionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyEmotionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		887C62C02DCD05A600087352 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
+		887C62C22DCD05A600087352 /* ChooseMoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMoodViewController.swift; sourceTree = "<group>"; };
+		887C62C82DCD05A600087352 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		887C632C2DCD193000087352 /* ChooseMoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMoodViewModel.swift; sourceTree = "<group>"; };
+		887C632E2DCD1B2E00087352 /* ChooseMoodCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMoodCoordinator.swift; sourceTree = "<group>"; };
+		887C63302DCD3E5400087352 /* AppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencyContainer.swift; sourceTree = "<group>"; };
+		887C63322DCE0E3C00087352 /* MoodRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRepository.swift; sourceTree = "<group>"; };
+		887C63342DCE0E8F00087352 /* MoodRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRepositoryImpl.swift; sourceTree = "<group>"; };
+		887C633C2DCFA3DE00087352 /* MoodEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoodEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		887C633D2DCFA3DE00087352 /* MoodEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoodEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		887C63422DCFB1B400087352 /* AddNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModel.swift; sourceTree = "<group>"; };
+		887C63442DCFB1C500087352 /* AddNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteCoordinator.swift; sourceTree = "<group>"; };
+		887C63462DD0A55F00087352 /* MoodCardEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoodCardEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		887C63472DD0A55F00087352 /* MoodCardEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoodCardEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		887C634A2DD0B03700087352 /* JournalListViewModel+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalListViewModel+State.swift"; sourceTree = "<group>"; };
+		887C63612DD32D5F00087352 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		887C63632DD32D6D00087352 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		887C63652DD33B6A00087352 /* SettingsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepositoryImpl.swift; sourceTree = "<group>"; };
+		887C63672DD33B7C00087352 /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
+		887C63692DD3AE1100087352 /* EmotionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionColor.swift; sourceTree = "<group>"; };
+		887C636B2DD3AE1100087352 /* DayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayData.swift; sourceTree = "<group>"; };
+		887C636C2DD3AE1100087352 /* FrequencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyData.swift; sourceTree = "<group>"; };
+		887C636E2DD3AE1100087352 /* PartOfDayColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfDayColor.swift; sourceTree = "<group>"; };
+		887C636F2DD3AE1100087352 /* PartsOfDayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsOfDayData.swift; sourceTree = "<group>"; };
+		887C63702DD3AE1100087352 /* StatWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatWeek.swift; sourceTree = "<group>"; };
+		887C63712DD3AE1100087352 /* WeekStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekStatistic.swift; sourceTree = "<group>"; };
+		887C637A2DD3AE1100087352 /* AddMoodButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoodButton.swift; sourceTree = "<group>"; };
+		887C637B2DD3AE1100087352 /* ChosenMoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosenMoodCard.swift; sourceTree = "<group>"; };
+		887C637C2DD3AE1100087352 /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
+		887C637D2DD3AE1100087352 /* MoodCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCircle.swift; sourceTree = "<group>"; };
+		887C637E2DD3AE1100087352 /* MoodGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodGridView.swift; sourceTree = "<group>"; };
+		887C637F2DD3AE1100087352 /* NotChosenMoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotChosenMoodCard.swift; sourceTree = "<group>"; };
+		887C63802DD3AE1100087352 /* NoteAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnswer.swift; sourceTree = "<group>"; };
+		887C63812DD3AE1100087352 /* NoteAnswerAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnswerAddButton.swift; sourceTree = "<group>"; };
+		887C63822DD3AE1100087352 /* NoteQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteQuestionView.swift; sourceTree = "<group>"; };
+		887C63832DD3AE1100087352 /* NotesAmountCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesAmountCard.swift; sourceTree = "<group>"; };
+		887C63842DD3AE1100087352 /* QuestionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionLabel.swift; sourceTree = "<group>"; };
+		887C63912DD3AE1100087352 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		887C63922DD3AE1100087352 /* MoodPerCentCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodPerCentCircle.swift; sourceTree = "<group>"; };
+		887C63942DD3AE1100087352 /* DayStaticticCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStaticticCard.swift; sourceTree = "<group>"; };
+		887C63952DD3AE1100087352 /* DayStatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatisticView.swift; sourceTree = "<group>"; };
+		887C63972DD3AE1100087352 /* ColorColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorColumn.swift; sourceTree = "<group>"; };
+		887C63982DD3AE1100087352 /* DuringDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuringDayView.swift; sourceTree = "<group>"; };
+		887C63992DD3AE1100087352 /* PartOfDayStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfDayStatistic.swift; sourceTree = "<group>"; };
+		887C639B2DD3AE1100087352 /* FrequencyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyCard.swift; sourceTree = "<group>"; };
+		887C639C2DD3AE1100087352 /* FrequencyStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyStatistics.swift; sourceTree = "<group>"; };
+		887C639D2DD3AE1100087352 /* MostFrequentlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostFrequentlyView.swift; sourceTree = "<group>"; };
+		887C63AB2DD3AE1100087352 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		887C63F02DD4765000087352 /* StatisticsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsRepository.swift; sourceTree = "<group>"; };
+		887C63F22DD478A000087352 /* StatisticsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsRepositoryImpl.swift; sourceTree = "<group>"; };
+		887C63F82DD501BB00087352 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		887C63FA2DD501C700087352 /* StatisticsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCoordinator.swift; sourceTree = "<group>"; };
+		887C63FD2DD507C500087352 /* DateIntervalFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateIntervalFormatter.swift; sourceTree = "<group>"; };
+		887C64012DD50FD600087352 /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
+		887C640C2DD5181D00087352 /* CategoryStatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStatisticsViewModel.swift; sourceTree = "<group>"; };
+		887C64152DD5258E00087352 /* DayStatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatisticsViewModel.swift; sourceTree = "<group>"; };
+		887C64172DD52D8500087352 /* StatisticsSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSectionCell.swift; sourceTree = "<group>"; };
+		887C641C2DD5379300087352 /* MostFrequentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostFrequentViewModel.swift; sourceTree = "<group>"; };
+		887C64222DD53B3C00087352 /* DuringDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuringDayViewModel.swift; sourceTree = "<group>"; };
+		887C642B2DDB25F800087352 /* NoteAnswerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnswerItem.swift; sourceTree = "<group>"; };
+		887C642D2DDB26CC00087352 /* NoteAnswersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnswersRepository.swift; sourceTree = "<group>"; };
+		887C642F2DDB26F600087352 /* NoteAnswersRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnswersRepositoryImpl.swift; sourceTree = "<group>"; };
+		887C64312DDB276A00087352 /* NoteAnswersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnswersViewModel.swift; sourceTree = "<group>"; };
+		887C64332DDB8AD500087352 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		887C64362DDC923C00087352 /* NoteStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStatistics.swift; sourceTree = "<group>"; };
+		887C64382DDC926200087352 /* NoteStatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStatRepository.swift; sourceTree = "<group>"; };
+		887C643A2DDC928800087352 /* NoteStatRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStatRepositoryImpl.swift; sourceTree = "<group>"; };
+		887C643C2DDCABCA00087352 /* Pluralization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pluralization.swift; sourceTree = "<group>"; };
+		887C643E2DDCAD3E00087352 /* GoalPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalPicker.swift; sourceTree = "<group>"; };
+		887C64482DDCB53000087352 /* MoodCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCardCell.swift; sourceTree = "<group>"; };
+		887C644B2DDDF54F00087352 /* CircleStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleStatistics.swift; sourceTree = "<group>"; };
+		887C644D2DDE221C00087352 /* GradientPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPair.swift; sourceTree = "<group>"; };
+		887C644F2DDE725F00087352 /* MoodIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodIconCell.swift; sourceTree = "<group>"; };
+		887C64512DE0960000087352 /* FakeLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLoginController.swift; sourceTree = "<group>"; };
+		887C645C2DE0F1B800087352 /* MockJournalListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJournalListRepository.swift; sourceTree = "<group>"; };
+		887C645D2DE0F1DE00087352 /* MockNoteStatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNoteStatRepository.swift; sourceTree = "<group>"; };
+		887C64612DE0F53700087352 /* MockMoods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMoods.swift; sourceTree = "<group>"; };
+		8882D0012DC228C0004F7061 /* JournalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListViewController.swift; sourceTree = "<group>"; };
+		8882D0032DC228C0004F7061 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8882D06D2DC22B04004F7061 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8882D0712DC37B56004F7061 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		8882D0732DC37C78004F7061 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		8882D07D2DC3AB7F004F7061 /* JournalListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListCoordinator.swift; sourceTree = "<group>"; };
+		8882D0942DC3B585004F7061 /* JournalListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListViewModel.swift; sourceTree = "<group>"; };
+		8882D09A2DC4BAE7004F7061 /* MoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		886E960F2D75C8640092BC6F /* Exceptions for "Laba1" folder in "MyEmotions" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 886E94B42D75C6680092BC6F /* MyEmotions */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		8805F2C22DE121CB00BBD950 /* Resources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		886E94D82D75C6690092BC6F /* MyEmotionsUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MyEmotionsUITests;
-			sourceTree = "<group>";
-		};
-		886E95D32D75C7B20092BC6F /* Laba1 */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				886E960F2D75C8640092BC6F /* Exceptions for "Laba1" folder in "MyEmotions" target */,
-			);
-			path = Laba1;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -85,12 +308,142 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8805F2A32DE0FCF300BBD950 /* Calculation */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2A42DE0FD0200BBD950 /* NoteStatisticsCalculator.swift */,
+			);
+			path = Calculation;
+			sourceTree = "<group>";
+		};
+		8805F2A82DE10FEC00BBD950 /* JournalTests */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2AE2DE118B900BBD950 /* AddNoteViewModelTests.swift */,
+				8805F2AA2DE115F900BBD950 /* JournalListViewModelTests.swift */,
+				8805F2A62DE10BA100BBD950 /* NoteStatisticsCalculatorTests.swift */,
+			);
+			path = JournalTests;
+			sourceTree = "<group>";
+		};
+		8805F2A92DE1157100BBD950 /* MockRepositories */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2B22DE11BC400BBD950 /* MockSettingsRepository.swift */,
+				8805F2AC2DE1188300BBD950 /* MockNoteAnswersRepository.swift */,
+				887C645C2DE0F1B800087352 /* MockJournalListRepository.swift */,
+				887C645D2DE0F1DE00087352 /* MockNoteStatRepository.swift */,
+			);
+			path = MockRepositories;
+			sourceTree = "<group>";
+		};
+		8805F2B42DE11C2100BBD950 /* SettingsTests */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2B72DE11C5400BBD950 /* SettingsViewModelTests.swift */,
+				8805F2B52DE11C2A00BBD950 /* SettingsRepositoryTests.swift */,
+			);
+			path = SettingsTests;
+			sourceTree = "<group>";
+		};
+		8805F2B92DE120EC00BBD950 /* StatisticsTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StatisticsTests;
+			sourceTree = "<group>";
+		};
+		8805F2BA2DE1212500BBD950 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2662DE0F93B00BBD950 /* AvatarWithName.swift */,
+				8805F2672DE0F93B00BBD950 /* ReminderTime.swift */,
+				8805F2682DE0F93B00BBD950 /* SendAlertComponent.swift */,
+				8805F2692DE0F93B00BBD950 /* TouchIdSwitchBar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		8805F2BB2DE1214400BBD950 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2602DE0F93B00BBD950 /* LoginButtonView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		886511AB2DC759DC00DB3496 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				886511AD2DC759EC00DB3496 /* MoodCard */,
+				886511AC2DC759E600DB3496 /* Mood */,
+				886511F12DC7DA3C00DB3496 /* MyEmotions.xcdatamodeld */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		886511AC2DC759E600DB3496 /* Mood */ = {
+			isa = PBXGroup;
+			children = (
+				887C633C2DCFA3DE00087352 /* MoodEntity+CoreDataClass.swift */,
+				887C633D2DCFA3DE00087352 /* MoodEntity+CoreDataProperties.swift */,
+			);
+			path = Mood;
+			sourceTree = "<group>";
+		};
+		886511AD2DC759EC00DB3496 /* MoodCard */ = {
+			isa = PBXGroup;
+			children = (
+				887C63462DD0A55F00087352 /* MoodCardEntity+CoreDataClass.swift */,
+				887C63472DD0A55F00087352 /* MoodCardEntity+CoreDataProperties.swift */,
+			);
+			path = MoodCard;
+			sourceTree = "<group>";
+		};
+		886511FC2DC882AF00DB3496 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				887C64382DDC926200087352 /* NoteStatRepository.swift */,
+				887C642D2DDB26CC00087352 /* NoteAnswersRepository.swift */,
+				887C63F02DD4765000087352 /* StatisticsRepository.swift */,
+				887C63672DD33B7C00087352 /* SettingsRepository.swift */,
+				887C63322DCE0E3C00087352 /* MoodRepository.swift */,
+				886512092DC8858B00DB3496 /* JournalListRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		886511FD2DC882C000DB3496 /* RepositoryImpl */ = {
+			isa = PBXGroup;
+			children = (
+				887C643A2DDC928800087352 /* NoteStatRepositoryImpl.swift */,
+				887C642F2DDB26F600087352 /* NoteAnswersRepositoryImpl.swift */,
+				887C63F22DD478A000087352 /* StatisticsRepositoryImpl.swift */,
+				887C63652DD33B6A00087352 /* SettingsRepositoryImpl.swift */,
+				887C63342DCE0E8F00087352 /* MoodRepositoryImpl.swift */,
+				8865120B2DC885F100DB3496 /* JournalListRepositoryImpl.swift */,
+			);
+			path = RepositoryImpl;
+			sourceTree = "<group>";
+		};
+		886511FE2DC882CC00DB3496 /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				8865120F2DC886E100DB3496 /* MoodCardMapper.swift */,
+				8865120D2DC886CC00DB3496 /* MoodMapper.swift */,
+			);
+			path = Mapper;
+			sourceTree = "<group>";
+		};
 		886E94AC2D75C6680092BC6F = {
 			isa = PBXGroup;
 			children = (
-				886E95D32D75C7B20092BC6F /* Laba1 */,
+				887C64592DE0F16200087352 /* UnitTests */,
+				886513952DCB01A300DB3496 /* MyEmotions.entitlements */,
+				8882D0832DC3AF30004F7061 /* Sources */,
 				886E94D82D75C6690092BC6F /* MyEmotionsUITests */,
 				886E94B62D75C6680092BC6F /* Products */,
+				8805F2C22DE121CB00BBD950 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +455,555 @@
 				886E94D52D75C6690092BC6F /* MyEmotionsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		887C63252DCD159D00087352 /* MoodCircles */ = {
+			isa = PBXGroup;
+			children = (
+				887C632B2DCD188500087352 /* View */,
+				887C632A2DCD187E00087352 /* ViewModel */,
+				887C63292DCD187700087352 /* Coordinator */,
+			);
+			path = MoodCircles;
+			sourceTree = "<group>";
+		};
+		887C63262DCD185E00087352 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				887C63442DCFB1C500087352 /* AddNoteCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		887C63272DCD186700087352 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C64312DDB276A00087352 /* NoteAnswersViewModel.swift */,
+				887C63422DCFB1B400087352 /* AddNoteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		887C63282DCD187000087352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C62C02DCD05A600087352 /* AddNoteViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		887C63292DCD187700087352 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				887C632E2DCD1B2E00087352 /* ChooseMoodCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		887C632A2DCD187E00087352 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C632C2DCD193000087352 /* ChooseMoodViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		887C632B2DCD188500087352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C62C22DCD05A600087352 /* ChooseMoodViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		887C635D2DD32D3E00087352 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2BA2DE1212500BBD950 /* Components */,
+				887C64562DE0B78500087352 /* SetAvatarImage */,
+				887C63602DD32D5700087352 /* ViewModel */,
+				887C635F2DD32D5200087352 /* View */,
+				887C635E2DD32D4A00087352 /* Coordinator */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		887C635E2DD32D4A00087352 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				887C63632DD32D6D00087352 /* SettingsCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		887C635F2DD32D5200087352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C62C82DCD05A600087352 /* SettingsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		887C63602DD32D5700087352 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C63612DD32D5F00087352 /* SettingsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		887C63F42DD5005700087352 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				887C64082DD5177400087352 /* Stats */,
+				887C63F72DD500C900087352 /* ViewModel */,
+				887C63F62DD500C100087352 /* View */,
+				887C63F52DD500B900087352 /* Coordinator */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		887C63F52DD500B900087352 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				887C63FA2DD501C700087352 /* StatisticsCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		887C63F62DD500C100087352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C64172DD52D8500087352 /* StatisticsSectionCell.swift */,
+				887C63AB2DD3AE1100087352 /* StatisticsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		887C63F72DD500C900087352 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C63F82DD501BB00087352 /* StatisticsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		887C63FC2DD507B400087352 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				887C643C2DDCABCA00087352 /* Pluralization.swift */,
+				887C63FD2DD507C500087352 /* DateIntervalFormatter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		887C63FF2DD50FC300087352 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				887C64052DD510C800087352 /* DuringDay */,
+				887C64042DD510AB00087352 /* Frequency */,
+				887C64032DD5103D00087352 /* Day */,
+				887C64002DD50FCE00087352 /* Category */,
+				887C63712DD3AE1100087352 /* WeekStatistic.swift */,
+				887C63702DD3AE1100087352 /* StatWeek.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		887C64002DD50FCE00087352 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				887C64012DD50FD600087352 /* CategoryData.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		887C64032DD5103D00087352 /* Day */ = {
+			isa = PBXGroup;
+			children = (
+				887C636B2DD3AE1100087352 /* DayData.swift */,
+			);
+			path = Day;
+			sourceTree = "<group>";
+		};
+		887C64042DD510AB00087352 /* Frequency */ = {
+			isa = PBXGroup;
+			children = (
+				887C636C2DD3AE1100087352 /* FrequencyData.swift */,
+			);
+			path = Frequency;
+			sourceTree = "<group>";
+		};
+		887C64052DD510C800087352 /* DuringDay */ = {
+			isa = PBXGroup;
+			children = (
+				887C636E2DD3AE1100087352 /* PartOfDayColor.swift */,
+				887C636F2DD3AE1100087352 /* PartsOfDayData.swift */,
+				887C63692DD3AE1100087352 /* EmotionColor.swift */,
+			);
+			path = DuringDay;
+			sourceTree = "<group>";
+		};
+		887C64072DD5115900087352 /* Mood */ = {
+			isa = PBXGroup;
+			children = (
+				886512072DC8840E00DB3496 /* Mood.swift */,
+				8882D09A2DC4BAE7004F7061 /* MoodCard.swift */,
+			);
+			path = Mood;
+			sourceTree = "<group>";
+		};
+		887C64082DD5177400087352 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				887C641F2DD53A2D00087352 /* DuringDay */,
+				887C64192DD5374500087352 /* Frequency */,
+				887C640E2DD5226900087352 /* Days */,
+				887C64092DD5177F00087352 /* Category */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		887C64092DD5177F00087352 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				887C640B2DD5179700087352 /* ViewModel */,
+				887C640A2DD5178D00087352 /* View */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		887C640A2DD5178D00087352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C63912DD3AE1100087352 /* CategoryView.swift */,
+				887C63922DD3AE1100087352 /* MoodPerCentCircle.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		887C640B2DD5179700087352 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C640C2DD5181D00087352 /* CategoryStatisticsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		887C640E2DD5226900087352 /* Days */ = {
+			isa = PBXGroup;
+			children = (
+				887C64102DD5227D00087352 /* ViewModel */,
+				887C640F2DD5227800087352 /* View */,
+			);
+			path = Days;
+			sourceTree = "<group>";
+		};
+		887C640F2DD5227800087352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C644F2DDE725F00087352 /* MoodIconCell.swift */,
+				887C63942DD3AE1100087352 /* DayStaticticCard.swift */,
+				887C63952DD3AE1100087352 /* DayStatisticView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		887C64102DD5227D00087352 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C64152DD5258E00087352 /* DayStatisticsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		887C64192DD5374500087352 /* Frequency */ = {
+			isa = PBXGroup;
+			children = (
+				887C641B2DD5375300087352 /* ViewModel */,
+				887C641A2DD5374D00087352 /* View */,
+			);
+			path = Frequency;
+			sourceTree = "<group>";
+		};
+		887C641A2DD5374D00087352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C639B2DD3AE1100087352 /* FrequencyCard.swift */,
+				887C639C2DD3AE1100087352 /* FrequencyStatistics.swift */,
+				887C639D2DD3AE1100087352 /* MostFrequentlyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		887C641B2DD5375300087352 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C641C2DD5379300087352 /* MostFrequentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		887C641F2DD53A2D00087352 /* DuringDay */ = {
+			isa = PBXGroup;
+			children = (
+				887C64212DD53A3900087352 /* ViewModel */,
+				887C64202DD53A3500087352 /* View */,
+			);
+			path = DuringDay;
+			sourceTree = "<group>";
+		};
+		887C64202DD53A3500087352 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C63972DD3AE1100087352 /* ColorColumn.swift */,
+				887C63982DD3AE1100087352 /* DuringDayView.swift */,
+				887C63992DD3AE1100087352 /* PartOfDayStatistic.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		887C64212DD53A3900087352 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C64222DD53B3C00087352 /* DuringDayViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		887C642A2DDB25F100087352 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				887C642B2DDB25F800087352 /* NoteAnswerItem.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		887C64352DDC922B00087352 /* NoteStatistics */ = {
+			isa = PBXGroup;
+			children = (
+				887C644D2DDE221C00087352 /* GradientPair.swift */,
+				887C644B2DDDF54F00087352 /* CircleStatistics.swift */,
+				887C64362DDC923C00087352 /* NoteStatistics.swift */,
+			);
+			path = NoteStatistics;
+			sourceTree = "<group>";
+		};
+		887C644A2DDDA65A00087352 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				887C637A2DD3AE1100087352 /* AddMoodButton.swift */,
+				887C637B2DD3AE1100087352 /* ChosenMoodCard.swift */,
+				887C637C2DD3AE1100087352 /* CircleProgressBar.swift */,
+				887C637D2DD3AE1100087352 /* MoodCircle.swift */,
+				887C637E2DD3AE1100087352 /* MoodGridView.swift */,
+				887C637F2DD3AE1100087352 /* NotChosenMoodCard.swift */,
+				887C63802DD3AE1100087352 /* NoteAnswer.swift */,
+				887C63812DD3AE1100087352 /* NoteAnswerAddButton.swift */,
+				887C63832DD3AE1100087352 /* NotesAmountCard.swift */,
+				887C63842DD3AE1100087352 /* QuestionLabel.swift */,
+				887C64332DDB8AD500087352 /* LeftAlignedCollectionViewFlowLayout.swift */,
+				887C63822DD3AE1100087352 /* NoteQuestionView.swift */,
+				887C64482DDCB53000087352 /* MoodCardCell.swift */,
+				887C643E2DDCAD3E00087352 /* GoalPicker.swift */,
+				886511192DC7568500DB3496 /* MoodCardView.swift */,
+				8805F2622DE0F93B00BBD950 /* BackArrow.swift */,
+				8805F2632DE0F93B00BBD950 /* RightArrow.swift */,
+				8805F2642DE0F93B00BBD950 /* WhiteButton.swift */,
+				8805F25D2DE0F93B00BBD950 /* NoteAnswerAddCell.swift */,
+				8805F25E2DE0F93B00BBD950 /* NoteAnswerCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		887C64562DE0B78500087352 /* SetAvatarImage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SetAvatarImage;
+			sourceTree = "<group>";
+		};
+		887C64592DE0F16200087352 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2B92DE120EC00BBD950 /* StatisticsTests */,
+				8805F2B42DE11C2100BBD950 /* SettingsTests */,
+				8805F2A92DE1157100BBD950 /* MockRepositories */,
+				8805F2A82DE10FEC00BBD950 /* JournalTests */,
+				887C645B2DE0F1AB00087352 /* Mocks */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		887C645B2DE0F1AB00087352 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2B02DE11BA300BBD950 /* MockSettingsDelegate.swift */,
+				887C64612DE0F53700087352 /* MockMoods.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		8882D0832DC3AF30004F7061 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8882D0862DC3AF50004F7061 /* Presentation */,
+				8882D0852DC3AF47004F7061 /* Domain */,
+				8882D0842DC3AF42004F7061 /* Data */,
+				887C63302DCD3E5400087352 /* AppDependencyContainer.swift */,
+				8805F2762DE0F93B00BBD950 /* Info.plist */,
+				8805F2752DE0F93B00BBD950 /* AppDelegate.swift */,
+				8805F2772DE0F93B00BBD950 /* LaunchScreen.storyboard */,
+				8805F2782DE0F93B00BBD950 /* SceneDelegate.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		8882D0842DC3AF42004F7061 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				886511FE2DC882CC00DB3496 /* Mapper */,
+				886511FD2DC882C000DB3496 /* RepositoryImpl */,
+				886511AB2DC759DC00DB3496 /* Entity */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8882D0852DC3AF47004F7061 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2A32DE0FCF300BBD950 /* Calculation */,
+				886511FC2DC882AF00DB3496 /* Repository */,
+				8882D0972DC4BAD8004F7061 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8882D0862DC3AF50004F7061 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				887C63FC2DD507B400087352 /* Helpers */,
+				8882D0872DC3AF5F004F7061 /* Modules */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8882D0872DC3AF5F004F7061 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				887C63F42DD5005700087352 /* Statistics */,
+				887C635D2DD32D3E00087352 /* Settings */,
+				8882D08D2DC3B357004F7061 /* Journal */,
+				8882D0892DC3AFB3004F7061 /* Login */,
+				8882D0882DC3AF93004F7061 /* Coordinator */,
+				886511482DC7568500DB3496 /* TabBarController.swift */,
+				886511402DC7568500DB3496 /* TabBarCoordinator.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		8882D0882DC3AF93004F7061 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8882D0712DC37B56004F7061 /* Coordinator.swift */,
+				8882D0732DC37C78004F7061 /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8882D0892DC3AFB3004F7061 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8805F2BB2DE1214400BBD950 /* Components */,
+				8882D08C2DC3AFFF004F7061 /* View */,
+				8882D08B2DC3AFC5004F7061 /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		8882D08B2DC3AFC5004F7061 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8882D06D2DC22B04004F7061 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8882D08C2DC3AFFF004F7061 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887C64512DE0960000087352 /* FakeLoginController.swift */,
+				8882D0032DC228C0004F7061 /* LoginViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8882D08D2DC3B357004F7061 /* Journal */ = {
+			isa = PBXGroup;
+			children = (
+				887C644A2DDDA65A00087352 /* Components */,
+				887C63252DCD159D00087352 /* MoodCircles */,
+				8882D08F2DC3B3B8004F7061 /* AddMood */,
+				8882D08E2DC3B366004F7061 /* JournalList */,
+			);
+			path = Journal;
+			sourceTree = "<group>";
+		};
+		8882D08E2DC3B366004F7061 /* JournalList */ = {
+			isa = PBXGroup;
+			children = (
+				8882D0932DC3B41F004F7061 /* Coordinator */,
+				8882D0922DC3B419004F7061 /* ViewModel */,
+				8882D0912DC3B40D004F7061 /* View */,
+			);
+			path = JournalList;
+			sourceTree = "<group>";
+		};
+		8882D08F2DC3B3B8004F7061 /* AddMood */ = {
+			isa = PBXGroup;
+			children = (
+				887C63282DCD187000087352 /* View */,
+				887C63272DCD186700087352 /* ViewModel */,
+				887C63262DCD185E00087352 /* Coordinator */,
+			);
+			path = AddMood;
+			sourceTree = "<group>";
+		};
+		8882D0912DC3B40D004F7061 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8882D0012DC228C0004F7061 /* JournalListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8882D0922DC3B419004F7061 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				887C634A2DD0B03700087352 /* JournalListViewModel+State.swift */,
+				886512212DC8BC3C00DB3496 /* MoodCardViewModel.swift */,
+				8882D0942DC3B585004F7061 /* JournalListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8882D0932DC3B41F004F7061 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8882D07D2DC3AB7F004F7061 /* JournalListCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8882D0972DC4BAD8004F7061 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				887C642A2DDB25F100087352 /* Note */,
+				887C64072DD5115900087352 /* Mood */,
+				887C63FF2DD50FC300087352 /* Statistics */,
+				887C64352DDC922B00087352 /* NoteStatistics */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +1022,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				886E95D32D75C7B20092BC6F /* Laba1 */,
+				8805F2C22DE121CB00BBD950 /* Resources */,
 			);
 			name = MyEmotions;
 			packageProductDependencies = (
@@ -225,6 +1127,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8805F27F2DE0F93B00BBD950 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +1152,111 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887C64232DD53B4B00087352 /* DuringDayViewModel.swift in Sources */,
+				887C62DF2DCD05A600087352 /* ChooseMoodViewController.swift in Sources */,
+				887C634B2DD0B04400087352 /* JournalListViewModel+State.swift in Sources */,
+				887C642C2DDB25FF00087352 /* NoteAnswerItem.swift in Sources */,
+				887C62E72DCD05A600087352 /* SettingsViewController.swift in Sources */,
+				887C633E2DCFA3DE00087352 /* MoodEntity+CoreDataProperties.swift in Sources */,
+				887C633F2DCFA3DE00087352 /* MoodEntity+CoreDataClass.swift in Sources */,
+				887C63642DD32D7500087352 /* SettingsCoordinator.swift in Sources */,
+				887C64302DDB270000087352 /* NoteAnswersRepositoryImpl.swift in Sources */,
+				887C64182DD52D9100087352 /* StatisticsSectionCell.swift in Sources */,
+				887C62FD2DCD05A600087352 /* AddNoteViewController.swift in Sources */,
+				887C63622DD32D6700087352 /* SettingsViewModel.swift in Sources */,
+				887C63452DCFB1CD00087352 /* AddNoteCoordinator.swift in Sources */,
+				887C63332DCE0E4100087352 /* MoodRepository.swift in Sources */,
+				887C63682DD33B8400087352 /* SettingsRepository.swift in Sources */,
+				887C632F2DCD1B4300087352 /* ChooseMoodCoordinator.swift in Sources */,
+				887C64322DDB277000087352 /* NoteAnswersViewModel.swift in Sources */,
+				8882D0742DC37C7C004F7061 /* MainCoordinator.swift in Sources */,
+				8882D0202DC228C0004F7061 /* JournalListViewController.swift in Sources */,
+				887C63432DCFB1C200087352 /* AddNoteViewModel.swift in Sources */,
+				8882D07E2DC3AB86004F7061 /* JournalListCoordinator.swift in Sources */,
+				887C63312DCD3E5F00087352 /* AppDependencyContainer.swift in Sources */,
+				887C63BB2DD3AE1100087352 /* PartsOfDayData.swift in Sources */,
+				887C64342DDB8AD800087352 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
+				887C63BC2DD3AE1100087352 /* PartOfDayStatistic.swift in Sources */,
+				887C63BD2DD3AE1100087352 /* FrequencyStatistics.swift in Sources */,
+				887C63C02DD3AE1100087352 /* DayStaticticCard.swift in Sources */,
+				887C63C12DD3AE1100087352 /* NoteAnswer.swift in Sources */,
+				887C642E2DDB26D500087352 /* NoteAnswersRepository.swift in Sources */,
+				887C640D2DD5182700087352 /* CategoryStatisticsViewModel.swift in Sources */,
+				887C64522DE0960B00087352 /* FakeLoginController.swift in Sources */,
+				887C63C52DD3AE1100087352 /* MoodGridView.swift in Sources */,
+				887C63C62DD3AE1100087352 /* FrequencyData.swift in Sources */,
+				887C63C72DD3AE1100087352 /* FrequencyCard.swift in Sources */,
+				8805F2812DE0F93B00BBD950 /* LoginButtonView.swift in Sources */,
+				8805F2822DE0F93B00BBD950 /* BackArrow.swift in Sources */,
+				8805F2832DE0F93B00BBD950 /* RightArrow.swift in Sources */,
+				8805F2842DE0F93B00BBD950 /* AppDelegate.swift in Sources */,
+				8805F2852DE0F93B00BBD950 /* WhiteButton.swift in Sources */,
+				8805F2862DE0F93B00BBD950 /* AvatarWithName.swift in Sources */,
+				8805F2872DE0F93B00BBD950 /* SceneDelegate.swift in Sources */,
+				8805F2882DE0F93B00BBD950 /* ReminderTime.swift in Sources */,
+				8805F2892DE0F93B00BBD950 /* SendAlertComponent.swift in Sources */,
+				8805F28A2DE0F93B00BBD950 /* NoteAnswerAddCell.swift in Sources */,
+				8805F28B2DE0F93B00BBD950 /* TouchIdSwitchBar.swift in Sources */,
+				8805F28C2DE0F93B00BBD950 /* NoteAnswerCell.swift in Sources */,
+				887C63F32DD478AA00087352 /* StatisticsRepositoryImpl.swift in Sources */,
+				887C63C92DD3AE1100087352 /* EmotionColor.swift in Sources */,
+				887C63FE2DD507C600087352 /* DateIntervalFormatter.swift in Sources */,
+				887C63CA2DD3AE1100087352 /* WeekStatistic.swift in Sources */,
+				887C63CB2DD3AE1100087352 /* AddMoodButton.swift in Sources */,
+				887C63CD2DD3AE1100087352 /* NoteAnswerAddButton.swift in Sources */,
+				887C64492DDCB53200087352 /* MoodCardCell.swift in Sources */,
+				887C63CF2DD3AE1100087352 /* PartOfDayColor.swift in Sources */,
+				887C63D02DD3AE1100087352 /* StatisticsViewController.swift in Sources */,
+				887C63D12DD3AE1100087352 /* ChosenMoodCard.swift in Sources */,
+				8805F2A52DE0FD0700BBD950 /* NoteStatisticsCalculator.swift in Sources */,
+				887C64392DDC926D00087352 /* NoteStatRepository.swift in Sources */,
+				887C63D32DD3AE1100087352 /* DayStatisticView.swift in Sources */,
+				887C63D72DD3AE1100087352 /* QuestionLabel.swift in Sources */,
+				887C63D82DD3AE1100087352 /* DuringDayView.swift in Sources */,
+				887C63D92DD3AE1100087352 /* NoteQuestionView.swift in Sources */,
+				887C643F2DDCAD4700087352 /* GoalPicker.swift in Sources */,
+				887C63DB2DD3AE1100087352 /* CategoryView.swift in Sources */,
+				887C643B2DDC928F00087352 /* NoteStatRepositoryImpl.swift in Sources */,
+				887C63DE2DD3AE1100087352 /* StatWeek.swift in Sources */,
+				887C63DF2DD3AE1100087352 /* NotesAmountCard.swift in Sources */,
+				887C64162DD5259500087352 /* DayStatisticsViewModel.swift in Sources */,
+				887C63E02DD3AE1100087352 /* MoodPerCentCircle.swift in Sources */,
+				887C63E12DD3AE1100087352 /* ColorColumn.swift in Sources */,
+				887C644E2DDE222300087352 /* GradientPair.swift in Sources */,
+				887C63E22DD3AE1100087352 /* NotChosenMoodCard.swift in Sources */,
+				887C641D2DD5379C00087352 /* MostFrequentViewModel.swift in Sources */,
+				887C63F92DD501C500087352 /* StatisticsViewModel.swift in Sources */,
+				887C63E32DD3AE1100087352 /* MostFrequentlyView.swift in Sources */,
+				887C63F12DD4765700087352 /* StatisticsRepository.swift in Sources */,
+				887C63E42DD3AE1100087352 /* CircleProgressBar.swift in Sources */,
+				887C63E52DD3AE1100087352 /* MoodCircle.swift in Sources */,
+				887C63E62DD3AE1100087352 /* DayData.swift in Sources */,
+				8882D06E2DC22B0A004F7061 /* LoginViewModel.swift in Sources */,
+				8882D09B2DC4BAEA004F7061 /* MoodCard.swift in Sources */,
+				886512082DC8841000DB3496 /* Mood.swift in Sources */,
+				8882D0722DC37B5C004F7061 /* Coordinator.swift in Sources */,
+				887C63662DD33B7200087352 /* SettingsRepositoryImpl.swift in Sources */,
+				887C63482DD0A55F00087352 /* MoodCardEntity+CoreDataClass.swift in Sources */,
+				887C63492DD0A55F00087352 /* MoodCardEntity+CoreDataProperties.swift in Sources */,
+				887C64372DDC924100087352 /* NoteStatistics.swift in Sources */,
+				8882D0952DC3B593004F7061 /* JournalListViewModel.swift in Sources */,
+				887C643D2DDCABCD00087352 /* Pluralization.swift in Sources */,
+				8882D0442DC228C0004F7061 /* LoginViewController.swift in Sources */,
+				887C644C2DDDF55400087352 /* CircleStatistics.swift in Sources */,
+				8865120C2DC8860000DB3496 /* JournalListRepositoryImpl.swift in Sources */,
+				887C64502DDE726600087352 /* MoodIconCell.swift in Sources */,
+				886512102DC886E700DB3496 /* MoodCardMapper.swift in Sources */,
+				886511732DC7568500DB3496 /* TabBarController.swift in Sources */,
+				887C63FB2DD501CE00087352 /* StatisticsCoordinator.swift in Sources */,
+				887C632D2DCD193C00087352 /* ChooseMoodViewModel.swift in Sources */,
+				886512222DC8BC5300DB3496 /* MoodCardViewModel.swift in Sources */,
+				8865120A2DC8859500DB3496 /* JournalListRepository.swift in Sources */,
+				8865117E2DC7568500DB3496 /* MoodCardView.swift in Sources */,
+				887C63352DCE0E9700087352 /* MoodRepositoryImpl.swift in Sources */,
+				8865117F2DC7568500DB3496 /* TabBarCoordinator.swift in Sources */,
+				887C64022DD50FE500087352 /* CategoryData.swift in Sources */,
+				886511F32DC7DA3C00DB3496 /* MyEmotions.xcdatamodeld in Sources */,
+				8865120E2DC886DE00DB3496 /* MoodMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +1264,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8805F2AF2DE118C100BBD950 /* AddNoteViewModelTests.swift in Sources */,
+				8805F2B32DE11BCB00BBD950 /* MockSettingsRepository.swift in Sources */,
+				887C64602DE0F27300087352 /* MockJournalListRepository.swift in Sources */,
+				8805F2A72DE10BA300BBD950 /* NoteStatisticsCalculatorTests.swift in Sources */,
+				8805F2B12DE11BAD00BBD950 /* MockSettingsDelegate.swift in Sources */,
+				887C64622DE0F53E00087352 /* MockMoods.swift in Sources */,
+				8805F2AB2DE115FE00BBD950 /* JournalListViewModelTests.swift in Sources */,
+				887C645F2DE0F26E00087352 /* MockNoteStatRepository.swift in Sources */,
+				8805F2B62DE11C3400BBD950 /* SettingsRepositoryTests.swift in Sources */,
+				8805F2AD2DE1188E00BBD950 /* MockNoteAnswersRepository.swift in Sources */,
+				8805F2B82DE11C5B00BBD950 /* SettingsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,17 +1300,29 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		8805F2772DE0F93B00BBD950 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8805F2792DE0F93B00BBD950 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		886E94DF2D75C6690092BC6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyEmotions.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3XMQDQF9VR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Laba1/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -315,11 +1346,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyEmotions.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3XMQDQF9VR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Laba1/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -465,7 +1497,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3XMQDQF9VR;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = zayata.MyEmotionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,7 +1516,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3XMQDQF9VR;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = zayata.MyEmotionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -588,6 +1620,19 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		886511F12DC7DA3C00DB3496 /* MyEmotions.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				886511F22DC7DA3C00DB3496 /* MyEmotions.xcdatamodel */,
+			);
+			currentVersion = 886511F22DC7DA3C00DB3496 /* MyEmotions.xcdatamodel */;
+			path = MyEmotions.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 886E94AD2D75C6680092BC6F /* Project object */;
 }
